@@ -1,0 +1,76 @@
+<canvas id="sequence-canvas-5" style="position:fixed;
+  inset:0; width:100vw; height:100vh; z-index:1; pointer-events:none;">
+</canvas>
+<script>
+  const DDC_E_frameCount = 120;
+  const DDC_E_canvas = document.getElementById("sequence-canvas-5");
+  const DDC_E_context = DDC_E_canvas.getContext("2d");
+
+  DDC_E_canvas.width = window.innerWidth;
+  DDC_E_canvas.height = window.innerHeight;
+
+  const DDC_E_url = "https://raw.githubusercontent.com/NiccoloSegato/unverse-assets/refs/heads/main/assets/flow/flusso_";
+
+  const DDC_E_currentFrame = DDC_E_i => `${DDC_E_url}${DDC_E_i}.webp`;
+
+  const DDC_E_imageCache = {};
+  let DDC_E_currentLoadedIndex = -1;
+
+  function DDC_E_render(DDC_E_i) {
+    if (DDC_E_i === DDC_E_currentLoadedIndex) return;
+    DDC_E_currentLoadedIndex = DDC_E_i;
+
+    if (DDC_E_imageCache[DDC_E_i]) {
+      DDC_E_drawImage(DDC_E_imageCache[DDC_E_i]);
+    } else {
+      const DDC_E_img = new Image();
+      DDC_E_img.src = DDC_E_currentFrame(DDC_E_i);
+      DDC_E_img.style.objectFit = "cover";
+      DDC_E_img.onload = () => {
+        DDC_E_imageCache[DDC_E_i] = DDC_E_img;
+        DDC_E_drawImage(DDC_E_img);
+      };
+    }
+
+    // Precarica 2 frame successivi
+    for (let DDC_E_offset = 1; DDC_E_offset <= 2; DDC_E_offset++) {
+      const DDC_E_preloadIndex = DDC_E_i + DDC_E_offset;
+      if (DDC_E_preloadIndex < DDC_E_frameCount && !DDC_E_imageCache[DDC_E_preloadIndex]) {
+        const DDC_E_preloadImg = new Image();
+        DDC_E_preloadImg.src = DDC_E_currentFrame(DDC_E_preloadIndex);
+        DDC_E_preloadImg.onload = () => {
+          DDC_E_imageCache[DDC_E_preloadIndex] = DDC_E_preloadImg;
+        };
+      }
+    }
+  }
+
+  function DDC_E_drawImage(DDC_E_img) {
+    DDC_E_context.clearRect(0, 0, DDC_E_canvas.width, DDC_E_canvas.height);
+    const DDC_E_scale = Math.min(DDC_E_canvas.width / DDC_E_img.width, DDC_E_canvas.height / DDC_E_img.height);
+    const DDC_E_x = (DDC_E_canvas.width - DDC_E_img.width * DDC_E_scale) / 2;
+    const DDC_E_y = (DDC_E_canvas.height - DDC_E_img.height * DDC_E_scale) / 2;
+    DDC_E_context.drawImage(DDC_E_img, 0, 0, DDC_E_img.width, DDC_E_img.height, DDC_E_x, DDC_E_y, DDC_E_img.width * DDC_E_scale, DDC_E_img.height * DDC_E_scale);
+  }
+	
+  const DDC_E_scrollArea = 3400;
+  // Scroll listener
+  window.addEventListener('scroll', () => {
+    const DDC_E_scrollTop = window.scrollY;
+    const DDC_E_maxScrollTop = document.documentElement.scrollHeight - window.innerHeight;
+    const DDC_E_scrollFraction = DDC_E_scrollTop / DDC_E_maxScrollTop;
+    const DDC_E_progress = Math.min(DDC_E_scrollTop / DDC_E_scrollArea, 1);
+    const DDC_E_frameIndex = Math.floor(DDC_E_progress * (DDC_E_frameCount - 1));
+    requestAnimationFrame(() => DDC_E_render(DDC_E_frameIndex));
+  });
+
+  // Resize listener
+  window.addEventListener('resize', () => {
+    DDC_E_canvas.width = window.innerWidth;
+    DDC_E_canvas.height = window.innerHeight;
+    DDC_E_render(DDC_E_currentLoadedIndex);
+  });
+
+  // Mostra il primo frame
+  DDC_E_render(0);
+</script>

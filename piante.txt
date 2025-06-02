@@ -1,0 +1,76 @@
+<canvas id="sequence-canvas-7" style="position:fixed;
+  inset:0; width:100vw; height:100vh; z-index:1; pointer-events:none;">
+</canvas>
+<script>
+  const DDC_G_frameCount = 120;
+  const DDC_G_canvas = document.getElementById("sequence-canvas-7");
+  const DDC_G_context = DDC_G_canvas.getContext("2d");
+
+  DDC_G_canvas.width = window.innerWidth;
+  DDC_G_canvas.height = window.innerHeight;
+
+  const DDC_G_url = "https://raw.githubusercontent.com/NiccoloSegato/unverse-assets/refs/heads/main/assets/piante/piante_";
+
+  const DDC_G_currentFrame = DDC_G_i => `${DDC_G_url}${DDC_G_i}.webp`;
+
+  const DDC_G_imageCache = {};
+  let DDC_G_currentLoadedIndex = -1;
+
+  function DDC_G_render(DDC_G_i) {
+    if (DDC_G_i === DDC_G_currentLoadedIndex) return;
+    DDC_G_currentLoadedIndex = DDC_G_i;
+
+    if (DDC_G_imageCache[DDC_G_i]) {
+      DDC_G_drawImage(DDC_G_imageCache[DDC_G_i]);
+    } else {
+      const DDC_G_img = new Image();
+      DDC_G_img.src = DDC_G_currentFrame(DDC_G_i);
+      DDC_G_img.style.objectFit = "cover";
+      DDC_G_img.onload = () => {
+        DDC_G_imageCache[DDC_G_i] = DDC_G_img;
+        DDC_G_drawImage(DDC_G_img);
+      };
+    }
+
+    // Precarica 2 frame successivi
+    for (let DDC_G_offset = 1; DDC_G_offset <= 2; DDC_G_offset++) {
+      const DDC_G_preloadIndex = DDC_G_i + DDC_G_offset;
+      if (DDC_G_preloadIndex < DDC_G_frameCount && !DDC_G_imageCache[DDC_G_preloadIndex]) {
+        const DDC_G_preloadImg = new Image();
+        DDC_G_preloadImg.src = DDC_G_currentFrame(DDC_G_preloadIndex);
+        DDC_G_preloadImg.onload = () => {
+          DDC_G_imageCache[DDC_G_preloadIndex] = DDC_G_preloadImg;
+        };
+      }
+    }
+  }
+
+  function DDC_G_drawImage(DDC_G_img) {
+    DDC_G_context.clearRect(0, 0, DDC_G_canvas.width, DDC_G_canvas.height);
+    const DDC_G_scale = Math.min(DDC_G_canvas.width / DDC_G_img.width, DDC_G_canvas.height / DDC_G_img.height);
+    const DDC_G_x = (DDC_G_canvas.width - DDC_G_img.width * DDC_G_scale) / 2;
+    const DDC_G_y = (DDC_G_canvas.height - DDC_G_img.height * DDC_G_scale) / 2;
+    DDC_G_context.drawImage(DDC_G_img, 0, 0, DDC_G_img.width, DDC_G_img.height, DDC_G_x, DDC_G_y, DDC_G_img.width * DDC_G_scale, DDC_G_img.height * DDC_G_scale);
+  }
+	
+  const DDC_G_scrollArea = 3400;
+  // Scroll listener
+  window.addEventListener('scroll', () => {
+    const DDC_G_scrollTop = window.scrollY;
+    const DDC_G_maxScrollTop = document.documentElement.scrollHeight - window.innerHeight;
+    const DDC_G_scrollFraction = DDC_G_scrollTop / DDC_G_maxScrollTop;
+    const DDC_G_progress = Math.min(DDC_G_scrollTop / DDC_G_scrollArea, 1);
+    const DDC_G_frameIndex = Math.floor(DDC_G_progress * (DDC_G_frameCount - 1));
+    requestAnimationFrame(() => DDC_G_render(DDC_G_frameIndex));
+  });
+
+  // Resize listener
+  window.addEventListener('resize', () => {
+    DDC_G_canvas.width = window.innerWidth;
+    DDC_G_canvas.height = window.innerHeight;
+    DDC_G_render(DDC_G_currentLoadedIndex);
+  });
+
+  // Mostra il primo frame
+  DDC_G_render(0);
+</script>

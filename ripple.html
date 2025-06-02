@@ -2,26 +2,29 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <title>Scroll Animation</title>
+        <title>Ripple Animation</title>
         <style>
             body {
-            margin: 0;
-            height: 10000px; /* scroll lungo per demo */
+                margin: 0;
+                height: 10000px; /* scroll lungo per demo */
             }
 
             canvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            z-index: 0;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100vw;
+                height: 100vh;
+                z-index: 1;
             }
         </style>
+        <link rel="stylesheet" href="styles/ripple.css">
+        <script src="scripts/jquery.js"></script>
+        <script src="scripts/ripples.js"></script>
     </head>
     <body>
         <canvas id="sequence-canvas"></canvas>
-        <canvas id="sequence-canvas-2"></canvas>
+        <div class="bg-image"></div>
 
         <script>
         const DDC_A_frameCount = 120;
@@ -31,7 +34,7 @@
         DDC_A_canvas.width = window.innerWidth;
         DDC_A_canvas.height = window.innerHeight;
 
-        const DDC_url = 'https://raw.githubusercontent.com/NiccoloSegato/unverse-assets/refs/heads/main/assets/altalena/altalena_';
+        const DDC_url = 'https://raw.githubusercontent.com/NiccoloSegato/unverse-assets/refs/heads/main/assets/nuvole/nuvole_';
 
         const DDC_A_currentFrame = DDC_A_i => `${DDC_url}${DDC_A_i}.webp`;
 
@@ -88,6 +91,13 @@
             DDC_A_canvas.width = window.innerWidth;
             DDC_A_canvas.height = window.innerHeight;
             DDC_A_render(DDC_A_currentLoadedIndex);
+        });
+
+        $(document).ready(function() {
+            $(".bg-image").ripples({
+                resolution: 336,
+                perturbance: 0.05
+            });
         });
 
         // Mostra il primo frame

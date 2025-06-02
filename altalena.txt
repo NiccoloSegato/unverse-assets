@@ -1,0 +1,76 @@
+<canvas id="sequence-canvas-3" style="position:fixed;
+  inset:0; width:100vw; height:100vh; z-index:1; pointer-events:none;">
+</canvas>
+<script>
+  const DDC_C_frameCount = 120;
+  const DDC_C_canvas = document.getElementById("sequence-canvas-3");
+  const DDC_C_context = DDC_C_canvas.getContext("2d");
+
+  DDC_C_canvas.width = window.innerWidth;
+  DDC_C_canvas.height = window.innerHeight;
+
+  const DDC_C_url = "https://raw.githubusercontent.com/NiccoloSegato/unverse-assets/refs/heads/main/assets/altalena/altalena_";
+
+  const DDC_C_currentFrame = DDC_C_i => `${DDC_C_url}${DDC_C_i}.webp`;
+
+  const DDC_C_imageCache = {};
+  let DDC_C_currentLoadedIndex = -1;
+
+  function DDC_C_render(DDC_C_i) {
+    if (DDC_C_i === DDC_C_currentLoadedIndex) return;
+    DDC_C_currentLoadedIndex = DDC_C_i;
+
+    if (DDC_C_imageCache[DDC_C_i]) {
+      DDC_C_drawImage(DDC_C_imageCache[DDC_C_i]);
+    } else {
+      const DDC_C_img = new Image();
+      DDC_C_img.src = DDC_C_currentFrame(DDC_C_i);
+      DDC_C_img.style.objectFit = "cover";
+      DDC_C_img.onload = () => {
+        DDC_C_imageCache[DDC_C_i] = DDC_C_img;
+        DDC_C_drawImage(DDC_C_img);
+      };
+    }
+
+    // Precarica 2 frame successivi
+    for (let DDC_C_offset = 1; DDC_C_offset <= 2; DDC_C_offset++) {
+      const DDC_C_preloadIndex = DDC_C_i + DDC_C_offset;
+      if (DDC_C_preloadIndex < DDC_C_frameCount && !DDC_C_imageCache[DDC_C_preloadIndex]) {
+        const DDC_C_preloadImg = new Image();
+        DDC_C_preloadImg.src = DDC_C_currentFrame(DDC_C_preloadIndex);
+        DDC_C_preloadImg.onload = () => {
+          DDC_C_imageCache[DDC_C_preloadIndex] = DDC_C_preloadImg;
+        };
+      }
+    }
+  }
+
+  function DDC_C_drawImage(DDC_C_img) {
+    DDC_C_context.clearRect(0, 0, DDC_C_canvas.width, DDC_C_canvas.height);
+    const DDC_C_scale = Math.min(DDC_C_canvas.width / DDC_C_img.width, DDC_C_canvas.height / DDC_C_img.height);
+    const DDC_C_x = (DDC_C_canvas.width - DDC_C_img.width * DDC_C_scale) / 2;
+    const DDC_C_y = (DDC_C_canvas.height - DDC_C_img.height * DDC_C_scale) / 2;
+    DDC_C_context.drawImage(DDC_C_img, 0, 0, DDC_C_img.width, DDC_C_img.height, DDC_C_x, DDC_C_y, DDC_C_img.width * DDC_C_scale, DDC_C_img.height * DDC_C_scale);
+  }
+	
+  const DDC_C_scrollArea = 3400;
+  // Scroll listener
+  window.addEventListener('scroll', () => {
+    const DDC_C_scrollTop = window.scrollY;
+    const DDC_C_maxScrollTop = document.documentElement.scrollHeight - window.innerHeight;
+    const DDC_C_scrollFraction = DDC_C_scrollTop / DDC_C_maxScrollTop;
+    const DDC_C_progress = Math.min(DDC_C_scrollTop / DDC_C_scrollArea, 1);
+    const DDC_C_frameIndex = Math.floor(DDC_C_progress * (DDC_C_frameCount - 1));
+    requestAnimationFrame(() => DDC_C_render(DDC_C_frameIndex));
+  });
+
+  // Resize listener
+  window.addEventListener('resize', () => {
+    DDC_C_canvas.width = window.innerWidth;
+    DDC_C_canvas.height = window.innerHeight;
+    DDC_C_render(DDC_C_currentLoadedIndex);
+  });
+
+  // Mostra il primo frame
+  DDC_C_render(0);
+</script>
