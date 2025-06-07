@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Simplex Noise Animation - Vintage</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: #a8c8d8;
+            overflow: hidden;
+        }
+        
+        .canvas-container {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+        }
+        
+        canvas {
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        
+        #canvas {
+            filter: blur(20px);
+            z-index: 1;
+        }
+        
+        #noise-canvas {
+            z-index: 2;
+            pointer-events: none;
+            opacity: 0.25;
+            mix-blend-mode: overlay;
+        }
+    </style>
+    <link rel="stylesheet" href="styles/ripple.css">
+    <script src="scripts/jquery.js"></script>
+    <script src="scripts/ripples.js"></script>
+</head>
+<body>
+    <div class="canvas-container">
+        <div class="bg-image"></div>
+        <canvas id="canvas"></canvas>
+        <canvas id="noise-canvas"></canvas>
+    </div>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/simplex-noise/2.4.0/simplex-noise.min.js"></script>
+    
+    <script>
+        // Canvas setup
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        const noiseCanvas = document.getElementById('noise-canvas');
+        const noiseCtx = noiseCanvas.getContext('2d');
+        
+        // Resize canvas to window
+        function resizeCanvas() {
+            const dpr = window.devicePixelRatio || 1;
+            const rect = canvas.getBoundingClientRect();
+            
+            // Set actual size in memory (scaled to account for extra pixel density)
+            canvas.width = rect.width * dpr;
+            canvas.height = rect.height * dpr;
+            noiseCanvas.width = rect.width * dpr;
+            noiseCanvas.height = rect.height * dpr;
+            
+            // Scale the drawing context so everything will work at the higher ratio
+            ctx.scale(dpr, dpr);
+            noiseCtx.scale(dpr, dpr);
+        }
+        
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+        
+        // Generate intense noise texture
+        function generateNoise() {
+            const width = noiseCanvas.width;
+            const height = noiseCanvas.height;
+            
+            // Check if canvas has valid dimensions
+            if (width <= 0 || height <= 0) {
+                return;
+            }
+            
+            const imageData = noiseCtx.createImageData(width, height);
+            const data = imageData.data;
+            
+            for (let i = 0; i < data.length; i += 4) {
+                // Generate high-contrast noise with vintage grain effect
+                const noise = Math.random();
+                const intensity = noise > 0.6 ? 255 : (noise > 0.3 ? 128 : 0);
+                const variation = (Math.random() - 0.5) * 60;
+                
+                const finalIntensity = Math.max(0, Math.min(255, intensity + variation));
+                
+                data[i] = finalIntensity;     // R
+                data[i + 1] = finalIntensity; // G
+                data[i + 2] = finalIntensity; // B
+                data[i + 3] = Math.random() * 120 + 60; // Alpha with stronger variation
+            }
+            
+            noiseCtx.putImageData(imageData, 0, 0);
+        }
+        
+        // Generate noise every few frames for animation
+        let noiseFrame = 0;
+        function updateNoise() {
+            if (noiseFrame % 4 === 0) { // Update every 4 frames for smoother performance
+                //generateNoise();
+            }
+            noiseFrame++;
+        }
+        
+        // Math constants
+        const TAU = Math.PI * 2;
+        
+        // Helper functions
+        function map(value, start1, stop1, start2, stop2) {
+            return start2 + (stop2 - start2) * ((value - start1) / (stop1 - start1));
+        }
+        
+        function cos(angle) {
+            return Math.cos(angle);
+        }
+        
+        function floor(value) {
+            return Math.floor(value);
+        }
+        
+        function hsl(h, s, l, a = 1) {
+            return `hsla(${h}, ${s}%, ${l}%, ${a})`;
+        }
+        
+        // Simplex noise instance
+        let noise = new SimplexNoise();
+        
+        function draw(e) {
+            const width = canvas.getBoundingClientRect().width;
+            const height = canvas.getBoundingClientRect().height;
+            const width_half = width / 2;
+            const height_half = height / 2;
+            
+            // Clear canvas
+            ctx.clearRect(0, 0, width, height);
+            
+            // Set origin to center
+            ctx.save();
+            ctx.translate(width_half, height_half);
+            
+            let xCount = 40;
+            let yCount = 60;
+            let iXCount = 1 / (xCount - 1);
+            let iYCount = 1 / (yCount - 1);
+            let time = e * 0.00005;
+            let timeStep = 0.01;
+            
+            // Gradient vintage con palette azzurro-celeste
+            let grad = ctx.createLinearGradient(-width, -height_half, width, height_half);
+            let t = time % 1;
+            let tSide = floor(time % 2) === 0;
+            
+            // Palette azzurra/celeste
+            let hueA = tSide ? 200 : 190;
+            let hueB = !tSide ? 180 : 210;
+            let hueC = 195;
+            
+            let colorA = hsl(hueA, 45, 75);
+            let colorB = hsl(hueB, 55, 65);
+            let colorC = hsl(hueC, 50, 80);
+            
+            grad.addColorStop(0, colorC);
+            grad.addColorStop(map(t, 0, 1, 0.3, 0.1), colorA);
+            grad.addColorStop(map(t, 0, 1, 0.7, 0.4), colorB);
+            grad.addColorStop(1, colorA);
+            
+            // Sfondo con opacità variabile
+            ctx.globalAlpha = map(cos(time * 0.5), -1, 1, 0.12, 0.25);
+            ctx.fillStyle = grad;
+            ctx.fillRect(-width_half, -height_half, width, height);
+            ctx.globalAlpha = 1;
+            
+            // Disegna le linee del flusso
+            ctx.beginPath();
+            for(let j = 0; j < yCount; j++) {
+                let tj = j * iYCount;
+                let c = cos(tj * TAU + time) * 0.12;
+                for(let i = 0; i < xCount; i++) {
+                    let t = i * iXCount;
+                    let n = noise.noise3D(t, time, c);
+                    let y = n * height_half * 0.8;
+                    let x = t * (width + 20) - width_half - 10;
+                    if (i === 0) {
+                        ctx.moveTo(x, y);
+                    } else {
+                        ctx.lineTo(x, y);
+                    }
+                }
+                time += timeStep;
+            }
+            
+            // Effetto vintage sulle linee con grana aggiuntiva
+            ctx.globalCompositeOperation = 'overlay';
+            ctx.filter = 'blur(12px) sepia(25%) saturate(120%) contrast(110%) brightness(95%)';
+            
+            // Gradiente per le linee con palette azzurra
+            let lineGrad = ctx.createLinearGradient(-width_half, -height_half, width_half, height_half);
+            lineGrad.addColorStop(0, hsl(190, 60, 70, 0.8));
+            lineGrad.addColorStop(0.5, hsl(200, 55, 65, 0.6));
+            lineGrad.addColorStop(1, hsl(210, 65, 75, 0.7));
+            
+            ctx.strokeStyle = lineGrad;
+            ctx.lineWidth = 4;
+            ctx.stroke();
+            
+            // Linee più definite con leggero effetto grana
+            ctx.filter = 'sepia(20%) saturate(110%) contrast(105%)';
+            ctx.strokeStyle = hsl(180, 100, 100, 1);
+            ctx.lineWidth = 5;
+            ctx.stroke();
+            
+            // Reset composite operation and filter
+            ctx.globalCompositeOperation = 'source-over';
+            ctx.filter = 'none';
+            
+            ctx.restore();
+            
+            // Update noise overlay
+            updateNoise();
+        }
+        
+        // Animation loop
+        function animate(timestamp) {
+            draw(timestamp);
+            requestAnimationFrame(animate);
+        }
+        
+        // Wait for DOM to be fully loaded before starting
+        window.addEventListener('load', function() {
+            // Initial noise generation after everything is loaded
+            setTimeout(() => {
+                generateNoise();
+                requestAnimationFrame(animate);
+            }, 100);
+        });
+
+        $(document).ready(function() {
+            $(".bg-image").ripples({
+                resolution: 336,
+                perturbance: 0.05
+            });
+        });
+    </script>
+</body>
+</html>
