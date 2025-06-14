@@ -22,7 +22,7 @@ function submitCalculation() {
 function resetForm() {
     document.getElementById("date").value = "";
     document.getElementById("time").value = "";
-    document.getElementById("earth-result").innerHTML = "";
-    document.getElementById("moon-result").innerHTML = "";
-    document.getElementById("tide-result").innerHTML = "";
+    document.getElementById("earth-result").innerHTML = "- (-)";
+    document.getElementById("moon-result").innerHTML = "- (-)";
+    document.getElementById("tide-result").innerHTML = "- (-)";
 }
