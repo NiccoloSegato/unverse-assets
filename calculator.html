@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="it">
+    <head>
+        <meta charset="UTF-8">
+        <title>Mood calculator</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="styles/calculator.css">
+        <script src="scripts/global.js"></script>
+        <script src="scripts/calculator.js"></script>
+    </head>
+    <body>
+        <div class="calculator-container">
+            <h1 class="calculator-title">Calcolatore</h1>
+            <p class="calculator-subtitle">Inserisci la data e l'ora per calcolare il mood del momento</p>
+            
+            <div class="input-section">
+                <div class="input-group">
+                    <label class="input-label">Data:</label>
+                    <input type="date" class="input-field" id="date">
+                </div>
+                <div class="input-group">
+                    <label class="input-label">Ora:</label>
+                    <input type="time" class="input-field" id="time">
+                </div>
+            </div>
+            
+            <button class="calculate-btn" onclick="submitCalculation()">Calcola Mood</button>
+            
+            <div class="results-section">
+                <h2 class="results-title">Risultato del Calcolo</h2>
+                
+                <div class="result-item">
+                    <span class="result-label">Terra</span>
+                    <span class="result-value" id="earth-result">(-)</span>
+                </div>
+                
+                <div class="result-item">
+                    <span class="result-label">Luna</span>
+                    <span class="result-value" id="moon-result">(-)</span>
+                </div>
+                
+                <div class="result-item">
+                    <span class="result-label">Marea</span>
+                    <span class="result-value" id="tide-result">(-)</span>
+                </div>
+            </div>
+            
+            <button class="reset-btn">Reset</button>
+        </div>
+    </body>
+</html>

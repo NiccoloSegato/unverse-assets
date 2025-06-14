@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="it">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Weberus</title>
+        <link rel="stylesheet" href="styles/planner.css">
+        <script src="scripts/global.js"></script>
+        <script src="scripts/planner.js"></script>
+    </head>
+    <body>
+        <nav>
+            <img src="assets/images/logo.png" alt="Logo Weberus" id="logo">
+        </nav>
+        <main>
+            <h1>Pianificazione mood</h1>
+            <p>Range intervallo: da <strong id="min-interval"></strong> a <strong id="max-interval"></strong></p>
+            <div id="period-buttons">
+                <button id="btn-1" class="period-button" onclick="getPeriodStats(1)">Giorno</button>
+                <button id="btn-7" class="period-button selected" onclick="getPeriodStats(7)">Settimana</button>
+                <button id="btn-30" class="period-button" onclick="getPeriodStats(30)">Mese</button>
+                <button id="btn-365" class="period-button" onclick="getPeriodStats(365)">Anno</button>
+            </div>
+            <h3>Statistiche</h3>
+            <table id="stats-table">
+                <thead>
+                    <tr>
+                        <th>Durata media</th>
+                        <th>Nostalgia</th>
+                        <th>Calma</th>
+                        <th>Libertà</th>
+                        <th>Solitudine</th>
+                        <th>Focus</th>
+                    </tr>
+                </thead>
+                <tbody id="stats-body">
+                    <!-- Le righe della tabella verranno generate dinamicamente -->
+                </tbody>
+            </table>
+            <h3>Pianificazione</h3>
+            <table id="planner-table">
+                <thead>
+                    <tr>
+                        <th>Data</th>
+                        <th>Inizio</th>
+                        <th>Fine</th>
+                        <th>Durata</th>
+                        <th>Mood</th>
+                    </tr>
+                </thead>
+                <tbody id="planner-body">
+                    <!-- Le righe della tabella verranno generate dinamicamente -->
+                </tbody>
+            </table>
+        </main>
+        <script>DDC_runPlanner()</script>
+    </body>
+</html>
