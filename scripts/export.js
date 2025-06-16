@@ -20,13 +20,6 @@ export const DDC_globalTextColors = [
     '#FFFFFF',
     '#FFFFFF'
 ];
-export const DDC_gradientsTints = [
-    ['#FD5E53', '#F6824F', '#ED964B', '#E4AA47', '#3A5F8A', '#1A2A40', '#040348', '#191970'],
-    ['#a0bce0', '#379ab8', '#a3d6bc', '#2d7e70', '#84ecba', '#5be78e', '#b2daeb', '#7de3ec'],
-    ['#d3e9b4', '#a6d1ec', '#ffc3d4', '#d5badf', '#bed899', '#e28bf2', '#fff491', '#ff829b'],
-    ['#1A1A1A', '#2F2F2F', '#434343', '#3A5E6B', '#5A5A5A', '#707070', '#858585', '#929292'],
-    ['#F5A7BE', '#E37EA1', '#D15886', '#BE326B', '#A22D77', '#852882', '#66207E', '#461D79']
-];
 export const DDC_dictionaryLength = 12;
 export const DDC_dictionary = [
     [
