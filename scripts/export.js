@@ -1,27 +1,27 @@
-let DDC_moods = ['Malinconia', 'Calma', 'Felicità', 'Solitudine', 'Trance'];
-const DDC_introBackgrounds = [
+export const DDC_moods = ['Malinconia', 'Calma', 'Felicità', 'Solitudine', 'Trance'];
+export const DDC_introBackgrounds = [
     '#FFFFFF',
     '#FFFFFF',
     '#FFFFFF',
     '#000000',
     '#000000'
 ];
-const DDC_globalTextColors = [
+export const DDC_globalTextColors = [
     '#000000',
     '#000000',
     '#000000',
     '#FFFFFF',
     '#FFFFFF'
 ];
-const DDC_gradientsTints = [
+export const DDC_gradientsTints = [
     ['#FD5E53', '#F6824F', '#ED964B', '#E4AA47', '#3A5F8A', '#1A2A40', '#040348', '#191970'],
     ['#a0bce0', '#379ab8', '#a3d6bc', '#2d7e70', '#84ecba', '#5be78e', '#b2daeb', '#7de3ec'],
     ['#d3e9b4', '#a6d1ec', '#ffc3d4', '#d5badf', '#bed899', '#e28bf2', '#fff491', '#ff829b'],
     ['#1A1A1A', '#2F2F2F', '#434343', '#3A5E6B', '#5A5A5A', '#707070', '#858585', '#929292'],
     ['#F5A7BE', '#E37EA1', '#D15886', '#BE326B', '#A22D77', '#852882', '#66207E', '#461D79']
 ];
-const DDC_dictionaryLength = 12;
-const DDC_dictionary = [
+export const DDC_dictionaryLength = 12;
+export const DDC_dictionary = [
     [
         "-",
         "-",
@@ -93,7 +93,7 @@ const DDC_dictionary = [
         "Non è come andare a sentire il concerto dell’artista che ti piace, dove alle canzoni associ mille memorie, ma sono proprio degli ingranaggi ai quali ti agganci per farti portare via."
     ]
 ];
-const DDC_dynamicTags = [
+export const DDC_dynamicTags = [
     [],
     [
             "video",
@@ -127,7 +127,7 @@ const DDC_dynamicTags = [
         "video"
     ],
 ];
-const DDC_dynamicContents = [
+export const DDC_dynamicContents = [
     [],
     [
         "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/calma/colibri.webm",
@@ -140,7 +140,7 @@ const DDC_dynamicContents = [
         "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/calma/rospo.webm"
     ]
 ];
-const DDC_dynamicClicked = [
+export const DDC_dynamicClicked = [
     [],
     [
         "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/calma/colibri.webm",
@@ -153,7 +153,7 @@ const DDC_dynamicClicked = [
         "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/calma/rospo.webm"
     ]
 ];
-const DDC_dynamicAudios = [
+export const DDC_dynamicAudios = [
     [],
     [
         "",
@@ -166,7 +166,7 @@ const DDC_dynamicAudios = [
         ""
     ]
 ];
-const DDC_objectsDidasH1 = [
+export const DDC_objectsDidasH1 = [
     [],
     [
             "Un battito d'ali, un'eco dalla Giamaica",
@@ -179,7 +179,7 @@ const DDC_objectsDidasH1 = [
         "Piccola Meraviglia"
     ]
 ];
-const DDC_objectsDidasP = [
+export const DDC_objectsDidasP = [
     [],
     [
             "22.04.2025, 11:12:11",
@@ -192,7 +192,7 @@ const DDC_objectsDidasP = [
         "22.04.2025, 19:36:22"
     ]
 ];
-const DDC_objectsLocations = [
+export const DDC_objectsLocations = [
     [],
     [
     "Kingston",
@@ -205,7 +205,7 @@ const DDC_objectsLocations = [
     "Kingston"
     ]
 ];
-const DDC_objectsMoodValues = [
+export const DDC_objectsMoodValues = [
     [],
     [
         ["165°", "Gibbosa calante", "Bassa marea"],
@@ -219,12 +219,12 @@ const DDC_objectsMoodValues = [
     ]
 ];
 
-const DDC_INTERVAL_MOON = 7 * 24 * 60 * 60 * 1000; // 7 giorni
-const DDC_INTERVAL_TIDE = 6 * 60 * 60 * 1000; // 6 ore
-const DDC_INTERVAL_EARTH = 20 * 60 * 1000; // 20 minuti
+export const DDC_INTERVAL_MOON = 7 * 24 * 60 * 60 * 1000; // 7 giorni
+export const DDC_INTERVAL_TIDE = 6 * 60 * 60 * 1000; // 6 ore
+export const DDC_INTERVAL_EARTH = 20 * 60 * 1000; // 20 minuti
 
-const DDC_MIN_DURATION_MINUTES = 20;
-const DDC_MAX_DURATION_MINUTES = 360;
-const DDC_DURATION_RANGE_SIZE = DDC_MAX_DURATION_MINUTES - DDC_MIN_DURATION_MINUTES + 1;
+export const DDC_MIN_DURATION_MINUTES = 20;
+export const DDC_MAX_DURATION_MINUTES = 360;
+export const DDC_DURATION_RANGE_SIZE = DDC_MAX_DURATION_MINUTES - DDC_MIN_DURATION_MINUTES + 1;
 
-const DDC_EPOCH_START_MS = new Date('1992-12-04T00:00:00Z').getTime();
+export const DDC_EPOCH_START_MS = new Date('1992-12-04T00:00:00Z').getTime();
