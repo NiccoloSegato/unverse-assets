@@ -76,29 +76,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Call the render function to populate the gallery
     DDC_renderGallery();
-
-    if (!isMobile()) {
-        DDC_galleryMaster.addEventListener('wheel', function(e) {
-            // Prevent default vertical scroll
-            e.preventDefault();
-            
-            // Convert vertical scroll to horizontal with multiplier for better speed
-            let scrollAmount = e.deltaY;
-            
-            // Increase scroll sensitivity based on deltaMode
-            if (e.deltaMode === 1) {
-                // Line scrolling (Firefox usually)
-                scrollAmount *= 30;
-            } else if (e.deltaMode === 2) {
-                // Page scrolling
-                scrollAmount *= 100;
-            } else {
-                // Pixel scrolling - apply multiplier for better responsiveness
-                scrollAmount *= 8;
-            }
-            
-            // Apply horizontal scroll
-            DDC_galleryMaster.scrollLeft += scrollAmount;
-        }, { passive: false });
-    }
+    
+    // TODO: Implementare lo scroll laterale
 });
