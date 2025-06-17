@@ -218,7 +218,10 @@ export const DDC_dynamicContents = [
         "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/calma/slang.webp",
         "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/calma/pianta.webp",
         "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/calma/rospo.webm"
-    ]
+    ],
+    [],
+    [],
+    []
 ];
 export const DDC_dynamicClicked = [
     [],
@@ -231,7 +234,10 @@ export const DDC_dynamicClicked = [
         "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/calma/slang.webm",
         "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/calma/pianta.webp",
         "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/calma/rospo.webm"
-    ]
+    ],
+    [],
+    [],
+    []
 ];
 export const DDC_dynamicAnimations = [
     [],
@@ -261,12 +267,15 @@ export const DDC_dynamicAudios = [
         "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/calma/jamaican-slang.m4a",
         "",
         ""
-    ]
+    ],
+    [],
+    [],
+    []
 ];
 export const DDC_objectsDidasH1 = [
     [],
     [
-        "Un battito d'ali, un'eco dalla Giamaica",
+        "Un battito d'ali",
         "Relaxing Water",
         "Microcosmo",
         "Materia e spirito",
@@ -274,6 +283,13 @@ export const DDC_objectsDidasH1 = [
         "Jamaican Slang",
         "Un Lento Abbraccio",
         "Piccola Meraviglia"
+    ],
+    [],
+    [],
+    [
+        "Techno Parade",
+        "",
+
     ]
 ];
 export const DDC_objectsDidasP = [
@@ -287,7 +303,10 @@ export const DDC_objectsDidasP = [
         "Nessuna data",
         "12.04.2025, 11:34:19",
         "22.04.2025, 19:36:22"
-    ]
+    ],
+    [],
+    [],
+    []
 ];
 export const DDC_objectsLocations = [
     [],
@@ -300,7 +319,10 @@ export const DDC_objectsLocations = [
         "Kingston",
         "Kingston",
         "Kingston"
-    ]
+    ],
+    [],
+    [],
+    []
 ];
 export const DDC_objectsMoodValues = [
     [],
@@ -313,7 +335,10 @@ export const DDC_objectsMoodValues = [
         ["200°", "Ultimo quarto", "Bassa marea"],
         ["170°", "Gibbosa crescente", "Bassa marea"],
         ["290°", "Gibbosa calante", "Bassa marea"],
-    ]
+    ],
+    [],
+    [],
+    []
 ];
 
 export const DDC_INTERVAL_MOON = 7 * 24 * 60 * 60 * 1000; // 7 giorni
