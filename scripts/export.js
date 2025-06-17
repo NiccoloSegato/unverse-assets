@@ -121,12 +121,12 @@ export const DDC_dictionary = [
         "Può essere davvero tante cose, come una serata o anche quando mi capita di essere mega impegnato, mi sento solo e dico: “aiuto”.",
         "È come se fosse una sorta di concentrazione particolare... ma c’è lo stesso tanta energia, anche se magari non sai dove sia di preciso.",
         "È anche un pochettino più difficile da capire, però, in realtà, può essere molto comprensibile come stato. Forse, ci succede anche più spesso di quanto pensiamo.",
-        "Mi immagino degli ingranaggi che vanno, dove trovi tanta energia in movimento, ma non necessariamente tocca dei punti di emotività o di incontro, non coinvolge altre persone.",
-        "Lo vedo molto HD, è una matematica del mondo che ha una sua lucidità.",
-        "È proprio un fluire… Lo vedi in una cascata, o nella lava di un vulcano.",
         "È accumuli di energia in quanto tale, non di energia in quanto vita.",
         "Mi viene in mente un trasporto che ha poco di elemento umano. È molto corporale ed agonistica come sensazione; senti solo l’energia allo stato puro del tuo corpo che funziona.",
-        "Non è come andare a sentire il concerto dell’artista che ti piace, dove alle canzoni associ mille memorie, ma sono proprio degli ingranaggi ai quali ti agganci per farti portare via."
+        "Non è come andare a sentire il concerto dell’artista che ti piace, dove alle canzoni associ mille memorie, ma sono proprio degli ingranaggi ai quali ti agganci per farti portare via.",
+        "Mi immagino degli ingranaggi che vanno, dove trovi tanta energia in movimento, ma non necessariamente tocca dei punti di emotività o di incontro, non coinvolge altre persone.",
+        "Lo vedo molto HD, è una matematica del mondo che ha una sua lucidità.",
+        "È proprio un fluire… Lo vedi in una cascata, o nella lava di un vulcano."
     ]
 ];
 export const DDC_titles = [
@@ -147,8 +147,8 @@ export const DDC_titles = [
     [
         "FUORI FUOCO",
         "ENERGIA DIFFUSA",
-        "ECCITAMENTO MECCANICO",
-        "ENERGIA PURA"
+        "ENERGIA PURA",
+        "ECCITAMENTO MECCANICO"
     ]
 ];
 export const DDC_subtitles = [
@@ -169,8 +169,8 @@ export const DDC_subtitles = [
     [
         "Né pace, né caos, solo coerenza distorta",
         "Una concentrazione piena di energia",
-        "La matematica dell'universo",
-        "Tutto un fluire astratto"
+        "Tutto un fluire astratto",
+        "La matematica dell'universo"
     ]
 ]
 export const DDC_dynamicTags = [
@@ -201,10 +201,10 @@ export const DDC_dynamicTags = [
         "img",
         "img",
         "img",
+        "img",
         "video",
-        "img",
-        "img",
-        "video"
+        "video",
+        "img"
     ],
 ];
 export const DDC_dynamicContents = [
@@ -216,7 +216,7 @@ export const DDC_dynamicContents = [
         "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/calma/tabacco.webp",
         "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/calma/studio.webm",
         "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/calma/slang.webp",
-        "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/calma/pinta.webp",
+        "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/calma/pianta.webp",
         "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/calma/rospo.webm"
     ]
 ];
@@ -229,7 +229,7 @@ export const DDC_dynamicClicked = [
         "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/calma/tabacco.webp",
         "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/calma/studio.webm",
         "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/calma/slang.webm",
-        "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/calma/pinta.webp",
+        "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/calma/pianta.webp",
         "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/calma/rospo.webm"
     ]
 ];
@@ -266,7 +266,7 @@ export const DDC_dynamicAudios = [
 export const DDC_objectsDidasH1 = [
     [],
     [
-            "Un battito d'ali, un'eco dalla Giamaica",
+        "Un battito d'ali, un'eco dalla Giamaica",
         "Relaxing Water",
         "Microcosmo",
         "Materia e spirito",
