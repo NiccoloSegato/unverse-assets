@@ -20,6 +20,13 @@ export const DDC_globalTextColors = [
     '#FFFFFF',
     '#FFFFFF'
 ];
+export const DDC_embossingStartColors = [
+    '#000000',
+    '#000000',
+    '#000000',
+    '#000000',
+    '#FFFFFF'
+];
 export const DDC_embossingColors = [
     '#000000',
     '#aec7d6',
