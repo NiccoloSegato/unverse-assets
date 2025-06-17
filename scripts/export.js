@@ -20,6 +20,19 @@ export const DDC_globalTextColors = [
     '#FFFFFF',
     '#FFFFFF'
 ];
+export const DDC_embossingColors = [
+    '#000000',
+    '#aec7d6',
+    '#000000',
+    '#FFFFFF',
+    '#2c1e1e'
+];
+export const DDC_embossingShadows = [
+    'rgba(0, 0, 0, 0.2) -1px -1px 2px, rgba(255, 255, 255, 0.9) 1px 1px 2px',
+    'rgba(0, 0, 0, 0.2) -1px -1px 2px, rgba(255, 255, 255, 0.9) 1px 1px 2px',
+    'rgba(0, 0, 0, 0.2) -1px -1px 2px, rgba(255, 255, 255, 0.9) 1px 1px 2px',
+    'rgba(0, 0, 0, 0.2) -1px -1px 2px, rgba(100, 100, 100, 0.9) 1px 1px 2px'
+];
 export const DDC_dictionaryLength = 12;
 export const DDC_dictionary = [
     [
@@ -79,10 +92,10 @@ export const DDC_dictionary = [
         "-"
     ],
     [
-            "Mi immagino un focus mode dove sei così preso  dalla situazione che non ti accorgi di come ti senti veramente. Non è per forza connesso alla calma, ma è uno stato interessante, perché  anche questo è parte della realtà,",
+        "Mi immagino un focus mode dove sei così preso  dalla situazione che non ti accorgi di come ti senti veramente. Non è per forza connesso alla calma, ma è uno stato interessante, perché  anche questo è parte della realtà,",
         "non è sempre tutto positivo o negativo, no?",
         "Quando sono davanti a un bell’impianto, con un DJ che mette la techno fatta bene e magari sono anche fatto, sento che è come se mi mettesse su una specie di binario.",
-            "Può essere davvero tante cose, come una serata o anche quando mi capita di essere mega impegnato, mi sento solo e dico: “aiuto”.",
+        "Può essere davvero tante cose, come una serata o anche quando mi capita di essere mega impegnato, mi sento solo e dico: “aiuto”.",
         "È come se fosse una sorta di concentrazione particolare... ma c’è lo stesso tanta energia, anche se magari non sai dove sia di preciso.",
         "È anche un pochettino più difficile da capire, però, in realtà, può essere molto comprensibile come stato. Forse, ci succede anche più spesso di quanto pensiamo.",
         "Mi immagino degli ingranaggi che vanno, dove trovi tanta energia in movimento, ma non necessariamente tocca dei punti di emotività o di incontro, non coinvolge altre persone.",
@@ -93,10 +106,54 @@ export const DDC_dictionary = [
         "Non è come andare a sentire il concerto dell’artista che ti piace, dove alle canzoni associ mille memorie, ma sono proprio degli ingranaggi ai quali ti agganci per farti portare via."
     ]
 ];
+export const DDC_titles = [
+    [],
+    [
+        "QUI, ADESSO",
+        "VITALITÀ DISCRETA",
+        "TRANQUILLA ASSENZA",
+        "FREQUENZA MINIMA"
+    ],
+    [
+        "TUTTO A FUOCO",
+        "QUASDO BASTANO I NUTRIMENTI DELLA VITA",
+        "VITA, E PERSONE",
+        "MA QUANTO SONO FELICI?"
+    ],
+    [],
+    [
+        "FUORI FUOCO",
+        "ENERGIA DIFFUSA",
+        "ECCITAMENTO MECCANICO",
+        "ENERGIA PURA"
+    ]
+];
+export const DDC_subtitles = [
+    [],
+    [
+        "Il presente che diventa emozione",
+        "La quiete che fa bene",
+        "La tranquillità che si nasconde",
+        "Due energie che si sfiorano senza disturbarsi"
+    ],
+    [
+        "Una lente speciale che ti permette di capire meglio la realtà",
+        "Stai bene con quello che hai, non hai bisogno di supplementi",
+        "Tutti i momenti passati insieme, tutti i luoghi dove si sta bene",
+        "La natura piena di vita, una questione di convivialità"
+    ],
+    [],
+    [
+        "Né pace, né caos, solo coerenza distorta",
+        "Una concentrazione piena di energia",
+        "La matematica dell'universo",
+        "Tutto un fluire astratto"
+    ]
+]
 export const DDC_dynamicTags = [
     [],
     [
-            "video",
+        "video",
         "videoaudio",
         "img",
         "img",
@@ -199,7 +256,7 @@ export const DDC_objectsDidasH1 = [
 export const DDC_objectsDidasP = [
     [],
     [
-            "22.04.2025, 11:12:11",
+        "22.04.2025, 11:12:11",
         "Nessuna data",
         "Nessuna data",
         "08.05.2025, 18:47:42",
@@ -212,14 +269,14 @@ export const DDC_objectsDidasP = [
 export const DDC_objectsLocations = [
     [],
     [
-    "Kingston",
-    "Kingston",
-    "Kingston",
-    "Kingston",
-    "Kingston",
-    "Kingston",
-    "Kingston",
-    "Kingston"
+        "Kingston",
+        "Kingston",
+        "Kingston",
+        "Kingston",
+        "Kingston",
+        "Kingston",
+        "Kingston",
+        "Kingston"
     ]
 ];
 export const DDC_objectsMoodValues = [
