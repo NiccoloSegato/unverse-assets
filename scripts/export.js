@@ -1,4 +1,4 @@
-export const DDC_moods = ['Malinconia', 'Calma', 'Felicità', 'Solitudine', 'Trance'];
+export const DDC_moods = ['Malinconia', 'Calma', 'Felicità', 'Solitudine', 'Focus'];
 export const DDC_globalBackgrounds = [
     '#FFFFFF',
     '#A8C8D8',
