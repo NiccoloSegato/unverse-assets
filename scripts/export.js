@@ -325,7 +325,7 @@ export const DDC_objectsDidasP = [
     [
         "22.04.2025, 11:12:11",
         "Nessuna data",
-        "Nessuna data",
+        "08.05.2025, 20:21:40",
         "08.05.2025, 18:47:42",
         "31.03.2025, 13:43:40",
         "Nessuna data",
@@ -334,23 +334,41 @@ export const DDC_objectsDidasP = [
     ],
     [],
     [],
-    []
+    [
+        "Nessuna data",
+        "Nessuna data",
+        "14.12.2024 00:16:50",
+        "03.04.2025 23:41:37",
+        "19.08.2024 12:04:41",
+        "30.03.2025 15:21:28",
+        "Nessuna data",
+        "Nessuna data"
+    ]
 ];
 export const DDC_objectsLocations = [
     [],
     [
-        "Kingston",
-        "Kingston",
-        "Kingston",
-        "Kingston",
-        "Kingston",
-        "Kingston",
-        "Kingston",
-        "Kingston"
+        "Kingston, Giamaica",
+        "Nessun luogo",
+        "Giamaica",
+        "Giamaica",
+        "Milano, Italia",
+        "Nessun luogo",
+        "Milano, Italia",
+        "Giamaica"
     ],
     [],
     [],
-    []
+    [
+        "Milano, Italia",
+        "Nessun luogo",
+        "Milano, Italia",
+        "Milano, Italia",
+        "Ulcinj, Montenegro",
+        "Milano, Italia",
+        "Milano, Italia",
+        "Nessun luogo"
+    ]
 ];
 export const DDC_objectsMoodValues = [
     [],
@@ -366,7 +384,16 @@ export const DDC_objectsMoodValues = [
     ],
     [],
     [],
-    []
+    [
+        ["345°", "Gibbosa crescente", "Bassa marea"],
+        ["355°", "Primo quarto", "Bassa marea"],
+        ["0", "Gibbosa crescente", "Alta marea"],
+        ["355°", "Luna nuova", "Bassa marea"],
+        ["180°", "Luna piena", "Alta marea"],
+        ["230°", "Luna calante", "Alta marea"],
+        ["205°", "Luna calante", "Alta marea"],
+        ["30°", "Gibbosa crescente", "Bassa marea"],
+    ]
 ];
 
 export const DDC_INTERVAL_MOON = 7 * 24 * 60 * 60 * 1000; // 7 giorni
