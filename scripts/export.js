@@ -35,10 +35,26 @@ export const DDC_embossingColors = [
     '#2c1e1e'
 ];
 export const DDC_embossingShadows = [
-    'rgba(0, 0, 0, 0.2) -1px -1px 2px, rgba(255, 255, 255, 0.9) 1px 1px 2px',
-    'rgba(0, 0, 0, 0.2) -1px -1px 2px, rgba(255, 255, 255, 0.9) 1px 1px 2px',
-    'rgba(0, 0, 0, 0.2) -1px -1px 2px, rgba(255, 255, 255, 0.9) 1px 1px 2px',
-    'rgba(0, 0, 0, 0.2) -1px -1px 2px, rgba(100, 100, 100, 0.9) 1px 1px 2px'
+    [
+        '-1px -1px 2px rgba(0, 0, 0, ',
+        ', 1px  1px 2px rgba(255, 255, 255, '
+    ],
+    [
+        '-1px -1px 2px rgba(0, 0, 0, ',
+        ', 1px  1px 2px rgba(255, 255, 255, '
+    ],
+    [
+        '-1px -1px 2px rgba(0, 0, 0, ',
+        ', 1px  1px 2px rgba(255, 255, 255, '
+    ],
+    [
+        '-1px -1px 2px rgba(0, 0, 0, ',
+        ', 1px  1px 2px rgba(255, 255, 255, '
+    ],
+    [
+        '-1px -1px 2px rgba(0, 0, 0, ',
+        ', 1px  1px 2px rgba(100, 100, 100, '
+    ]
 ];
 export const DDC_dictionaryLength = 12;
 export const DDC_dictionary = [
