@@ -268,7 +268,7 @@ function DDC_getDuration(DDC_dateInput = Date.now()) {
     return Math.floor(DDC_randomValue * DDC_DURATION_RANGE_SIZE) + DDC_MIN_DURATION_MINUTES;
 }
 
-function DDC_getCurrentTimesliceDetails(DDC_targetTimeMs = Date.now()) {
+export function DDC_getCurrentTimesliceDetails(DDC_targetTimeMs = Date.now()) {
     // Per il calcolo parto da una data più vicina del suo compleanno
     const DDC_REF_TIME = new Date('2025-04-25T00:00:00Z').getTime();
     if (DDC_targetTimeMs < DDC_REF_TIME) {
