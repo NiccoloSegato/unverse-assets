@@ -221,7 +221,16 @@ export const DDC_dynamicContents = [
     ],
     [],
     [],
-    []
+    [
+        "",
+        "",
+        "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/focus/focus.3.webp",
+        "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/focus/focus.2.webp",
+        "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/focus/focus.1.webp",
+        "",
+        "",
+        ""
+    ]
 ];
 export const DDC_dynamicClicked = [
     [],
@@ -237,7 +246,16 @@ export const DDC_dynamicClicked = [
     ],
     [],
     [],
-    []
+    [
+        "",
+        "",
+        "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/focus/focus.3.webp",
+        "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/focus/focus.2.webp",
+        "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/focus/focus.1.webp",
+        "",
+        "",
+        ""
+    ]
 ];
 export const DDC_dynamicAnimations = [
     [],
@@ -270,7 +288,12 @@ export const DDC_dynamicAudios = [
     ],
     [],
     [],
-    []
+    [
+        "",
+        "",
+
+
+    ]
 ];
 export const DDC_objectsDidasH1 = [
     [],
@@ -288,8 +311,13 @@ export const DDC_objectsDidasH1 = [
     [],
     [
         "Techno Parade",
-        "",
-
+        "Techno Disco",
+        "Ritmo Verticale",
+        "Prima vibrazione",
+        "Un tasto rotto",
+        "DSFC",
+        "Tic. Tic. Tic.",
+        "Piano Key"
     ]
 ];
 export const DDC_objectsDidasP = [
