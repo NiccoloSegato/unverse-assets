@@ -169,7 +169,7 @@ export const DDC_dynamicAnimations = [
         "https://raw.githubusercontent.com/NiccoloSegato/unverse-assets/refs/heads/main/assets/nuvole-immersive/nuvole_nuove_",
         "https://raw.githubusercontent.com/NiccoloSegato/unverse-assets/refs/heads/main/assets/nuvole-immersive/nuvole_nuove_",
     ]
-]
+];
 export const DDC_dynamicAudios = [
     [],
     [
