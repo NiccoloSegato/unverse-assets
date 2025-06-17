@@ -4,7 +4,7 @@ export const DDC_globalBackgrounds = [
     '#A8C8D8',
     '#FFFFFF',
     '#000000',
-    '#1B1212'
+    '#271b1b'
 ];
 export const DDC_introBackgrounds = [
     '#FFFFFF',
