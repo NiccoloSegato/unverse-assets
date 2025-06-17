@@ -153,6 +153,23 @@ export const DDC_dynamicClicked = [
         "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/calma/rospo.webm"
     ]
 ];
+export const DDC_dynamicAnimations = [
+    [],
+    [
+        "https://raw.githubusercontent.com/NiccoloSegato/unverse-assets/refs/heads/main/assets/nuvole-immersive/nuvole_nuove",
+        "https://raw.githubusercontent.com/NiccoloSegato/unverse-assets/refs/heads/main/assets/petali/petali_",
+        "https://raw.githubusercontent.com/NiccoloSegato/unverse-assets/refs/heads/main/assets/sole/sole_",
+        "https://raw.githubusercontent.com/NiccoloSegato/unverse-assets/refs/heads/main/assets/nuvole-immersive/nuvole_nuove"
+    ],
+    [],
+    [],
+    [
+        "https://raw.githubusercontent.com/NiccoloSegato/unverse-assets/refs/heads/main/assets/nuvole-immersive/nuvole_nuove_",
+        "https://raw.githubusercontent.com/NiccoloSegato/unverse-assets/refs/heads/main/assets/nuvole-immersive/nuvole_nuove_",
+        "https://raw.githubusercontent.com/NiccoloSegato/unverse-assets/refs/heads/main/assets/nuvole-immersive/nuvole_nuove_",
+        "https://raw.githubusercontent.com/NiccoloSegato/unverse-assets/refs/heads/main/assets/nuvole-immersive/nuvole_nuove_",
+    ]
+]
 export const DDC_dynamicAudios = [
     [],
     [
