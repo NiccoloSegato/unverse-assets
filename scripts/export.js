@@ -308,6 +308,13 @@ export const DDC_dynamicAnimations = [
         "https://raw.githubusercontent.com/NiccoloSegato/unverse-assets/refs/heads/main/assets/nuvole-immersive/nuvole_nuove_",
     ]
 ];
+export const DDC_backgroundAudio = [
+    "",
+    "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/audio/calma.mp3",
+    "",
+    "",
+    "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/assets/audio/focus.m4a",
+]
 export const DDC_dynamicAudios = [
     [],
     [
