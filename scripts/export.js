@@ -296,7 +296,7 @@ export const DDC_dynamicAnimations = [
     [
         "https://raw.githubusercontent.com/NiccoloSegato/unverse-assets/refs/heads/main/assets/nuvole-immersive/nuvole_nuove",
         "https://raw.githubusercontent.com/NiccoloSegato/unverse-assets/refs/heads/main/assets/petali/petali_",
-        "https://raw.githubusercontent.com/NiccoloSegato/unverse-assets/refs/heads/main/assets/sole/sole_",
+        "https://raw.githubusercontent.com/NiccoloSegato/unverse-assets/refs/heads/main/assets/sole1/sole_",
         "https://raw.githubusercontent.com/NiccoloSegato/unverse-assets/refs/heads/main/assets/nuvole-immersive/nuvole_nuove"
     ],
     [],
