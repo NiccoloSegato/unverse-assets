@@ -198,7 +198,7 @@ export const DDC_dynamicTags = [
     [],
     [ 
         "video",
-        "img",
+        "videoaudio",
         "img",
         "img",
         "img",
@@ -222,14 +222,14 @@ export const DDC_dynamicContents = [
     [],
     [],
     [
-        "",
-        "",
+        "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/focus/technoparade.webm",
+        "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/focus/technodisco.webp",
         "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/focus/focus.3.webp",
         "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/focus/focus.2.webp",
         "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/focus/focus.1.webp",
-        "",
-        "",
-        ""
+        "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/focus/DSFC.webm",
+        "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/focus/tictictic.webm",
+        "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/focus/pianokey.webp"
     ]
 ];
 export const DDC_dynamicClicked = [
@@ -247,14 +247,14 @@ export const DDC_dynamicClicked = [
     [],
     [],
     [
-        "",
-        "",
+        "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/focus/technoparade.webm",
+        "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/focus/technodisco.webm",
         "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/focus/focus.3.webp",
         "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/focus/focus.2.webp",
         "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/focus/focus.1.webp",
-        "",
-        "",
-        ""
+        "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/focus/DSFC.webm",
+        "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/focus/tictictic.webm",
+        "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/focus/pianokey.webm"
     ]
 ];
 export const DDC_dynamicAnimations = [
@@ -290,9 +290,13 @@ export const DDC_dynamicAudios = [
     [],
     [
         "",
+        "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/focus/techno-disco.m4a",
         "",
-
-
+        "",
+        "",
+        "",
+        "",
+        "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/focus/piano-key.m4a"
     ]
 ];
 export const DDC_objectsDidasH1 = [
