@@ -508,7 +508,7 @@ export function DDC_getCurrentTimesliceDetails(DDC_targetTimeMs = Date.now()) {
             // Trovato! Questo è il timeslice attivo.
             return {
                 //DDC_activeMood: DDC_periodMood,
-                DDC_activeMood: 5,
+                DDC_activeMood: 2,
                 DDC_startTimeMs: DDC_currentPeriodStartTimeMs,
                 DDC_endTimeMs: DDC_currentPeriodEndTimeMs,
                 DDC_durationMinutes: DDC_periodDurationMinutes,
