@@ -368,37 +368,37 @@ export const DDC_objectsDidasH1 = [
 export const DDC_objectsDidasP = [
     [],
     [
-        "22.04.2025, 11:12:11",
-        "Nessuna data",
-        "08.05.2025, 20:21:40",
-        "08.05.2025, 18:47:42",
-        "31.03.2025, 13:43:40",
-        "Nessuna data",
-        "12.04.2025, 11:34:19",
-        "22.04.2025, 19:36:22"
+        "22.04.2025 11:12:11",
+        "05.07.2024 14:23:32",
+        "08.05.2025 20:21:40",
+        "08.05.2025 18:47:42",
+        "31.03.2025 13:43:40",
+        "21.04.2025 16:36:49",
+        "12.04.2025 11:34:19",
+        "22.04.2025 19:36:22"
     ],
     [],
     [],
     [
-        "Nessuna data",
-        "Nessuna data",
+        "01.05.2024 07:34:24",
+        "15.01.2023 02:37:12",
         "14.12.2024 00:16:50",
         "03.04.2025 23:41:37",
         "19.08.2024 12:04:41",
         "30.03.2025 15:21:28",
-        "Nessuna data",
-        "Nessuna data"
+        "13.05.2025 10:29:39",
+        "11.02:2025 18:56:01"
     ]
 ];
 export const DDC_objectsLocations = [
     [],
     [
         "Kingston, Giamaica",
-        "Nessun luogo",
+        "Giamaica",
         "Giamaica",
         "Giamaica",
         "Milano, Italia",
-        "Nessun luogo",
+        "Giamaica",
         "Milano, Italia",
         "Giamaica"
     ],
@@ -406,13 +406,13 @@ export const DDC_objectsLocations = [
     [],
     [
         "Milano, Italia",
-        "Nessun luogo",
+        "Milano, Italia",
         "Milano, Italia",
         "Milano, Italia",
         "Ulcinj, Montenegro",
         "Milano, Italia",
         "Milano, Italia",
-        "Nessun luogo"
+        "Milano, Italia"
     ]
 ];
 export const DDC_objectsMoodValues = [
