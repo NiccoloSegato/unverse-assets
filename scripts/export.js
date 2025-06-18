@@ -132,10 +132,10 @@ export const DDC_dictionary = [
 export const DDC_titles = [
     [],
     [
-        "QUI, ADESSO",
-        "VITALITÀ DISCRETA",
-        "TRANQUILLA ASSENZA",
-        "FREQUENZA MINIMA"
+        ["QUI, ", "ADESSO"],
+        ["VITALITÀ ", "DISCRETA"],
+        ["TRANQUILLA ", "ASSENZA"],
+        ["FREQUENZA", " MINIMA"]
     ],
     [
         "TUTTO A FUOCO",
@@ -145,10 +145,10 @@ export const DDC_titles = [
     ],
     [],
     [
-        "FUORI FUOCO",
-        "ENERGIA DIFFUSA",
-        "ENERGIA PURA",
-        "ECCITAMENTO MECCANICO"
+        ["FUORI ", "FUOCO"],
+        ["ENERGIA ", "DIFFUSA"],
+        ["ENERGIA ", "PURA"],
+        ["ECCITAMENTO ", "MECCANICO"]
     ]
 ];
 export const DDC_subtitles = [
@@ -238,7 +238,7 @@ export const DDC_dynamicTagsClicked = [
         "img",
         "video",
         "video",
-        "img"
+        "audiovideo"
     ],
 ];
 export const DDC_dynamicContents = [
