@@ -425,7 +425,7 @@ export const DDC_objectsMoodValues = [
     [
         ["345°", "Gibbosa crescente", "Bassa marea"],
         ["355°", "Primo quarto", "Bassa marea"],
-        ["0", "Gibbosa crescente", "Alta marea"],
+        ["0°", "Gibbosa crescente", "Alta marea"],
         ["355°", "Luna nuova", "Bassa marea"],
         ["180°", "Luna piena", "Alta marea"],
         ["230°", "Luna calante", "Alta marea"],
