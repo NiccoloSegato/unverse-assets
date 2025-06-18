@@ -303,9 +303,9 @@ export const DDC_dynamicAnimations = [
     [],
     [
         "https://raw.githubusercontent.com/NiccoloSegato/unverse-assets/refs/heads/main/assets/tunnel/tunneltrasparente_",
+        "",
         "https://raw.githubusercontent.com/NiccoloSegato/unverse-assets/refs/heads/main/assets/sfera/sfera_",
-        "https://raw.githubusercontent.com/NiccoloSegato/unverse-assets/refs/heads/main/assets/sfera/sfera_",
-        "https://raw.githubusercontent.com/NiccoloSegato/unverse-assets/refs/heads/main/assets/nuvole-immersive/nuvole_nuove_",
+        "",
     ]
 ];
 export const DDC_backgroundAudio = [
