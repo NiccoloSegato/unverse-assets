@@ -1,27 +1,23 @@
-export const DDC_moods = ['Malinconia', 'Calma', 'Felicità', 'Solitudine', 'Focus'];
+export const DDC_moods = ['Malinconia', 'Calma', 'Felicità', 'Focus'];
 export const DDC_globalBackgrounds = [
     '#FFFFFF',
     '#A8C8D8',
     '#FFFFFF',
-    '#000000',
     '#000000'
 ];
 export const DDC_introBackgrounds = [
     '#FFFFFF',
     '#FFFFFF',
     '#FFFFFF',
-    '#000000',
     '#000000'
 ];
 export const DDC_globalTextColors = [
     '#000000',
     '#000000',
     '#000000',
-    '#FFFFFF',
     '#FFFFFF'
 ];
 export const DDC_embossingStartColors = [
-    '#000000',
     '#000000',
     '#000000',
     '#000000',
@@ -31,14 +27,9 @@ export const DDC_embossingColors = [
     '#000000',
     '#aec7d6',
     '#000000',
-    '#FFFFFF',
     '#322e45'
 ];
 export const DDC_embossingShadows = [
-    [
-        '-1px -1px 2px rgba(0, 0, 0, ',
-        '), 1px  1px 2px rgba(255, 255, 255, '
-    ],
     [
         '-1px -1px 2px rgba(0, 0, 0, ',
         '), 1px  1px 2px rgba(255, 255, 255, '
@@ -84,7 +75,8 @@ export const DDC_dictionary = [
         "Se leggessi in mezzo alla natura, non sentirei di avere fretta o di dover scappare; <i>il tempo, praticamente, sparisce.</i>",
         "Il riuscire a stare a <strong>un livello basso di energia</strong> insieme a qualcun altro è più raro, ma è anche molto bello.",
         "In quel momento poi, a volte, scatta anche un po’ di felicità. Se <i>si crea quell'equilibrio tranquillo con un'altra persona</i>, spesso ti fa anche sentire felice.",
-        "Non so come dire... sono i momenti in cui sei con qualcuno e riuscite a stare insieme in maniera tranquilla ed armonica che, di solito, ti <i>toccano anche un po' il cuore</i>."
+        "Non so come dire... sono i momenti in cui sei con qualcuno e riuscite a stare insieme in maniera tranquilla ed armonica che, di solito, ti <i>toccano anche un po' il cuore</i>.",
+        "Ciò che hai sfiorato svanirà, ma resta come eco silenziosa. </br>Nulla permane, tutto scorre"
     ],
     [
         "Vuoi essere solo lì, sia a livello temporale che spaziale. Non senti proprio il bisogno di essere da un'altra parte. ",
@@ -98,21 +90,8 @@ export const DDC_dictionary = [
         "In quella sensazione, penso sia difficile avere dei problemi con quelli a cui voglio bene. Percepisco del calore, un’immagine di un piccolo villaggio o di una casa con delle luci accese all’interno... mi piace l’idea che questi posti siano popolati dalla vita.",
         "A livello naturale, sono tanti uccellini che cantano e volano, dei fiori magari, e una vegetazione rigogliosa e riccamente popolata da altri esseri viventi.",
         "Mi ricordo di quando ero sul tetto di questa casa nella giungla Giamaicana e, mentre guardavo il tramonto, tutt’intorno c'erano questi uccellini in una totale estasi. Erano circondati da tutta quella natura, quei fiori e la temperatura era perfetta.",
-        "C’è sempre questo elemento vitale che va a visitare la natura,no? È sempre una questione di convivialità."
-    ],
-    [
-        "-",
-        "-",
-        "-",
-        "-",
-        "-",
-        "-",
-        "-",
-        "-",
-        "-",
-        "-",
-        "-",
-        "-"
+        "C’è sempre questo elemento vitale che va a visitare la natura,no? È sempre una questione di convivialità.",
+        "Ciò che hai sfiorato svanirà, ma resta come eco silenziosa. </br>Nulla permane, tutto scorre"
     ],
     [
         "Mi immagino un focus mode dove sei così preso  dalla situazione che non ti accorgi di come ti senti veramente. Non è per forza connesso alla calma, ma è uno stato interessante, perché  anche questo è parte della realtà,",
@@ -126,7 +105,8 @@ export const DDC_dictionary = [
         "Non è come andare a sentire il concerto dell’artista che ti piace, dove alle canzoni associ mille memorie, ma sono proprio degli ingranaggi ai quali ti agganci per farti portare via.",
         "Mi immagino degli ingranaggi che vanno, dove trovi tanta energia in movimento, ma non necessariamente tocca dei punti di emotività o di incontro, non coinvolge altre persone.",
         "Lo vedo molto HD, è una matematica del mondo che ha una sua lucidità.",
-        "È proprio un fluire… Lo vedi in una cascata, o nella lava di un vulcano."
+        "È proprio un fluire… Lo vedi in una cascata, o nella lava di un vulcano.",
+        "Ciò che hai sfiorato svanirà, ma resta come eco silenziosa. </br>Nulla permane, tutto scorre"
     ]
 ];
 export const DDC_titles = [
@@ -143,7 +123,6 @@ export const DDC_titles = [
         "VITA, E PERSONE",
         "MA QUANTO SONO FELICI?"
     ],
-    [],
     [
         ["FUORI ", "FUOCO"],
         ["ENERGIA ", "DIFFUSA"],
@@ -165,7 +144,6 @@ export const DDC_subtitles = [
         "Tutti i momenti passati insieme, tutti i luoghi dove si sta bene",
         "La natura piena di vita, una questione di convivialità"
     ],
-    [],
     [
         "Né pace, né caos, solo coerenza distorta",
         "Una concentrazione piena di energia",
@@ -195,7 +173,6 @@ export const DDC_dynamicTags = [
         "img",
         "video"
     ],
-    [],
     [ 
         "video",
         "img",
@@ -229,7 +206,6 @@ export const DDC_dynamicTagsClicked = [
         "img",
         "video"
     ],
-    [],
     [ 
         "video",
         "videoaudio",
@@ -253,7 +229,6 @@ export const DDC_dynamicContents = [
         "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/calma/pianta.webp",
         "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/calma/rospo.webm"
     ],
-    [],
     [],
     [
         "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/focus/technoparade.webm",
@@ -279,7 +254,6 @@ export const DDC_dynamicClicked = [
         "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/calma/rospo.webm"
     ],
     [],
-    [],
     [
         "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/focus/technoparade.webm",
         "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/focus/technodisco.webm",
@@ -300,7 +274,6 @@ export const DDC_dynamicAnimations = [
         "https://raw.githubusercontent.com/NiccoloSegato/unverse-assets/refs/heads/main/assets/fiori/fiori_"
     ],
     [],
-    [],
     [
         "https://raw.githubusercontent.com/NiccoloSegato/unverse-assets/refs/heads/main/assets/tunnel/tunneltrasparente_",
         "",
@@ -311,7 +284,6 @@ export const DDC_dynamicAnimations = [
 export const DDC_backgroundAudio = [
     "",
     "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/audio/calma.mp3",
-    "",
     "",
     "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/audio/focus.m4a",
 ]
@@ -327,7 +299,6 @@ export const DDC_dynamicAudios = [
         "",
         ""
     ],
-    [],
     [],
     [
         "",
@@ -353,7 +324,6 @@ export const DDC_objectsDidasH1 = [
         "Piccola Meraviglia"
     ],
     [],
-    [],
     [
         "Techno Parade",
         "Techno Disco",
@@ -377,7 +347,6 @@ export const DDC_objectsDidasP = [
         "12.04.2025 11:34:19",
         "22.04.2025 19:36:22"
     ],
-    [],
     [],
     [
         "01.05.2024 07:34:24",
@@ -403,7 +372,6 @@ export const DDC_objectsLocations = [
         "Giamaica"
     ],
     [],
-    [],
     [
         "Milano, Italia",
         "Milano, Italia",
@@ -427,7 +395,6 @@ export const DDC_objectsMoodValues = [
         ["170°", "Gibbosa crescente", "Bassa marea"],
         ["290°", "Gibbosa calante", "Bassa marea"],
     ],
-    [],
     [],
     [
         ["345°", "Gibbosa crescente", "Bassa marea"],
@@ -507,8 +474,7 @@ export function DDC_getCurrentTimesliceDetails(DDC_targetTimeMs = Date.now()) {
         if (DDC_targetTimeMs < DDC_currentPeriodEndTimeMs) {
             // Trovato! Questo è il timeslice attivo.
             return {
-                //DDC_activeMood: DDC_periodMood,
-                DDC_activeMood: 2,
+                DDC_activeMood: DDC_periodMood,
                 DDC_startTimeMs: DDC_currentPeriodStartTimeMs,
                 DDC_endTimeMs: DDC_currentPeriodEndTimeMs,
                 DDC_durationMinutes: DDC_periodDurationMinutes,
@@ -563,8 +529,8 @@ function DDC_generateMood(DDC_dateInput = Date.now()) {
     // Dividiamo poi per 2^32 (4294967296).
     const DDC_randomValue = (DDC_hash >>> 0) / 4294967296;
 
-    // Mappiamo il valore [0, 1) all'intervallo intero desiderato [1, 5].
-    const DDC_resultD = Math.floor(DDC_randomValue * 5) + 1;
+    // Mappiamo il valore [0, 1) all'intervallo intero desiderato [1, 4].
+    const DDC_resultD = Math.floor(DDC_randomValue * 4) + 1;
 
     return DDC_resultD;
 }
