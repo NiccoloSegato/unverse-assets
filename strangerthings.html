@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Power Of Light v0.2</title>
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+
+            section {
+                pointer-events: none;
+                position: relative;
+                min-height: 100vh;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .sfondo-immagine {
+                background-image: url('assets/images/mood-4.webp'); /* Sostituisci con il percorso della tua immagine */
+                background-size: cover; /* Assicura che l'immagine copra l'intera area */
+                background-position: center; /* Centra l'immagine */
+                background-repeat: no-repeat; /* Evita che l'immagine si ripeta */
+                width: 100vw; /* Occupa il 100% della larghezza della viewport */
+                height: 100vh; /* Occupa il 100% dell'altezza della viewport */
+            }
+
+            .light {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                pointer-events: none;
+                background: radial-gradient(circle at var(--x) var(--y), transparent 10%, rgba(0,0,0,0.95) 20%);
+            }
+        </style>
+    </head>
+    <body>
+        <section>
+            <div class="sfondo-immagine"></div>
+        </section>
+        <div class="light"></div>
+        <script type="text/javascript">
+            var pos = document.documentElement;
+            pos.addEventListener('mousemove', e => {
+            pos.style.setProperty('--x', e.clientX + 'px');
+            pos.style.setProperty('--y', e.clientY + 'px');
+            });
+        </script>
+    </body>
+</html>
