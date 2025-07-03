@@ -118,10 +118,10 @@ export const DDC_titles = [
         ["FREQUENZA", " MINIMA"]
     ],
     [
-        "TUTTO A FUOCO",
-        "QUASDO BASTANO I NUTRIMENTI DELLA VITA",
-        "VITA, E PERSONE",
-        "MA QUANTO SONO FELICI?"
+        ["TUTTO", " A FUOCO"],
+        ["I NUTRIMENTI", " DELLA VITA"],
+        ["VITA,", " E PERSONE"],
+        ["MA QUANTO", " SONO FELICI?"]
     ],
     [
         ["FUORI ", "FUOCO"],

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        
+        }
+        .image-container {
+            position: relative;
+            display: inline-block;
+            cursor: none;
+        
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .blurred-image {
+            display: block;
+            width: 100vw;
+            height: 100vh;
+            object-fit: cover;
+            filter: blur(8px);
+        }
+        .lens {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            border-radius: 40%;
+            overflow: hidden;
+            opacity: 0;
+            border-radius: 50%;
+            transform: scale(0);
+            transition: opacity 0.2s ease, transform 0.2s ease;
+            pointer-events: none;
+            z-index: 10; 
+            background: radial-gradient(circle at var(--x) var(--y), transparent 70%, rgba(0,0,0,0.95) 20%);
+        }
+        .clear-image {
+            position: absolute;
+            width: 100vw;
+            height: 100vh;
+            object-fit: cover;
+        }
+        .image-container:hover .lens {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+    </style>
+</head>
+<body>
+        
+    <div class="image-container">
+        <video src="assets/images/blurvideo.mp4" autoplay loop muted playsinline class="blurred-image"></video>
+        <div class="lens">
+            <img src="assets/images/nitida.jpg" alt="Clear Image" class="clear-image">
+        </div>
+    </div>
+        
+    <script>
+        const imageContainer = document.querySelector('.image-container');
+        const lens = document.querySelector('.lens');
+        const clearImage = document.querySelector('.clear-image');
+
+        imageContainer.addEventListener('mousemove', (e) => {
+            const containerRect = imageContainer.getBoundingClientRect();
+            const mouseX = e.clientX - containerRect.left;
+            const mouseY = e.clientY - containerRect.top;
+
+            // Position the lens centered on mouse
+            const lensHalfWidth = lens.offsetWidth / 2;
+            const lensHalfHeight = lens.offsetHeight / 2;
+            
+            let lensX = mouseX - lensHalfWidth;
+            let lensY = mouseY - lensHalfHeight;
+
+            // Keep lens within image bounds
+            lensX = Math.max(0, Math.min(lensX, containerRect.width - lens.offsetWidth));
+            lensY = Math.max(0, Math.min(lensY, containerRect.height - lens.offsetHeight));
+
+            lens.style.left = `${lensX}px`;
+            lens.style.top = `${lensY}px`;
+
+            // Position the clear image to show the correct portion
+            // The clear image needs to move opposite to the lens position
+            clearImage.style.left = `-${lensX}px`;
+            clearImage.style.top = `-${lensY}px`;
+        });
+
+        imageContainer.addEventListener('mouseenter', () => {
+            lens.style.opacity = '1';
+            lens.style.transform = 'scale(1)';
+        });
+
+        imageContainer.addEventListener('mouseleave', () => {
+            lens.style.opacity = '0';
+            lens.style.transform = 'scale(0)';
+        });
+    </script>
+</body>
+</html>
