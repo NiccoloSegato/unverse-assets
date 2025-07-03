@@ -2,7 +2,7 @@ export const DDC_moods = ['Malinconia', 'Calma', 'Felicità', 'Focus'];
 export const DDC_globalBackgrounds = [
     '#FFFFFF',
     '#A8C8D8',
-    '#FFFFFF',
+    "radial-gradient(ellipse 120% 80% at 10% 20%, #ff9db4 0%, #ffb5a3 15%, #ffc999 30%, transparent 65%), radial-gradient(ellipse 100% 70% at 90% 80%, #87ceeb 0%, #a3d5d9 20%, #b8e0d2 35%, transparent 70%), radial-gradient(ellipse 150% 100% at 50% 50%, #f0c4a6 0%, #f5d5b8 25%, #f8e4d0 45%, #faf0e6 65%, #f5f5dc 85%, #ebebeb 100%), linear-gradient(25deg, #ff91a4 0%, #ffb399 12%, #f0c49a 25%, #e8d4b8 37%, #d9e0c7 50%, #c8e3d4 62%, #9fd4d8 75%, #8cc8d8 87%, #87ceeb 100%);",
     '#000000'
 ];
 export const DDC_introBackgrounds = [
