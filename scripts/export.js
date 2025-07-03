@@ -47,7 +47,7 @@ export const DDC_embossingShadows = [
         '), 1px  1px 2px rgba(100, 100, 100, '
     ]
 ];
-export const DDC_dictionaryLength = 12;
+export const DDC_dictionaryLength = 13;
 export const DDC_dictionary = [
     [
         "-",
