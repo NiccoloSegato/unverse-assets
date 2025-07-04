@@ -51,8 +51,8 @@ export const DDC_dictionaryLength = 13;
 export const DDC_dictionary = [
     [
         "Mi viene in mente una specie di pre-vita, nel senso di ricordo ancestrale di uno <i>stato originario di completa armonia</i>; c’era una connessione totale, diciamo.",
-        "Invece la vita, con tutte le sue complicazioni e dinamiche, è come se tagliasse questo filo e, spesso, ti dici: \</i>“Cos’è che mi manca? Perché la vita finisce? Perché finiscono i rapporti?”</i>\",
-        "È la stessa cosa di dire \</i>“Oddio, ma perché esisto?”</i>\. Quando guardi un cielo stellato gigante, ad esempio, ti viene quel vuoto, quella cosa che ti fa dire \</i>“Ma perché sono qua?”</i>\.",
+        "Invece la vita, con tutte le sue complicazioni e dinamiche, è come se tagliasse questo filo e, spesso, ti dici: </i>\“Cos’è che mi manca? Perché la vita finisce? Perché finiscono i rapporti?\”</i>",
+        "È la stessa cosa di dire </i>\“Oddio, ma perché esisto?\”</i>. Quando guardi un cielo stellato gigante, ad esempio, ti viene quel vuoto, quella cosa che ti fa dire </i>\“Ma perché sono qua?\”</i>.",
         "Come una linfa vitale: c’entra con l’esistenza, c’entra col voler vivere le cose avendo le ferite aperte, come a voler <strong>conservare e osservare il dolore</strong>. Lo vuoi ascoltare, non lo vuoi necessariamente curare </i>affinché scompaia</i>.",
         "Sicuramente la associo all’affetto, che può essere quello per i miei amici, la mia famiglia o la mia ragazza. </i>Quasi un voler tornare piccolo</i> per essere avvolto da quel sentimento, da quella persona, da quel volto, ma è anche <strong>un qualcosa di più cosmico</strong>.",
         "Come dire... Non è necessariamente legato alle persone; è come se queste, specialmente quelle a cui vuoi bene, fossero </i>delle antenne di un sentimento più grande.</i>",
