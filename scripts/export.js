@@ -203,7 +203,7 @@ export const DDC_dynamicTagsClicked = [
         "img",
         "img",
         "video",
-        "video",
+        "img",
         "video"
     ],
     [ 
@@ -235,7 +235,9 @@ export const DDC_dynamicContents = [
         "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/felicita/felicita-3.webm",
         "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/felicita/felicita-4.webp",
         "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/felicita/felicita-5.webp",
-        "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/felicita/felicita-6.webm"
+        "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/felicita/felicita-6.webm",
+        "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/felicita/felicita-7.webp",
+        "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/felicita/felicita-8.webm"
     ],
     [
         "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/focus/technoparade.webm",
