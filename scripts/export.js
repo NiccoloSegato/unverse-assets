@@ -118,10 +118,10 @@ export const DDC_titles = [
         ["FREQUENZA", " MINIMA"]
     ],
     [
-        ["TUTTO", " A FUOCO"],
-        ["I NUTRIMENTI", " DELLA VITA"],
-        ["VITA,", " E PERSONE"],
-        ["MA QUANTO", " SONO FELICI?"]
+        ["RIBOLLE", " TUTTO"],
+        ["TUTTO ", "A FUOCO"],
+        ["MA QUANTO", " SONO FELICI?"],
+        ["È VITA", " È PERSONE?"]
     ],
     [
         ["FUORI ", "FUOCO"],
@@ -139,10 +139,10 @@ export const DDC_subtitles = [
         "Due energie che si sfiorano senza disturbarsi"
     ],
     [
-        "Una lente speciale che ti permette di capire meglio la realtà",
         "Stai bene con quello che hai, non hai bisogno di supplementi",
-        "Tutti i momenti passati insieme, tutti i luoghi dove si sta bene",
-        "La natura piena di vita, una questione di convivialità"
+        "Una lente speciale che ti permette di capire meglio la realtà",
+        "La natura piena di vita, una questione di convivialità",
+        "Tutti i momenti passati insieme, tutti i luoghi dove si sta bene"
     ],
     [
         "Né pace, né caos, solo coerenza distorta",
@@ -168,9 +168,9 @@ export const DDC_dynamicTags = [
         "img",
         "video",
         "img",
-        "video",
-        "video",
         "img",
+        "video",
+        "video",
         "video"
     ],
     [ 
@@ -201,9 +201,9 @@ export const DDC_dynamicTagsClicked = [
         "img",
         "video",
         "img",
-        "video",
-        "video",
         "img",
+        "video",
+        "video",
         "video"
     ],
     [ 
@@ -229,7 +229,9 @@ export const DDC_dynamicContents = [
         "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/calma/pianta.webp",
         "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/calma/rospo.webm"
     ],
-    [],
+    [
+        "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/felicita/felicita-1.webm"
+    ],
     [
         "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/focus/technoparade.webm",
         "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/focus/technodisco.webp",
