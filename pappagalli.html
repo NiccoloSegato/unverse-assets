@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Scroll Animation</title>
+        <style>
+            body {
+            margin: 0;
+            height: 10000px; /* scroll lungo per demo */
+            }
+
+            canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 0;
+            }
+        </style>
+    </head>
+    <body>
+        <canvas id="sequence-canvas"></canvas>
+
+        <script>
+        const DDC_A_frameCount = 120;
+        const DDC_A_canvas = document.getElementById("sequence-canvas");
+        const DDC_A_context = DDC_A_canvas.getContext("2d");
+
+        DDC_A_canvas.width = window.innerWidth;
+        DDC_A_canvas.height = window.innerHeight;
+
+        const DDC_url = 'https://raw.githubusercontent.com/NiccoloSegato/unverse-assets/refs/heads/main/assets/pappagalli/pappagalli';
+
+        const DDC_A_currentFrame = DDC_A_i => `${DDC_url}${DDC_A_i}.webp`;
+
+        const DDC_A_imageCache = {};
+        let DDC_A_currentLoadedIndex = -1;
+
+        function DDC_A_render(DDC_A_i) {
+            if (DDC_A_i === DDC_A_currentLoadedIndex) return;
+            DDC_A_currentLoadedIndex = DDC_A_i;
+
+            if (DDC_A_imageCache[DDC_A_i]) {
+            DDC_A_drawImage(DDC_A_imageCache[DDC_A_i]);
+            } else {
+            const DDC_A_img = new Image();
+            DDC_A_img.src = DDC_A_currentFrame(DDC_A_i);
+            DDC_A_img.onload = () => {
+                DDC_A_imageCache[DDC_A_i] = DDC_A_img;
+                DDC_A_drawImage(DDC_A_img);
+            };
+            }
+
+            // Precarica 2 frame successivi
+            for (let DDC_A_offset = 1; DDC_A_offset <= 2; DDC_A_offset++) {
+            const DDC_A_preloadIndex = DDC_A_i + DDC_A_offset;
+            if (DDC_A_preloadIndex < DDC_A_frameCount && !DDC_A_imageCache[DDC_A_preloadIndex]) {
+                const DDC_A_preloadImg = new Image();
+                DDC_A_preloadImg.src = DDC_A_currentFrame(DDC_A_preloadIndex);
+                DDC_A_preloadImg.onload = () => {
+                DDC_A_imageCache[DDC_A_preloadIndex] = DDC_A_preloadImg;
+                };
+            }
+            }
+        }
+
+        function DDC_A_drawImage(DDC_A_img) {
+            DDC_A_context.clearRect(0, 0, DDC_A_canvas.width, DDC_A_canvas.height);
+            const DDC_A_scale = Math.min(DDC_A_canvas.width / DDC_A_img.width, DDC_A_canvas.height / DDC_A_img.height);
+            const DDC_A_x = (DDC_A_canvas.width - DDC_A_img.width * DDC_A_scale) / 2;
+            const DDC_A_y = (DDC_A_canvas.height - DDC_A_img.height * DDC_A_scale) / 2;
+            DDC_A_context.drawImage(DDC_A_img, 0, 0, DDC_A_img.width, DDC_A_img.height, DDC_A_x, DDC_A_y, DDC_A_img.width * DDC_A_scale, DDC_A_img.height * DDC_A_scale);
+        }
+
+        // Scroll listener
+        window.addEventListener('scroll', () => {
+            const DDC_A_scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+            const DDC_A_maxScrollTop = document.documentElement.scrollHeight - window.innerHeight;
+            const DDC_A_scrollFraction = DDC_A_scrollTop / DDC_A_maxScrollTop;
+            const DDC_A_frameIndex = Math.min(DDC_A_frameCount - 1, Math.floor(DDC_A_scrollFraction * DDC_A_frameCount));
+            requestAnimationFrame(() => DDC_A_render(DDC_A_frameIndex));
+        });
+
+        // Resize listener
+        window.addEventListener('resize', () => {
+            DDC_A_canvas.width = window.innerWidth;
+            DDC_A_canvas.height = window.innerHeight;
+            DDC_A_render(DDC_A_currentLoadedIndex);
+        });
+
+        // Mostra il primo frame
+        DDC_A_render(0);
+        </script>
+    </body>
+</html>
