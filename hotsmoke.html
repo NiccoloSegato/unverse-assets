@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <title>Flame Cursor</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: black;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      touch-action: none;
+      cursor: none;
+    }
+    canvas {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+<canvas id="canvas"></canvas>
+<script>
+"use strict";
+
+// Setup
+const canvas = document.getElementById('canvas');
+const ctx = canvas.getContext('2d');
+const DPR = window.devicePixelRatio || 1;
+let center = [0, 0];
+let tick = 0;
+
+// Configurazioni flame
+const CELL_WIDTH = 1 * DPR;
+const CELL_HEIGHT = 1 * DPR;
+const FLAME_COLOR_DEPTH = 1000;
+const FLAME_COLOR_TABLE = [
+  [0,   '#331A00'],
+  [0.1, '#663300'],
+  [0.3, '#994C00'],
+  [0.5, '#CC6600'],
+  [0.6, '#E67300'],
+  [0.7, '#FFA640'],
+  [0.8, '#FFD19B'],
+  [1,   '#111'],
+];
+const SPREAD_FROM = ['bottom','bottom','bottom','bottom','bottom','left','right','top'];
+
+function getRandomInt(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function createGradientArray(size, colorStops) {
+  const tempCanvas = document.createElement('canvas');
+  const tempCtx = tempCanvas.getContext('2d');
+  tempCanvas.width = size;
+  tempCanvas.height = 1;
+  const gradient = tempCtx.createLinearGradient(0, 0, size, 0);
+  colorStops.forEach(([stop, color]) => gradient.addColorStop(stop, color));
+  tempCtx.fillStyle = gradient;
+  tempCtx.fillRect(0, 0, size, 1);
+  return Array.from({ length: size }, (_, x) => {
+    const [r, g, b] = tempCtx.getImageData(x, 0, 1, 1).data;
+    return `rgb(${r}, ${g}, ${b})`;
+  });
+}
+
+class Pixel {
+  constructor(x, y, arr, idx) {
+    this.x = x;
+    this.y = y;
+    this.idx = idx;
+    this.arr = arr;
+  }
+  setSides({ top, left, bottom, right }) {
+    this.top = top;
+    this.left = left;
+    this.bottom = bottom;
+    this.right = right;
+  }
+  draw(ctx) {
+    ctx.fillStyle = this.arr[this.idx];
+    ctx.fillRect(this.x, this.y, CELL_WIDTH, CELL_HEIGHT);
+  }
+  update() {
+    const side = SPREAD_FROM[getRandomInt(0, SPREAD_FROM.length - 1)];
+    const dest = this[side];
+    if (dest && dest.idx < this.idx) {
+      this.idx = dest.idx + getRandomInt(-1, 4);
+    } else {
+      this.idx++;
+    }
+    this.idx = Math.max(0, Math.min(this.idx, this.arr.length - 1));
+  }
+}
+
+class Matrix {
+  constructor() {
+    this.colors = createGradientArray(FLAME_COLOR_DEPTH, FLAME_COLOR_TABLE);
+    this.pointer = { x: null, y: null };
+    window.addEventListener('pointermove', e => {
+      this.pointer.x = e.clientX;
+      this.pointer.y = e.clientY;
+    });
+  }
+
+  createMatrix() {
+    const rows = Math.ceil(canvas.height / CELL_HEIGHT);
+    const cols = Math.ceil(canvas.width / CELL_WIDTH);
+    this.rows = rows;
+    this.columns = cols;
+    this.pixels = Array.from({ length: rows }, (_, y) =>
+      Array.from({ length: cols }, (_, x) =>
+        new Pixel(x * CELL_WIDTH, y * CELL_HEIGHT, this.colors, y >= rows - 2 ? 0 : this.colors.length - 1)
+      )
+    );
+
+    for (let y = 0; y < rows; y++) {
+      for (let x = 0; x < cols; x++) {
+        const pixel = this.pixels[y][x];
+        pixel.setSides({
+          top: this.pixels[y - 1]?.[x],
+          left: this.pixels[y]?.[x - 1],
+          bottom: this.pixels[y + 1]?.[x],
+          right: this.pixels[y]?.[x + 1],
+        });
+      }
+    }
+  }
+
+  draw(ctx) {
+    const { x, y } = this.pointer;
+    const col = x !== null ? Math.floor(x / CELL_WIDTH) : Math.floor(center[0] / CELL_WIDTH);
+    const row = y !== null ? Math.floor(y / CELL_HEIGHT) : Math.floor(center[1] / CELL_HEIGHT);
+    const radius = 30;
+    const radiusSq = radius * radius;
+
+    for (let r = Math.max(0, row - radius); r < Math.min(this.rows, row + radius); r++) {
+      for (let c = Math.max(0, col - radius); c < Math.min(this.columns, col + radius); c++) {
+        const dx = c - col;
+        const dy = r - row;
+        if (dx * dx + dy * dy <= radiusSq) {
+          const pixel = this.pixels[r][c];
+          if (r === row && c === col) pixel.idx = 0;
+          pixel.draw(ctx);
+          pixel.update();
+        }
+      }
+    }
+  }
+}
+
+const matrix = new Matrix();
+
+function resizeAll() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  center = [canvas.width / 2, canvas.height / 2];
+  matrix.createMatrix();
+}
+
+function loop() {
+  tick++;
+  ctx.fillStyle = "rgba(0, 0, 0, 0.08)";
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  matrix.draw(ctx);
+  requestAnimationFrame(loop);
+}
+
+window.addEventListener('resize', resizeAll);
+window.addEventListener('load', () => {
+  resizeAll();
+  loop();
+});
+</script>
+</body>
+</html>
