@@ -231,7 +231,13 @@ export const DDC_dynamicTagsClicked = [
 export const DDC_dynamicContents = [
     [
         "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/malinconia/malinconia.webp",
-        "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/malinconia/lettera.webp"
+        "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/malinconia/feel-it.webp",
+        "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/malinconia/lettera.webp",
+        "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/malinconia/just-that.webp",
+        "",
+        "",
+        "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/malinconia/solitudine-1.webp",
+        "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/malinconia/solitudine-2.webp"
     ],
     [
         "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/calma/colibri.webm",
@@ -267,7 +273,8 @@ export const DDC_dynamicContents = [
 export const DDC_dynamicClicked = [
     [
         "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/malinconia/malinconia.webp",
-        "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/malinconia/lettera.webp"
+        "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/malinconia/lettera.webp",
+        "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/malinconia/malinconia-2.webp"
     ],
     [
         "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/calma/colibri.webm",
@@ -323,7 +330,7 @@ export const DDC_dynamicAnimations = [
     ]
 ];
 export const DDC_backgroundAudio = [
-    "",
+    "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/audio/solitudine.m4a",
     "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/audio/calma.mp3",
     "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/audio/felicita.m4a",
     "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/audio/focus.m4a",

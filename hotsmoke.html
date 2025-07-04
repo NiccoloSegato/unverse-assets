@@ -134,7 +134,7 @@ class Matrix {
     const { x, y } = this.pointer;
     const col = x !== null ? Math.floor(x / CELL_WIDTH) : Math.floor(center[0] / CELL_WIDTH);
     const row = y !== null ? Math.floor(y / CELL_HEIGHT) : Math.floor(center[1] / CELL_HEIGHT);
-    const radius = 30;
+    const radius = 70;
     const radiusSq = radius * radius;
 
     for (let r = Math.max(0, row - radius); r < Math.min(this.rows, row + radius); r++) {
