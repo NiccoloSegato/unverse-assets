@@ -230,7 +230,11 @@ export const DDC_dynamicContents = [
         "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/calma/rospo.webm"
     ],
     [
-        "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/felicita/felicita-1.webm"
+        "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/felicita/felicita-1.webm",
+        "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/felicita/felicita-2.webp",
+        "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/felicita/felicita-3.webm",
+        "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/felicita/felicita-4.webp",
+        "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/felicita/felicita-5.webp"
     ],
     [
         "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/focus/technoparade.webm",
