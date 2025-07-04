@@ -1,10 +1,10 @@
-let DDC_moods = ['Malinconia', 'Calma', 'Felicità', 'Solitudine', 'Trance'];
+let DDC_moods = ['Malinconia', 'Calma', 'Felicità', 'Trance'];
 let DDC_gradients = [
     'linear-gradient(to right, #ffd89b, #19547b)',
     'linear-gradient(to right, #C9D6FF, #E2E2E2)',
     'linear-gradient(to right, #ff7e5f, #feb47b)',
     'linear-gradient(to right, #616161, #9bc5c3)',
-    'linear-gradient(to right, #1A2A40, #3A5F8A)'
+    'linear-gradient(to right, #1A2A40,rgb(90, 122, 159))'
 ]
 
 const DDC_gradientsTints = [
@@ -148,8 +148,8 @@ function DDC_generateMood(DDC_dateInput = Date.now()) {
     // Dividiamo poi per 2^32 (4294967296).
     const DDC_randomValue = (DDC_hash >>> 0) / 4294967296;
   
-    // Mappiamo il valore [0, 1) all'intervallo intero desiderato [1, 5].
-    const DDC_resultD = Math.floor(DDC_randomValue * 5) + 1;
+    // Mappiamo il valore [0, 1) all'intervallo intero desiderato [1, 4].
+    const DDC_resultD = Math.floor(DDC_randomValue * 4) + 1;
   
     return DDC_resultD;
 }
