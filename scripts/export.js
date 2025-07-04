@@ -273,7 +273,16 @@ export const DDC_dynamicClicked = [
         "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/calma/pianta.webp",
         "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/calma/rospo.webm"
     ],
-    [],
+    [
+        "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/felicita/felicita-1.webm",
+        "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/felicita/felicita-2.webp",
+        "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/felicita/felicita-3.webm",
+        "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/felicita/felicita-4.webp",
+        "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/felicita/felicita-5.webp",
+        "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/felicita/felicita-6.webm",
+        "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/felicita/felicita-7.webp",
+        "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/felicita/felicita-8.webm"
+    ],
     [
         "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/focus/technoparade.webm",
         "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/focus/technodisco.webm",
@@ -290,20 +299,17 @@ export const DDC_dynamicAnimations = [
     [
         "https://raw.githubusercontent.com/NiccoloSegato/unverse-assets/refs/heads/main/assets/nuvole-immersive/nuvole_nuove",
         "https://raw.githubusercontent.com/NiccoloSegato/unverse-assets/refs/heads/main/assets/petali/petali_",
-        "https://raw.githubusercontent.com/NiccoloSegato/unverse-assets/refs/heads/main/assets/sole1/sole_",
         "https://raw.githubusercontent.com/NiccoloSegato/unverse-assets/refs/heads/main/assets/fiori/fiori_"
     ],
     [
         "https://raw.githubusercontent.com/NiccoloSegato/unverse-assets/refs/heads/main/assets/ribolle/ribolle",
         "",
         "",
-        "",
     ],
     [
         "https://raw.githubusercontent.com/NiccoloSegato/unverse-assets/refs/heads/main/assets/tunnel/tunneltrasparente_",
         "",
-        "https://raw.githubusercontent.com/NiccoloSegato/unverse-assets/refs/heads/main/assets/sfera/sfera_",
-        "",
+        "https://raw.githubusercontent.com/NiccoloSegato/unverse-assets/refs/heads/main/assets/sfera/sfera_"
     ]
 ];
 export const DDC_backgroundAudio = [
