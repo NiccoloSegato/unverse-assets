@@ -50,18 +50,19 @@ export const DDC_embossingShadows = [
 export const DDC_dictionaryLength = 13;
 export const DDC_dictionary = [
     [
+        "Mi viene in mente una specie di pre-vita, nel senso di ricordo ancestrale di uno <i>stato originario di completa armonia</i>; c’era una connessione totale, diciamo.",
+        "Invece la vita, con tutte le sue complicazioni e dinamiche, è come se tagliasse questo filo e, spesso, ti dici: \</i>“Cos’è che mi manca? Perché la vita finisce? Perché finiscono i rapporti?”</i>\",
+        "È la stessa cosa di dire \</i>“Oddio, ma perché esisto?”</i>\. Quando guardi un cielo stellato gigante, ad esempio, ti viene quel vuoto, quella cosa che ti fa dire \</i>“Ma perché sono qua?”</i>\.",
+        "Come una linfa vitale: c’entra con l’esistenza, c’entra col voler vivere le cose avendo le ferite aperte, come a voler <strong>conservare e osservare il dolore</strong>. Lo vuoi ascoltare, non lo vuoi necessariamente curare </i>affinché scompaia</i>.",
+        "Sicuramente la associo all’affetto, che può essere quello per i miei amici, la mia famiglia o la mia ragazza. </i>Quasi un voler tornare piccolo</i> per essere avvolto da quel sentimento, da quella persona, da quel volto, ma è anche <strong>un qualcosa di più cosmico</strong>.",
+        "Come dire... Non è necessariamente legato alle persone; è come se queste, specialmente quelle a cui vuoi bene, fossero </i>delle antenne di un sentimento più grande.</i>",
         "-",
         "-",
         "-",
-        "-",
-        "-",
-        "-",
-        "-",
-        "-",
-        "-",
-        "-",
-        "-",
-        "-"
+        "Sento dei suoni che non riesco a capire, un po’ </i>ovattati</i>, che non si riescono a distinguere perché c’è </strong>un filtro che rende tutto incomprensibile</strong>. Se sono delle voci, sento che non si riescono a riconoscere le parole.",
+        "Potrei anche essere circondato da un sacco di cose, eppure </i>manca la comprensione di ciò che mi sta intorno</i> e, quindi, </strong>mi sento solo</strong>. Mi sento anche perso, perché </i>mi sembra di non avere gli strumenti per affrontare nulla</i>.",
+        "Lo associo un po’ alla </i>sensazione di pericolo</i>, ma senza un motivo specifico. È la sensazione di confusione a farmi sentire in pericolo, perché </i>penso che potrebbe succedermi qualsiasi cosa</i> e che </i>non riuscirei ad affrontare ciò che avrò di fronte.</i>",
+        "Ciò che hai sfiorato svanirà, ma resta come eco silenziosa. </br>Nulla permane, tutto scorre"
     ],
     [
         "Immagino di respirare a <i>pieni polmoni</i>, di sentire l'aria che entra, proprio un'<strong>armonia totale</strong> tra me e il mondo esterno, tra quello che provo dentro e quello che c’è fuori.",
@@ -94,7 +95,7 @@ export const DDC_dictionary = [
         "Ciò che hai sfiorato svanirà, ma resta come eco silenziosa. </br>Nulla permane, tutto scorre"
     ],
     [
-        "Mi immagino un focus mode dove sei così preso  dalla situazione che non ti accorgi di come ti senti veramente. Non è per forza connesso alla calma, ma è uno stato interessante, perché  anche questo è parte della realtà,",
+        "Mi immagino un focus mode dove sei così preso dalla situazione che non ti accorgi di come ti senti veramente. Non è per forza connesso alla calma, ma è uno stato interessante, perché  anche questo è parte della realtà,",
         "non è sempre tutto positivo o negativo, no?",
         "Quando sono davanti a un bell’impianto, con un DJ che mette la techno fatta bene e magari sono anche fatto, sento che è come se mi mettesse su una specie di binario.",
         "Può essere davvero tante cose, come una serata o anche quando mi capita di essere mega impegnato, mi sento solo e dico: “aiuto”.",
@@ -110,7 +111,12 @@ export const DDC_dictionary = [
     ]
 ];
 export const DDC_titles = [
-    [],
+    [
+        ["NIENTE DURA, ", "PER SEMPRE"],
+        ["UOMINI ", "CHE RESPIRANO"],
+        ["", ""],
+        ["PERDERSI", " NEL RUMORE"]
+    ],
     [
         ["QUI, ", "ADESSO"],
         ["VITALITÀ ", "DISCRETA"],
@@ -131,7 +137,12 @@ export const DDC_titles = [
     ]
 ];
 export const DDC_subtitles = [
-    [],
+    [
+        "Un vuoto cosmico",
+        "Amo quei momenti in cui ti sento vivere",
+        "",
+        "Voci indistinte in un silenzio confuso"
+    ],
     [
         "Il presente che diventa emozione",
         "La quiete che fa bene",
