@@ -207,9 +207,9 @@ export const DDC_dynamicTags = [
 export const DDC_dynamicTagsClicked = [
     [
         "img",
+        "videoaudio",
         "img",
-        "img",
-        "img",
+        "videoaudio",
         "img",
         "img",
         "img",
@@ -359,7 +359,16 @@ export const DDC_backgroundAudio = [
     "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/audio/focus.m4a",
 ]
 export const DDC_dynamicAudios = [
-    [],
+    [
+        "",
+        "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/malinconia/feel-it.m4a",
+        "",
+        "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/maliconia/just-that.m4a",
+        "",
+        "",
+        "",
+        ""
+    ],
     [
         "",
         "",
