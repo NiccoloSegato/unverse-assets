@@ -196,7 +196,16 @@ export const DDC_dynamicTags = [
     ],
 ];
 export const DDC_dynamicTagsClicked = [
-    [],
+    [
+        "img",
+        "img",
+        "img",
+        "img",
+        "img",
+        "img",
+        "img",
+        "img"
+    ],
     [
         "video",
         "videoaudio",
