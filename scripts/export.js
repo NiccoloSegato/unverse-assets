@@ -309,7 +309,7 @@ export const DDC_dynamicClicked = [
 ];
 export const DDC_dynamicAnimations = [
     [
-        "https://raw.githubusercontent.com/NiccoloSegato/unverse-assets/refs/heads/main/assets/universo/universo_",
+        "https://raw.githubusercontent.com/NiccoloSegato/unverse-assets/refs/heads/main/assets/universo/universo",
         "",
         ""
     ],
