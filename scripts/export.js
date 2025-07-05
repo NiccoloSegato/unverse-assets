@@ -426,14 +426,14 @@ export const DDC_objectsDidasH1 = [
 ];
 export const DDC_objectsDidasP = [
     [
-        "22.04.2025 - 11:12:11",
-        "08.05.2025 - 20:21:40",
-        "05.07.2024 - 14:23:32",
-        "08.05.2025 - 18:47:42",
-        "31.03.2025 - 13:43:40",
-        "21.04.2025 - 16:36:49",
-        "12.04.2025 - 11:34:19",
-        "22.04.2025 - 19:36:22"
+        "26.05.2025 - 18:14:38",
+        "21.04.2025 - 16:18:58",
+        "13.04.2025 - 03:30:53",
+        "03.05.2025 - 17:17:02",
+        "",
+        "",
+        "08.05.2025 - 22:29:27",
+        "14.03.2025 - 23:37:08"
     ],
     [
         "22.04.2025 - 11:12:11",
@@ -467,7 +467,16 @@ export const DDC_objectsDidasP = [
     ]
 ];
 export const DDC_objectsLocations = [
-    [],
+    [
+        "Montego Bay, Giamaica",
+        "Giamaica",
+        "Milano, Italia",
+        "Milano, Italia",
+        "",
+        "",
+        "Milano, Italia",
+        "Milano, Italia"
+    ],
     [
         "Kingston, Giamaica",
         "Giamaica",
@@ -500,7 +509,16 @@ export const DDC_objectsLocations = [
     ]
 ];
 export const DDC_objectsMoodValues = [
-    [],
+    [
+        ["270°", "Ultimo quarto", "Bassa marea"],
+        ["240°", "Gibbosa calante", "Alta marea"],
+        ["50°", "Gibbosa crescente", "Alta marea"],
+        ["255°", "Luna nuova", "Alta marea"],
+        [],
+        [],
+        ["335°", "Primo quarto", "Bassa marea"],
+        ["350°", "Gibbosa crescente", "Bassa marea"],
+    ],
     [
         ["165°", "Gibbosa calante", "Bassa marea"],
         ["155°", "Gibbosa crescente", "Bassa marea"],
