@@ -31,8 +31,8 @@ export const DDC_embossingColors = [
 ];
 export const DDC_embossingShadows = [
     [
-        '-1px -1px 2px rgba(0, 0, 0, ',
-        '), 1px  1px 2px rgba(255, 255, 255, '
+        '-1px -1px 2px rgba(117, 18, 18, ',
+        '), 1px  1px 2px rgba(0, 61, 183, '
     ],
     [
         '-1px -1px 2px rgba(0, 0, 0, ',
@@ -163,7 +163,16 @@ export const DDC_subtitles = [
     ]
 ]
 export const DDC_dynamicTags = [
-    [],
+    [
+        "img",
+        "img",
+        "img",
+        "img",
+        "img",
+        "img",
+        "img",
+        "img"
+    ],
     [
         "video",
         "img",
