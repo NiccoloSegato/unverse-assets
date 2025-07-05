@@ -243,7 +243,7 @@ export const DDC_dynamicTagsClicked = [
         "img",
         "video",
         "video",
-        "audiovideo"
+        "videoaudio"
     ],
 ];
 export const DDC_dynamicContents = [
