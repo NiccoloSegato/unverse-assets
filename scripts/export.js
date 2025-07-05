@@ -399,10 +399,10 @@ export const DDC_objectsDidasH1 = [
         "Soft Rituals",
         "Ballano i giorni leggeri",
         "Tutti, uno",
+        "Quando il viaggio sboccia",
         "Più leggeri dell’erba",
-        "Jamaican Slang",
-        "Un Lento Abbraccio",
-        "Piccola Meraviglia"
+        "Milano Behind You",
+        "Mi salutano le strade"
     ],
     [
         "Techno Parade",
@@ -427,7 +427,16 @@ export const DDC_objectsDidasP = [
         "12.04.2025 11:34:19",
         "22.04.2025 19:36:22"
     ],
-    [],
+    [
+        "03.04.2025 23:12:15",
+        "27.04.2025 23:59:49",
+        "22.04.2024 13:54:01",
+        "03.04.2025 00:21:43",
+        "07.05.2025 10:12:45",
+        "05.03.2025 16:46:23",
+        "28.03.2025 14:03:43",
+        "20.04.2025 17:45:22"
+    ],
     [
         "01.05.2024 07:34:24",
         "15.01.2023 02:37:12",
@@ -451,7 +460,16 @@ export const DDC_objectsLocations = [
         "Milano, Italia",
         "Giamaica"
     ],
-    [],
+    [
+        "Milano, Italia",
+        "Milano, Italia",
+        "Giamaica",
+        "Milano, Italia",
+        "Milano, Italia",
+        "Lugano, Svizzera",
+        "Milano, Italia",
+        "Giamaica"
+    ],
     [
         "Milano, Italia",
         "Milano, Italia",
