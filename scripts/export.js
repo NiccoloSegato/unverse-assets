@@ -217,8 +217,8 @@ export const DDC_dynamicTagsClicked = [
     ],
     [
         "video",
-        "videoaudio",
         "img",
+        "videoaudio",
         "img",
         "video",
         "videoaudio",
@@ -259,8 +259,8 @@ export const DDC_dynamicContents = [
     ],
     [
         "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/calma/colibri.webm",
-        "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/calma/musicassetta-relaxing-water.webp",
         "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/calma/rana.webp",
+        "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/calma/musicassetta-relaxing-water.webp",
         "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/calma/tabacco.webp",
         "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/calma/studio.webm",
         "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/calma/slang.webp",
@@ -296,8 +296,8 @@ export const DDC_dynamicClicked = [
     ],
     [
         "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/calma/colibri.webm",
-        "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/calma/relaxing-water.webm",
         "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/calma/rana.webp",
+        "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/calma/relaxing-water.webm",
         "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/calma/tabacco.webp",
         "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/calma/studio.webm",
         "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/calma/slang.webm",
@@ -357,8 +357,8 @@ export const DDC_dynamicAudios = [
     [],
     [
         "",
-        "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/calma/acqua-studio.m4a",
         "",
+        "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/calma/acqua-studio.m4a",
         "",
         "",
         "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/calma/jamaican-slang.m4a",
@@ -381,8 +381,8 @@ export const DDC_objectsDidasH1 = [
     [],
     [
         "Un battito d'ali",
-        "Relaxing Water",
         "Microcosmo",
+        "Relaxing Water",
         "Materia e spirito",
         "Anatomia di un Suono",
         "Jamaican Slang",
@@ -405,8 +405,8 @@ export const DDC_objectsDidasP = [
     [],
     [
         "22.04.2025 11:12:11",
-        "05.07.2024 14:23:32",
         "08.05.2025 20:21:40",
+        "05.07.2024 14:23:32",
         "08.05.2025 18:47:42",
         "31.03.2025 13:43:40",
         "21.04.2025 16:36:49",
@@ -453,8 +453,8 @@ export const DDC_objectsMoodValues = [
     [],
     [
         ["165°", "Gibbosa calante", "Bassa marea"],
-        ["160°", "Luna piena", "Alta marea"],
         ["155°", "Gibbosa crescente", "Bassa marea"],
+        ["160°", "Luna piena", "Alta marea"],
         ["280°", "Primo quarto", "Bassa marea"],
         ["205°", "Luna calante", "Alta marea"],
         ["200°", "Ultimo quarto", "Bassa marea"],
