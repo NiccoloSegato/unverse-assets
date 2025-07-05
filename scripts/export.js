@@ -24,7 +24,7 @@ export const DDC_embossingStartColors = [
     '#FFFFFF'
 ];
 export const DDC_embossingColors = [
-    '#051650',
+    '#172966',
     '#aec7d6',
     '#000000',
     '#322e45'
@@ -32,7 +32,7 @@ export const DDC_embossingColors = [
 export const DDC_embossingShadows = [
     [
         '-1px -1px 2px rgba(117, 18, 18, ',
-        '), 1px  1px 2px rgba(0, 61, 183, '
+        '), 1px  1px 2px rgba(137, 151, 178, '
     ],
     [
         '-1px -1px 2px rgba(0, 0, 0, ',
@@ -113,7 +113,7 @@ export const DDC_dictionary = [
 export const DDC_titles = [
     [
         ["NIENTE DURA ", "PER SEMPRE"],
-        ["UOMINI ", "CHE RESPIRANO"],
+        ["UMANI ", "CHE RESPIRANO"],
         ["", ""],
         ["PERDERSI", " NEL RUMORE"]
     ],
@@ -383,9 +383,18 @@ export const DDC_dynamicAudios = [
     ]
 ];
 export const DDC_objectsDidasH1 = [
-    [],
     [
-        "Un battito d'ali",
+        "Troppo Bello per Durare",
+        "Feel It",
+        "Umani che Respirano",
+        "Just That",
+        "",
+        "",
+        "Cat's Nightmare",
+        "Al Centro della Spirale"
+    ],
+    [
+        "Un Battito d'Ali",
         "Microcosmo",
         "Relaxing Water",
         "Materia e spirito",
@@ -395,28 +404,37 @@ export const DDC_objectsDidasH1 = [
         "Piccola Meraviglia"
     ],
     [
-        "Ti penso, per la prima volta",
+        "Ti Penso, per la Prima Volta",
         "Soft Rituals",
-        "Ballano i giorni leggeri",
-        "Tutti, uno",
-        "Quando il viaggio sboccia",
-        "Più leggeri dell’erba",
+        "Ballano i Giorni Leggeri",
+        "Tutti, Uno",
+        "Quando il Viaggio Sboccia",
+        "Più Leggeri dell’Erba",
         "Milano Behind You",
-        "Mi salutano le strade"
+        "Mi Salutano le Strade"
     ],
     [
         "Techno Parade",
         "Techno Disco",
         "Ritmo Verticale",
-        "Prima vibrazione",
-        "Un tasto rotto",
+        "Prima Vibrazione",
+        "Un Tasto Rotto",
         "DSFC",
         "Tic. Tic. Tic.",
         "Piano Key"
     ]
 ];
 export const DDC_objectsDidasP = [
-    [],
+    [
+        "22.04.2025 - 11:12:11",
+        "08.05.2025 - 20:21:40",
+        "05.07.2024 - 14:23:32",
+        "08.05.2025 - 18:47:42",
+        "31.03.2025 - 13:43:40",
+        "21.04.2025 - 16:36:49",
+        "12.04.2025 - 11:34:19",
+        "22.04.2025 - 19:36:22"
+    ],
     [
         "22.04.2025 - 11:12:11",
         "08.05.2025 - 20:21:40",
