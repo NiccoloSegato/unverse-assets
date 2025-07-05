@@ -389,7 +389,16 @@ export const DDC_objectsDidasH1 = [
         "Un Lento Abbraccio",
         "Piccola Meraviglia"
     ],
-    [],
+    [
+        "Ti penso, per la prima volta",
+        "Soft Rituals",
+        "Ballano i giorni leggeri",
+        "Tutti, uno",
+        "Più leggeri dell’erba",
+        "Jamaican Slang",
+        "Un Lento Abbraccio",
+        "Piccola Meraviglia"
+    ],
     [
         "Techno Parade",
         "Techno Disco",
