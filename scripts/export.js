@@ -254,8 +254,8 @@ export const DDC_dynamicContents = [
         "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/malinconia/just-that.webp",
         "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/malinconia/5.webp",
         "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/malinconia/5.webp",
-        "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/malinconia/solitudine-1.webp",
-        "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/malinconia/solitudine-2.webp"
+        "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/malinconia/solitudine-2.webp",
+        "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/malinconia/solitudine-1.webp"
     ],
     [
         "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/calma/colibri.webm",
@@ -296,8 +296,8 @@ export const DDC_dynamicClicked = [
         "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/malinconia/just-that.webm",
         "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/malinconia/5.webp",
         "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/malinconia/5.webp",
-        "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/malinconia/solitudine-1.webp",
-        "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/malinconia/solitudine-2.webp"
+        "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/malinconia/solitudine-2.webp",
+        "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/malinconia/solitudine-1.webp"
     ],
     [
         "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/calma/colibri.webm",
@@ -397,8 +397,8 @@ export const DDC_objectsDidasH1 = [
         "Feel It",
         "Umani che Respirano",
         "Just That",
-        "PD&DC",
-        "PD&DC",
+        "PD",
+        "DC",
         "Cat's Nightmare",
         "Al Centro della Spirale"
     ],
