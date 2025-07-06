@@ -26,7 +26,7 @@ export const DDC_embossingStartColors = [
 export const DDC_embossingColors = [
     '#172966',
     '#aec7d6',
-    'transparent',
+    '#000000',
     '#322e45'
 ];
 export const DDC_embossingShadows = [
