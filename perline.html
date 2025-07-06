@@ -3,24 +3,33 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Stable Optimized Particle Animation</title>
+  <title>Transparent Particle Animation</title>
   <script src="https://cdn.jsdelivr.net/npm/noisejs@2.1.0/index.min.js"></script>
   <style>
-    body {
+    html, body {
       margin: 0;
+      padding: 0;
       overflow: hidden;
-      background-color: #080F32;
+      height: 100%;
+      width: 100%;
+      background: transparent;
     }
     canvas {
       display: block;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
     }
   </style>
 </head>
 <body>
-<canvas class="animation-container" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;"></canvas>
+<canvas class="animation-container"></canvas>
 <script>
 const canvas = document.querySelector('.animation-container');
-const ctx = canvas.getContext("2d");
+const ctx = canvas.getContext("2d", { alpha: true });
 
 const particleCount = 30000;
 const step = 3;
@@ -38,7 +47,6 @@ document.body.addEventListener('mousemove', (e) => {
   mouse.y = e.clientY;
 });
 
-// 🎨 Precompute 100 gradient steps
 const LUT_SIZE = 100;
 const colorLUT = [];
 const start = { r: 250, g: 140, b: 0, a: 0.8 };
@@ -97,8 +105,11 @@ function animate() {
   const w = canvas.width;
   const h = canvas.height;
 
+  // ⬇ Fading with transparency (no background fill)
+  ctx.globalCompositeOperation = 'destination-out';
   ctx.fillStyle = 'rgba(0, 0, 0, 0.06)';
   ctx.fillRect(0, 0, w, h);
+  ctx.globalCompositeOperation = 'source-over';
 
   for (let i = 0; i < particles.length; i++) {
     particles[i].update(mouse.x, mouse.y);
@@ -113,7 +124,6 @@ function render() {
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
 
-  // SOLO se non è stato già creato
   if (particles.length === 0) {
     for (let i = 0; i < particleCount; i++) {
       particles.push(new Particle());
