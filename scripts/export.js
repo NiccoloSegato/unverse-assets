@@ -112,7 +112,7 @@ export const DDC_dictionary = [
 ];
 export const DDC_titles = [
     [
-        ["NIENTE DURA ", "PER SEMPRE"],
+        ["TUTTO", "SCORRE"],
         ["UMANI ", "CHE RESPIRANO"],
         ["", ""],
         ["PERDERSI", " NEL RUMORE"]
