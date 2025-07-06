@@ -478,9 +478,9 @@ export const DDC_objectsDidasP = [
 export const DDC_objectsLocations = [
     [
         "Montego Bay, Giamaica",
+        "Milano, Italia",
+        "Milano, Italia",
         "Giamaica",
-        "Milano, Italia",
-        "Milano, Italia",
         "",
         "",
         "Milano, Italia",
