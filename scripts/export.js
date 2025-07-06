@@ -835,9 +835,9 @@ export function DDC_updateTime() {
 }
 
 let currentMoodGen = DDC_getCurrentTimesliceDetails().DDC_activeMood;
-const canvas = document.getElementById("myCanvas");
+const canvas = document.getElementById("generator-canvas");
 const ctx = canvas.getContext("2d");
-const outputImage = document.getElementById("outputImage");
+const outputImage = document.getElementById("generated-image");
 
 const img = new Image();
 img.src = "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/generator/" + currentMoodGen + ".png";// Cambia il percorso dell'immagine di sfondo
