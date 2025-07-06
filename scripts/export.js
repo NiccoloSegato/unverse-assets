@@ -363,7 +363,7 @@ export const DDC_dynamicAudios = [
         "",
         "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/malinconia/feel-it.m4a",
         "",
-        "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/maliconia/just-that.m4a",
+        "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/malinconia/just-that.m4a",
         "",
         "",
         "",
