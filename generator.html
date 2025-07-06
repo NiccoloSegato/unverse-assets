@@ -26,7 +26,10 @@
 
 <script  type="module">
   import {
-    DDC_getCurrentTimesliceDetails
+    DDC_getCurrentTimesliceDetails,
+    DDC_getLiteralMoonValue,
+    DDC_getLiteralTideValue,
+    DDC_getLiteralEarthValue
   } from 'https://niccolosegato.github.io/unverse-assets/scripts/export.js';
 
   let currentMoodGen = DDC_getCurrentTimesliceDetails().DDC_activeMood;
@@ -51,7 +54,6 @@
   }
 
   polaroidImg.src = getRandomPolaroidImage();
-  console.log("Polaroid Image Source: ", polaroidImg.src); // Debug: verifica il percorso dell'immagine polaroid
 
   // Contatore per assicurarsi che entrambe le immagini siano caricate
   let imagesLoadedCount = 0;
@@ -64,8 +66,6 @@
       canvas.width = img.width;
       canvas.height = img.height;
       ctx.drawImage(img, 0, 0); // Disegna l'immagine di sfondo
-
-      
     }
   }
 
@@ -74,7 +74,7 @@
   polaroidImg.onload = drawImagesOnCanvas;
 
 
-  document.getElementById("addTextBtn").addEventListener("click", () => {
+  export function DDC_genSocialImage(){
     // Quando clicchi il bottone, ridisegna tutto per assicurarti che il testo si aggiunga correttamente
     canvas.width = img.width; // Ridisegna lo sfondo
     canvas.height = img.height;
@@ -82,11 +82,10 @@
 
     // Ridisegna l'immagine "polaroid focus" dopo aver ridisegnato lo sfondo
     const focusImgWidth = 750;
-      const focusImgHeight = 1100;
-      const focusImgX = 170;
-      const focusImgY = 320;
+    const focusImgHeight = 1100;
+    const focusImgX = 170;
+    const focusImgY = 320;
     ctx.drawImage(polaroidImg, focusImgX, focusImgY, focusImgWidth, focusImgHeight);
-
 
     // Data
     ctx.font = "40px Arial";
@@ -110,7 +109,7 @@
     ctx.strokeText(text, x, y);
     ctx.fillText(text, x, y);
     // variabile 1
-    const thirdText = "310";
+    const thirdText = DDC_getLiteralEarthValue() + "°";
     ctx.textAlign = "center";
     ctx.textBaseline = "bottom";
     const thirdX = 310;
@@ -136,7 +135,7 @@
     ctx.fillText(secondText, secondX, secondY);
 
       // Luna
-      const fourthText = "Crescente";
+    const fourthText = DDC_getLiteralMoonValue();
     ctx.textAlign = "center";
     ctx.textBaseline = "bottom";
     const fourthX = 540;
@@ -145,7 +144,7 @@
     ctx.fillText(fourthText, fourthX, fourthY);
 
      // marea
-     const fifthText = "Alta";
+    const fifthText = DDC_getLiteralTideValue();
     ctx.textAlign = "center";
     ctx.textBaseline = "bottom";
     const fifthX = 770;
@@ -157,8 +156,7 @@
     const dataURL = canvas.toDataURL("image/png");
     outputImage.src = dataURL;
     outputImage.style.display = "block";
-  });
+  };
 </script>
-
 </body>
 </html>
