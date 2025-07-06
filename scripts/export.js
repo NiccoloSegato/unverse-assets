@@ -252,8 +252,8 @@ export const DDC_dynamicContents = [
         "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/malinconia/feel-it.webp",
         "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/malinconia/lettera.webp",
         "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/malinconia/just-that.webp",
-        "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/malinconia/just-that.webp",
-        "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/malinconia/just-that.webp",
+        "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/malinconia/5.webp",
+        "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/malinconia/5.webp",
         "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/malinconia/solitudine-1.webp",
         "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/malinconia/solitudine-2.webp"
     ],
@@ -296,8 +296,8 @@ export const DDC_dynamicClicked = [
         "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/malinconia/just-that.webm",
         "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/malinconia/5.webp",
         "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/malinconia/5.webp",
-        "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/malinconia/solitudine-2.webp",
-        "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/malinconia/solitudine-1.webp"
+        "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/malinconia/solitudine-1.webp",
+        "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/malinconia/solitudine-2.webp"
     ],
     [
         "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/calma/colibri.webm",
