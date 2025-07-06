@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Perlin Noise Particle Animation</title>
+<script src="https://cdn.jsdelivr.net/npm/noisejs@2.1.0/index.min.js"></script>
+<style>
+body {
+    margin: 0;
+    overflow: hidden;
+    background-color: #080F32; /* Il tuo colore di sfondo scuro fisso */
+}
+canvas {
+    display: block;
+}
+</style>
+</head>
+<body style="min-height: 100vh;">
+<canvas class="animation-container" style="height: 100vh; width: 100vw; position: fixed; top: 0; left: 0;"></canvas>
+<script>
+const particleCount = 30000;
+const step = 3;
+const gridSize = 100;
+const particleMaxAge = 300;
+const maxDistance = 150;
+const canvas = document.querySelector('.animation-container');
+const ctx = canvas.getContext("2d");
+const noise = new Noise(Math.random());
+let particles = [];
+let frame = 0;
+let mouse = {x: window.innerWidth / 2, y: window.innerHeight / 2};
+
+document.body.addEventListener('mousemove', (e) => {
+    mouse = {x: e.clientX, y: e.clientY};
+});
+
+function calcPerlin (x, y) {
+    x /= gridSize;
+    y /= gridSize;
+    return noise.perlin3(x, y, frame);
+}
+
+// --- Colori per il gradiente delle PARTICELLE ---
+// Inizio gradiente: il tuo giallo-arancio originale
+const startParticleColor = { r: 250, g: 140, b: 0, a: 0.8 }; 
+// Fine gradiente: rosso quasi bordeaux
+const endParticleColor = { r: 128, g: 0, b: 32, a: 0.8 }; // Un rosso scuro/bordeaux (es. Maroon)
+
+class Particle {
+    constructor() {
+        this.x = 0;
+        this.y = 0;
+        this.age = 0;
+        this.reset();
+    }
+
+    reset() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.age = Math.random() * particleMaxAge;
+    }
+
+    update() {
+        let perlin = calcPerlin(this.x, this.y);
+        perlin = (perlin + 1) * 2 * Math.PI;
+        this.x += step * Math.cos(perlin);
+        this.y += step * Math.sin(perlin);
+
+        if (Math.sqrt((mouse.x - this.x)**2 + (mouse.y - this.y)**2) > maxDistance) {
+            let near = Math.random() * 0.04;
+            this.x += near * (mouse.x - this.x);
+            this.y += near * (mouse.y - this.y);
+        }
+
+        this.age--;
+        if (this.age <= 0) this.reset();
+    }
+
+    draw() {
+        // Calcola la percentuale della posizione verticale della particella (0 in alto, 1 in basso)
+        const yPercent = this.y / canvas.height;
+
+        // Interpola i valori R, G, B e A tra i colori di inizio e fine
+        const r = Math.round(startParticleColor.r + (endParticleColor.r - startParticleColor.r) * yPercent);
+        const g = Math.round(startParticleColor.g + (endParticleColor.g - startParticleColor.g) * yPercent);
+        const b = Math.round(startParticleColor.b + (endParticleColor.b - startParticleColor.b) * yPercent);
+        const a = startParticleColor.a + (endParticleColor.a - startParticleColor.a) * yPercent;
+
+        ctx.fillStyle = `rgba(${r}, ${g}, ${b}, ${a})`;
+        ctx.fillRect(this.x, this.y, 1, 1);
+    }
+}
+
+function animate(){
+    // Questo è il tuo effetto di "fading trail", usa il colore scuro che hai indicato
+    ctx.fillStyle = 'rgba(8, 15, 50, 0.05)';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    // Il colore delle particelle non è più impostato qui, ma nel loro metodo draw()
+    particles.forEach(particle => {
+        particle.update();
+        particle.draw(); // Ogni particella si disegna con il colore del gradiente
+    });
+
+    frame += 0.01;
+    requestAnimationFrame(animate);
+}
+
+function render() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    particles = [];
+    for (let i = 0; i < particleCount; i++) {
+        particles.push(new Particle());
+    }
+    animate();
+}
+
+window.addEventListener('resize', render);
+
+render();
+</script>
+</body>
+</html>
