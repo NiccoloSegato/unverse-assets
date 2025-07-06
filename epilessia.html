@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <title>Flash Stroboscopici Ultra</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background: black;
+    }
+    canvas {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+<canvas id="canvas"></canvas>
+
+<script>
+"use strict";
+
+const canvas = document.getElementById("canvas");
+const ctx = canvas.getContext("2d");
+
+let center = [0, 0];
+let tick = 0;
+let flashes = [];
+
+function resize() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  center = [canvas.width / 2, canvas.height / 2];
+}
+
+function createFlash() {
+  const maxRadius = Math.max(canvas.width, canvas.height) * 1.5;
+  flashes.push({
+    radius: 0,
+    maxRadius: maxRadius,
+    growth: Math.random() * 50 + 15,
+    opacity: 1.2, // super luminosa
+  });
+}
+
+function updateFlashes() {
+  flashes = flashes.filter(flash => flash.opacity > 0.5);
+
+  for (let flash of flashes) {
+    flash.radius += flash.growth;
+    flash.opacity *= 0.95; // svanisce più lentamente
+  }
+}
+
+function drawFlashes() {
+  ctx.save();
+  ctx.globalCompositeOperation = "screen";
+  ctx.filter = "blur(14px)";
+
+  for (let flash of flashes) {
+    const gradient = ctx.createRadialGradient(
+      center[0], center[1], flash.radius * 0.5,
+      center[0], center[1], flash.radius
+    );
+
+    gradient.addColorStop(0, `hsla(270, 100%, 10%, ${flash.opacity})`);
+    gradient.addColorStop(1, `hsla(270, 100%, 1%, 0)`);
+
+    ctx.fillStyle = gradient;
+    ctx.beginPath();
+    ctx.arc(center[0], center[1], flash.radius, 0, Math.PI * 2);
+    ctx.fill();
+  }
+
+  ctx.restore();
+}
+
+function animate() {
+  tick++;
+
+  // Flash ancora più frequente
+  if (tick % 2 === 0) {
+    createFlash();
+  }
+
+  // Sfondo più trasparente = maggiore persistenza
+  ctx.fillStyle = "rgba( 0, 0, 0.04)";
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+  updateFlashes();
+  drawFlashes();
+
+  requestAnimationFrame(animate);
+}
+
+window.addEventListener("resize", resize);
+window.addEventListener("load", () => {
+  resize();
+  animate();
+});
+</script>
+</body>
+</html>
