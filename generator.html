@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <title>Canvas con Testo e Download</title>
+  <style>
+   
+    canvas, #outputImage {
+      border: 1px solid #ccc;
+      display: block;
+      margin-bottom: 1rem;
+      max-width: 60%;
+      height: auto;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 25px;
+    }
+  </style>
+</head>
+<body>
+
+<canvas id="myCanvas"></canvas>
+<button id="addTextBtn">Aggiungi Testo</button>
+<img id="outputImage" style="display: none;" alt="Immagine con testo"/>
+
+<script  type="module">
+  import {
+    DDC_getCurrentTimesliceDetails
+  } from 'https://niccolosegato.github.io/unverse-assets/scripts/export.js';
+
+  let currentMoodGen = DDC_getCurrentTimesliceDetails().DDC_activeMood;
+  const params = new URLSearchParams(window.location.search);
+  if (params.has('m')) {
+    const mValue = params.get('m');
+    currentMoodGen = mValue;
+  }
+
+  const canvas = document.getElementById("myCanvas");
+  const ctx = canvas.getContext("2d");
+  const outputImage = document.getElementById("outputImage");
+
+  const img = new Image();
+  img.src = "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/generator/" + currentMoodGen + ".png";// Cambia il percorso dell'immagine di sfondo
+
+  const polaroidImg = new Image();
+
+  function getRandomPolaroidImage() {
+    const randomIndex = Math.floor(Math.random() * 4) + 1;
+    return "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/generator/polaroid/" + currentMoodGen + "/" + randomIndex + ".png";
+  }
+
+  polaroidImg.src = getRandomPolaroidImage();
+  console.log("Polaroid Image Source: ", polaroidImg.src); // Debug: verifica il percorso dell'immagine polaroid
+
+  // Contatore per assicurarsi che entrambe le immagini siano caricate
+  let imagesLoadedCount = 0;
+  const totalImagesToLoad = 2;
+
+  // Funzione per disegnare le immagini sul canvas una volta caricate
+  function drawImagesOnCanvas() {
+    imagesLoadedCount++;
+    if (imagesLoadedCount === totalImagesToLoad) {
+      canvas.width = img.width;
+      canvas.height = img.height;
+      ctx.drawImage(img, 0, 0); // Disegna l'immagine di sfondo
+
+      
+    }
+  }
+
+  // Assicurati che entrambe le immagini siano caricate prima di tentare di disegnarle
+  img.onload = drawImagesOnCanvas;
+  polaroidImg.onload = drawImagesOnCanvas;
+
+
+  document.getElementById("addTextBtn").addEventListener("click", () => {
+    // Quando clicchi il bottone, ridisegna tutto per assicurarti che il testo si aggiunga correttamente
+    canvas.width = img.width; // Ridisegna lo sfondo
+    canvas.height = img.height;
+    ctx.drawImage(img, 0, 0);
+
+    // Ridisegna l'immagine "polaroid focus" dopo aver ridisegnato lo sfondo
+    const focusImgWidth = 750;
+      const focusImgHeight = 1100;
+      const focusImgX = 170;
+      const focusImgY = 320;
+    ctx.drawImage(polaroidImg, focusImgX, focusImgY, focusImgWidth, focusImgHeight);
+
+
+    // Data
+    ctx.font = "40px Arial";
+    ctx.fillStyle = "white";
+    ctx.strokeStyle = "black";
+    ctx.textAlign = "left";
+    ctx.textBaseline = "bottom";
+    ctx.lineWidth = 2;
+    
+    // Inizio della modifica
+    const today = new Date(); // Ottiene la data e l'ora attuali
+    const day = String(today.getDate()).padStart(2, '0'); // Giorno del mese (es. 05)
+    const month = String(today.getMonth() + 1).padStart(2, '0'); // Mese (aggiungi 1 perché è base 0, es. 07)
+    const year = today.getFullYear(); // Anno completo (es. 2025)
+
+    const text = `${day}-${month}-${year}`; // Formatta la data come "GG-MM-AAAA"
+    // Fine della modifica
+
+    const x = 795;
+    const y = img.height - 50;
+    ctx.strokeText(text, x, y);
+    ctx.fillText(text, x, y);
+    // variabile 1
+    const thirdText = "310";
+    ctx.textAlign = "center";
+    ctx.textBaseline = "bottom";
+    const thirdX = 310;
+    const thirdY = img.height - 250;
+    ctx.strokeText(thirdText, thirdX, thirdY);
+    ctx.fillText(thirdText, thirdX, thirdY);
+
+     // orario
+     // Inizio della modifica
+     const now = new Date(); // Ottiene la data e l'ora attuali
+     const hours = String(now.getHours()).padStart(2, '0'); // Ore (es. 17)
+     const minutes = String(now.getMinutes()).padStart(2, '0'); // Minuti (es. 44)
+     const seconds = String(now.getSeconds()).padStart(2, '0'); // Secondi (es. 22)
+
+     const secondText = `${hours}:${minutes}:${seconds}`; // Formatta l'orario come "HH:MM:SS"
+     // Fine della modifica
+
+    ctx.textAlign = "right";
+    ctx.textBaseline = "bottom";
+    const secondX = 235;
+    const secondY = img.height - 1720;
+    ctx.strokeText(secondText, secondX, secondY);
+    ctx.fillText(secondText, secondX, secondY);
+
+      // Luna
+      const fourthText = "Crescente";
+    ctx.textAlign = "center";
+    ctx.textBaseline = "bottom";
+    const fourthX = 540;
+    const fourthY = img.height - 250;
+    ctx.strokeText(fourthText, fourthX, fourthY);
+    ctx.fillText(fourthText, fourthX, fourthY);
+
+     // marea
+     const fifthText = "Alta";
+    ctx.textAlign = "center";
+    ctx.textBaseline = "bottom";
+    const fifthX = 770;
+    const fifthY = img.height - 250;
+    ctx.strokeText(fifthText, fifthX, fifthY);
+    ctx.fillText(fifthText, fifthX, fifthY);
+
+    // Genera immagine finale
+    const dataURL = canvas.toDataURL("image/png");
+    outputImage.src = dataURL;
+    outputImage.style.display = "block";
+  });
+</script>
+
+</body>
+</html>
