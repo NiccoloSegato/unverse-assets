@@ -115,7 +115,7 @@ export const DDC_titles = [
         ["TUTTO", "SCORRE"],
         ["UMANI ", "CHE RESPIRANO"],
         ["", ""],
-        ["PERDERSI", " NEL RUMORE"]
+        ["PERDERSI ", "NEL RUMORE"]
     ],
     [
         ["QUI, ", "ADESSO"],
