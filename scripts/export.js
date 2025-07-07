@@ -168,8 +168,8 @@ export const DDC_dynamicTags = [
         "img",
         "img",
         "img",
-        "img",
-        "img",
+        "none",
+        "none",
         "img",
         "img"
     ],
