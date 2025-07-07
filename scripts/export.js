@@ -352,6 +352,28 @@ export const DDC_dynamicAnimations = [
         "https://raw.githubusercontent.com/NiccoloSegato/unverse-assets/refs/heads/main/assets/sfera/sfera"
     ]
 ];
+export const DDC_dynamicMobileAnimations = [
+    [
+        "https://raw.githubusercontent.com/NiccoloSegato/unverse-assets/refs/heads/main/assets/titanium/sfondo",
+        "",
+        "https://raw.githubusercontent.com/NiccoloSegato/unverse-assets/refs/heads/main/assets/titanium/sfondo"
+    ],
+    [
+        "https://raw.githubusercontent.com/NiccoloSegato/unverse-assets/refs/heads/main/assets/nuvole-immersive/nuvole_nuove",
+        "https://raw.githubusercontent.com/NiccoloSegato/unverse-assets/refs/heads/main/assets/petali/petali_",
+        "https://raw.githubusercontent.com/NiccoloSegato/unverse-assets/refs/heads/main/assets/fiori/fiori_"
+    ],
+    [
+        "https://raw.githubusercontent.com/NiccoloSegato/unverse-assets/refs/heads/main/assets/ribolle/ribolle",
+        "",
+        "https://raw.githubusercontent.com/NiccoloSegato/unverse-assets/refs/heads/main/assets/pappagalli/pappagalli",
+    ],
+    [
+        "https://raw.githubusercontent.com/NiccoloSegato/unverse-assets/refs/heads/main/assets/tunnel/tunneltrasparente_",
+        "",
+        "https://raw.githubusercontent.com/NiccoloSegato/unverse-assets/refs/heads/main/assets/sfera/sfera"
+    ]
+];
 export const DDC_backgroundAudio = [
     "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/audio/solitudine.m4a",
     "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/audio/calma.mp3",
