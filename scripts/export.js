@@ -210,8 +210,8 @@ export const DDC_dynamicTagsClicked = [
         "videoaudio",
         "img",
         "videoaudio",
-        "img",
-        "img",
+        "none",
+        "none",
         "img",
         "img"
     ],
