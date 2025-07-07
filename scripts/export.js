@@ -91,7 +91,7 @@ export const DDC_dictionary = [
         "In quella sensazione, penso sia difficile avere dei problemi con quelli a cui voglio bene. Percepisco del calore, un’immagine di un piccolo villaggio o di una casa con delle luci accese all’interno... mi piace l’idea che questi posti siano popolati dalla vita.",
         "A livello naturale, sono tanti uccellini che cantano e volano, dei fiori magari, e una vegetazione rigogliosa e riccamente popolata da altri esseri viventi.",
         "Mi ricordo di quando ero sul tetto di questa casa nella giungla Giamaicana e, mentre guardavo il tramonto, tutt’intorno c'erano questi uccellini in una totale estasi. Erano circondati da tutta quella natura, quei fiori e la temperatura era perfetta.",
-        "C’è sempre questo elemento vitale che va a visitare la natura,no? È sempre una questione di convivialità.",
+        "C’è sempre questo elemento vitale che va a visitare la natura, no? È sempre una questione di convivialità.",
         "Ciò che hai sfiorato svanirà, ma resta come eco silenziosa. </br>Nulla permane, tutto scorre"
     ],
     [
@@ -126,8 +126,8 @@ export const DDC_titles = [
     [
         ["RIBOLLE", " TUTTO"],
         ["TUTTO ", "A FUOCO"],
-        ["MA QUANTO", " SONO FELICI?"],
-        ["È VITA", " È PERSONE?"]
+        ["QUANTO", " SONO FELICI?"],
+        ["È VITA,", " È PERSONE"]
     ],
     [
         ["FUORI ", "FUOCO"],
