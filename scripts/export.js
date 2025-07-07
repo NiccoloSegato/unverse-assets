@@ -68,7 +68,7 @@ export const DDC_dictionary = [
         "Immagino di respirare a <i>pieni polmoni</i>, di sentire l'aria che entra, proprio un'<strong>armonia totale</strong> tra me e il mondo esterno, tra quello che provo dentro e quello che c’è fuori.",
         "È come se <i>l'ambiente esterno</i> e il mio stato d'animo fossero in sintonia.",
         "Quando sono calmo, mi immagino di essere proprio <i>lì nel presente</i>, senza farmi distrarre dai pensieri che vanno avanti e indietro.",
-        "È l'altalena  a trasmettermi questa sensazione, perché <i>è semplicemente lì presente<i> ed è fatta per godersi quell'istante e quel piccolo pezzo di mondo con <strong>spensieratezza</strong>.",
+        "È l'altalena  a trasmettermi questa sensazione, perché <i>è semplicemente lì presente</i> ed è fatta per godersi quell'istante e quel piccolo pezzo di mondo con <strong>spensieratezza</strong>.",
         "Se la felicità è un'energia pazzesca, la calma è meno intensa. Ad esempio, l’acqua che bolle è un casino, finché non abbassi il gas. La calma è un po' così: <i>un grande mare piatto, intatto<i>.",
         "Mi viene in mente <strong>un giardino super ordinato</strong>, tipo quelli zen. Se c'è vita, come dei fiori o degli animali, rimane comunque una presenza silenziosa, che non rompe l'armonia.",
         "Una cosa interessante è che <i>non te ne accorgi mentre la stai vivendo</i>. In quel momento, <strong>sei totalmente immerso in ciò che stai facendo</strong>, che non noti la tranquillità della situazione, anche se, inconsciamente, la percepisci.",
