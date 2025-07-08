@@ -207,7 +207,7 @@ export const DDC_dynamicTags = [
 export const DDC_dynamicTagsClicked = [
     [
         "img",
-        "img",
+        "videoaudio",
         "img",
         "videoaudio",
         "none",
@@ -293,7 +293,7 @@ export const DDC_dynamicClicked = [
         "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/malinconia/malinconia-1.webp",
         "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/malinconia/feel-it-animato.webp",
         "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/malinconia/lettera.webp",
-        "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/malinconia/just-that.webm",
+        "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/malinconia/just-that-animato.webp",
         "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/malinconia/lettera.webp",
         "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/malinconia/lettera.webp",
         "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/malinconia/solitudine-2.webp",
@@ -305,7 +305,7 @@ export const DDC_dynamicClicked = [
         "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/calma/relaxing-water.webm",
         "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/calma/tabacco.webp",
         "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/calma/studio.webm",
-        "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/calma/slang.webm",
+        "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/calma/slang-animato.webp",
         "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/calma/pianta.webp",
         "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/calma/rospo.webm"
     ],
@@ -321,13 +321,13 @@ export const DDC_dynamicClicked = [
     ],
     [
         "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/focus/technoparade.webm",
-        "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/focus/technodisco.webm",
+        "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/focus/technodisco-animato.webp",
         "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/focus/focus.3.webp",
         "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/focus/focus.2.webp",
         "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/focus/focus.1.webp",
         "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/focus/DSFC.webm",
         "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/focus/tictictic.webm",
-        "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/focus/pianokey.webm"
+        "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/focus/pianokey-animato.webp"
     ]
 ];
 export const DDC_dynamicAnimations = [
