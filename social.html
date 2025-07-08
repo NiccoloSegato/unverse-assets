@@ -1,274 +1,80 @@
-<!DOCTYPE html>
-<html lang="it">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Polaroid VHS Component</title>
-    <style>
-        body {
-            background: linear-gradient(135deg, #0a0a2e 0%, #16213e 50%, #0f3460 100%);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            margin: 0;
-            padding: 20px;
-            font-family: 'Courier New', monospace;
-        }
+<script>
+    const polaroidContainer = document.getElementById('polaroid');
 
-        /* Polaroid Container */
-        .polaroid-container {
-            position: relative;
-            transform: rotate(-2deg);
-            transition: all 0.3s ease;
-            cursor: pointer;
-            margin-bottom: 30px;
-        }
+    // Effetto al click sulla polaroid
+    polaroidContainer.addEventListener('click', function() {
+        this.classList.add('clicked');
 
-        .polaroid-container:hover {
-            transform: rotate(0deg) scale(1.05);
-        }
+        setTimeout(() => {
+            this.classList.remove('clicked');
+        }, 200);
+    });
 
-        .polaroid-container.clicked {
-            transform: rotate(0deg) scale(1.1) !important;
-            filter: brightness(1.2);
-        }
+    // Funzione per scaricare l'immagine
+    function downloadImage() {
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
 
-        .polaroid-container::before {
-            content: '';
-            position: absolute;
-            top: 12px;
-            left: 12px;
-            right: -12px;
-            bottom: -12px;
-            background: rgba(0, 0, 0, 0.4);
-            border-radius: 8px;
-            z-index: -1;
-            filter: blur(15px);
-        }
+        // Dimensioni del canvas
+        canvas.width = 400;
+        canvas.height = 360; // Più alto per includere il padding della polaroid
 
-        .polaroid-image {
-            max-width: 400px;
-            width: 100%;
-            border-radius: 8px;
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
-            position: relative;
-            overflow: hidden;
-            background: #f5f5f5;
-            padding: 20px;
-            padding-bottom: 60px;
-        }
+        // Sfondo polaroid
+        ctx.fillStyle = '#f5f5f5';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-        .polaroid-image::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(
-                180deg,
-                transparent 0%,
-                rgba(255, 255, 255, 0.1) 25%,
-                transparent 50%,
-                rgba(255, 255, 255, 0.05) 75%,
-                transparent 100%
-            );
-            pointer-events: none;
-            animation: scanlines 4s linear infinite;
-        }
-
-        @keyframes scanlines {
-            0% { transform: translateY(-100%); }
-            100% { transform: translateY(100%); }
-        }
-
-        .polaroid-image img {
-            width: 100%;
-            height: auto;
-            display: block;
-            border-radius: 4px;
-        }
-
-        .polaroid-date {
-            position: absolute;
-            bottom: 15px;
-            left: 50%;
-            transform: translateX(-50%);
-            color: #333;
-            font-size: 12px;
-            font-family: 'Courier New', monospace;
-            letter-spacing: 1px;
-        }
-
-        /* Download Button */
-        .download-btn {
-            background: rgba(255, 255, 255, 0.1);
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            color: white;
-            padding: 12px 24px;
-            border-radius: 25px;
-            font-family: 'Courier New', monospace;
-            font-size: 14px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .download-btn:hover {
-            background: rgba(255, 255, 255, 0.2);
-            border-color: rgba(255, 255, 255, 0.5);
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
-        }
-
-        .download-btn:active {
-            transform: translateY(0);
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .polaroid-image {
-                max-width: 320px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .polaroid-image {
-                max-width: 280px;
-            }
-        }
-    </style>
-</head>
-<body>
-    <!-- Polaroid Container -->
-    <div class="polaroid-container" id="polaroid">
-        <div class="polaroid-image">
-            <img id="polaroidImg" src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgdmlld0JveD0iMCAwIDQwMCAzMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iMzAwIiBmaWxsPSIjZjVmNWY1Ii8+CjxyZWN0IHg9IjIwIiB5PSIyMCIgd2lkdGg9IjM2MCIgaGVpZ2h0PSIyNDAiIGZpbGw9IiMzMzMiLz4KPGNpcmNsZSBjeD0iMjAwIiBjeT0iMTMwIiByPSI0MCIgZmlsbD0iIzY2NiIvPgo8Y2lyY2xlIGN4PSIxODAiIGN5PSIxMjAiIHI9IjUiIGZpbGw9IiMzMzMiLz4KPGNpcmNsZSBjeD0iMjIwIiBjeT0iMTIwIiByPSI1IiBmaWxsPSIjMzMzIi8+CjxwYXRoIGQ9Ik0gMTgwIDE1MCBRIDIwMCAxNjAgMjIwIDE1MCIgc3Ryb2tlPSIjMzMzIiBzdHJva2Utd2lkdGg9IjMiIGZpbGw9Im5vbmUiLz4KPHR4dCB4PSIyMDAiIHk9IjI4MCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iIzMzMyIgZm9udC1mYW1pbHk9Im1vbm9zcGFjZSIgZm9udC1zaXplPSIxNCI+VkVORVJVUyAtIDIwMjQ8L3R4dD4KPC9zdmc+" alt="Polaroid VHS Style">
-            <div class="polaroid-date">VENERUS - 2024</div>
-        </div>
-    </div>
-
-    <button class="download-btn" onclick="downloadImage()">
-        📷 Scarica nella Galleria
-    </button>
-
-    <script>
-        const polaroidContainer = document.getElementById('polaroid');
+        // Bordo interno (immagine placeholder)
+        const img = document.getElementById('polaroidImg');
         
-        // Effetto al click sulla polaroid
-        polaroidContainer.addEventListener('click', function() {
-            this.classList.add('clicked');
-            
-            setTimeout(() => {
-                this.classList.remove('clicked');
-            }, 200);
-        });
+        // Aspetta che l'immagine (anche se è un SVG in-page) sia "pronta"
+        const tempImg = new Image();
+        tempImg.onload = function() {
+            ctx.drawImage(tempImg, 20, 20, 360, 240); // Disegna l'immagine
 
-        // Funzione per scaricare l'immagine
-        function downloadImage() {
-            const canvas = document.createElement('canvas');
-            const ctx = canvas.getContext('2d');
-            
-            // Dimensioni del canvas
-            canvas.width = 400;
-            canvas.height = 360; // Più alto per includere il padding della polaroid
-            
-            // Sfondo polaroid
-            ctx.fillStyle = '#f5f5f5';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-            
-            // Bordo interno
-            ctx.fillStyle = '#333';
-            ctx.fillRect(20, 20, 360, 240);
-            
-            // Disegno semplice
-            ctx.fillStyle = '#666';
-            ctx.beginPath();
-            ctx.arc(200, 130, 40, 0, 2 * Math.PI);
-            ctx.fill();
-            
-            // Occhi
-            ctx.fillStyle = '#333';
-            ctx.beginPath();
-            ctx.arc(180, 120, 5, 0, 2 * Math.PI);
-            ctx.fill();
-            ctx.beginPath();
-            ctx.arc(220, 120, 5, 0, 2 * Math.PI);
-            ctx.fill();
-            
-            // Sorriso
-            ctx.strokeStyle = '#333';
-            ctx.lineWidth = 3;
-            ctx.beginPath();
-            ctx.arc(200, 130, 20, 0, Math.PI);
-            ctx.stroke();
-            
             // Testo
             ctx.fillStyle = '#333';
-            ctx.font = '14px monospace';
+            ctx.font = '14px "Courier New", monospace';
             ctx.textAlign = 'center';
-            ctx.fillText('VENERUS - 2024', 200, 280);
-            
+            ctx.fillText('VENERUS - 2024', 200, 340); // Posizione aggiustata
+
             // Converti in blob e scarica
             canvas.toBlob(function(blob) {
                 const url = URL.createObjectURL(blob);
                 const a = document.createElement('a');
-                
+
                 // Per iOS - prova a usare il tipo MIME corretto
                 if (navigator.userAgent.match(/iPhone|iPad|iPod/i)) {
                     // Su iOS, apri l'immagine in una nuova finestra
-                    // L'utente potrà poi salvarla tenendo premuto
                     const newWindow = window.open('', '_blank');
-                    const img = new Image();
-                    img.onload = function() {
-                        newWindow.document.write(`
+                    const imgElement = new Image();
+                    imgElement.onload = function() {
+                        const htmlContent = `
                             <html>
-                                <head>
-                                    <title>Polaroid VHS</title>
-                                    <style>
-                                        body { 
-                                            margin: 0; 
-                                            padding: 20px; 
-                                            display: flex; 
-                                            justify-content: center; 
-                                            align-items: center; 
-                                            min-height: 100vh; 
-                                            background: #000; 
-                                        }
-                                        img { 
-                                            max-width: 100%; 
-                                            height: auto; 
-                                            box-shadow: 0 0 20px rgba(255,255,255,0.3); 
-                                        }
-                                        .instruction {
-                                            position: fixed;
-                                            top: 20px;
-                                            left: 50%;
-                                            transform: translateX(-50%);
-                                            color: white;
-                                            font-family: monospace;
-                                            text-align: center;
-                                            background: rgba(0,0,0,0.8);
-                                            padding: 10px;
-                                            border-radius: 5px;
-                                        }
-                                    </style>
-                                </head>
-                                <body>
-                                    <div class="instruction">
-                                        Tieni premuto sull'immagine e seleziona<br>
-                                        "Salva in Foto" per aggiungerla alla galleria
-                                    </div>
-                                    <img src="${url}" alt="Polaroid VHS" />
-                                </body>
+                            <head>
+                                <title>Polaroid VHS</title>
+                                <style>
+                                    body { margin: 0; padding: 20px; display: flex; flex-direction: column; justify-content: center; align-items: center; min-height: 100vh; background: #000; font-family: Helvetica, Arial, sans-serif; }
+                                    img { max-width: 90vw; max-height: 60vh; height: auto; box-shadow: 0 0 20px rgba(255,255,255,0.3); border-radius: 8px; }
+                                    .instruction { color: white; text-align: center; background: rgba(0,0,0,0.8); padding: 15px 20px; border-radius: 10px; margin-top: 20px; font-size: 16px; line-height: 1.4; border: 1px solid rgba(255,255,255,0.2); }
+                                    @media (max-width: 480px) {
+                                        body { padding: 10px; }
+                                        .instruction { font-size: 14px; padding: 12px 15px; }
+                                        img { max-width: 95vw; max-height: 50vh; }
+                                    }
+                                </style>
+                            </head>
+                            <body>
+                                <img src="${url}" alt="Polaroid VHS" />
+                                <div class="instruction">
+                                    <div>Tieni premuto sull'immagine e seleziona<br><strong>"Aggiungi a Foto"</strong> per salvarla.</div>
+                                </div>
+                            </body>
                             </html>
-                        `);
+                        `;
+                        newWindow.document.write(htmlContent);
+                        newWindow.document.close();
                     };
-                    img.src = url;
+                    imgElement.src = url;
                 } else {
                     // Per altri dispositivi, download normale
                     a.href = url;
@@ -278,8 +84,8 @@
                     document.body.removeChild(a);
                     URL.revokeObjectURL(url);
                 }
-            }, 'image/png');
-        }
-    </script>
-</body>
-</html>
+            }, 'image/png'); // Chiusura della funzione toBlob e tipo MIME
+        }; // <-- La parentesi grafa mancante va qui
+        tempImg.src = img.src; // Imposta la sorgente per triggerare l'onload
+    }
+</script>
