@@ -291,7 +291,7 @@ export const DDC_dynamicContents = [
 export const DDC_dynamicClicked = [
     [
         "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/malinconia/malinconia-1.webp",
-        "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/malinconia/feel-it-animato.webm",
+        "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/malinconia/feel-it-animato.webp",
         "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/malinconia/lettera.webp",
         "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/malinconia/just-that.webm",
         "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/moods/malinconia/lettera.webp",
@@ -356,7 +356,7 @@ export const DDC_dynamicMobileAnimations = [
     [
         "https://raw.githubusercontent.com/NiccoloSegato/unverse-assets/refs/heads/main/assets/titanium/sfondo",
         "",
-        "https://raw.githubusercontent.com/NiccoloSegato/unverse-assets/refs/heads/main/assets/titanium/sfondo"
+        "https://raw.githubusercontent.com/NiccoloSegato/unverse-assets/refs/heads/main/assets/mobile/animazioni/titanium/titanium"
     ],
     [
         "https://raw.githubusercontent.com/NiccoloSegato/unverse-assets/refs/heads/main/assets/mobile/animazioni/nuvole/nuvole",
