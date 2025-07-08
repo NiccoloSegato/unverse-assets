@@ -379,6 +379,7 @@ export const DDC_backgroundAudio = [
     "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/audio/calma.mp3",
     "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/audio/felicita.m4a",
     "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/audio/focus.m4a",
+    "https://github.com/NiccoloSegato/unverse-assets/raw/refs/heads/main/assets/audio/malinconia.m4a"
 ]
 export const DDC_dynamicAudios = [
     [
