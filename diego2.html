@@ -1,0 +1,653 @@
+<style>
+#main-app-container {
+    display: flex;
+    flex-direction: column; /* Organizza gli elementi in colonna */
+    align-items: center; /* Centra gli elementi figli orizzontalmente */
+    width: 100%; /* Occupa l'intera larghezza disponibile */
+    height: 100%; /* Occupa l'intera altezza disponibile */
+    padding-top: 100px; /* Alza tutto il contenuto della pagina */
+    box-sizing: border-box; /* Include il padding nel calcolo dell'altezza/larghezza */
+}
+#gallery-master {
+    /* Altezza ridotta per fare spazio al testo informativo */
+    height: 60vh; /* Esempio: 60% dell'altezza della viewport */
+    max-height: 850px; /* Altezza massima opzionale per schermi molto grandi */
+    width: 100%; /* Assicura che occupi l'intera larghezza per l'effetto di scorrimento orizzontale */
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start; /* Gli elementi sono allineati all'inizio */
+    flex-grow: 0;
+    /*overflow-x: hidden; Disabilita lo scroll orizzontale utente */
+    overflow-y: hidden;
+    scroll-behavior: smooth; /* Rende lo scroll animato */
+    -webkit-overflow-scrolling: touch; /* Migliora lo scroll su iOS */
+    scrollbar-width: none; /* Nasconde la scrollbar per Firefox */
+    -ms-overflow-style: none; /* Nasconde la scrollbar per IE/Edge */
+    
+    /* Padding per centrare il primo e l'ultimo elemento della galleria */
+    padding-left: calc(50vw - 20vw); /* 50vw (centro viewport) - 20vw (metà larghezza item 40vw) */
+    padding-right: calc(50vw - 20vw);
+    box-sizing: border-box; /* Assicura che il padding non aggiunga larghezza */
+}
+
+/* Nasconde la scrollbar per Webkit (Chrome, Safari) */
+#gallery-master::-webkit-scrollbar {
+    display: none;
+}
+
+/* Stili per i singoli elementi della galleria */
+.gallery-item-new {
+    height: 100%; /* Altezza piena rispetto al master */
+    width: 40vw; /* Larghezza fissa per un centraggio prevedibile */
+    flex-shrink: 0; /* Impedisce agli elementi di restringersi */
+    display: flex;
+    flex-direction: row; /* Contenuto all'interno del div */
+    justify-content: center; /* Centra orizzontalmente il contenuto (img/video) */
+    align-items: center; /* Centra verticalmente il contenuto (img/video) */
+    margin-right: 80px; /* Spazio tra gli elementi */
+    
+    /* Transizioni per animare scala e opacità */
+    transition: transform 0.5s ease-out, opacity 0.5s ease-out;
+    border-radius: 12px; /* Angoli arrotondati */
+    overflow: hidden; /* Assicura che il contenuto arrotondato non sporga */
+}
+
+/* Rimuove il margine dall'ultimo elemento per un layout pulito */
+.gallery-item-new:last-child {
+    margin-right: 0;
+}
+
+/* Stili per l'immagine o il video all'interno di .gallery-item-new */
+.gallery-item-new > * {
+    max-width: 100%; /* Si adatta alla larghezza del contenitore */
+    height: 100%; /* Si adatta all'altezza del contenitore */
+    object-fit: contain; /* L'immagine/video viene ridimensionato per stare nel contenitore */
+    object-position: center; /* Centra l'immagine/video all'interno del suo spazio */
+    border-radius: 12px; /* Angoli arrotondati anche per il contenuto */
+}
+
+/* Stili per il contenitore del testo informativo sotto la galleria */
+#gallery-info-container {
+    width: 100%;
+    margin-top: 30px; /* Spazio tra galleria e testo */
+    text-align: center;
+    padding: 0 20px; /* Aggiunge un po' di padding orizzontale */
+    box-sizing: border-box;
+}
+
+/* Stili per il testo informativo dinamico */
+#gallery-info-text {
+    font-size: 1.8rem; /* Dimensione del font più grande */
+    color: #333;
+    font-weight: bold;
+    transition: opacity 0.3s ease-in-out; /* Transizione fluida per i cambi di testo */
+    opacity: 0; /* Inizialmente nascosto, apparirà con una transizione */
+    min-height: 2.2em; /* Riserva spazio per prevenire salti di layout (CLS) quando il testo cambia */
+    display: flex; /* Usa flexbox per centrare verticalmente il testo nel caso di una sola riga */
+    justify-content: center; /* Centra orizzontalmente */
+    align-items: center; /* Centra verticalmente */
+}
+
+/* 👇 MODIFICHE SOLO PER MOBILE 👇 */
+@media screen and (max-width: 768px) {
+  #gallery-master {
+    padding-left: calc(50vw - 40vw);
+    padding-right: calc(50vw - 40vw + 40px); /* Aggiungi il margine mancante dell'ultimo elemento */
+    height: auto; /* Lascia adattarsi */
+    max-height: 100dvh; /* Vista dinamica su mobile */
+  }
+
+  .gallery-item-new {
+    width: 70vw;
+    height: auto; /* Adattabile */
+    max-height: calc(100dvh - 100px); /* Limita l'altezza per evitare tagli */
+    margin-right: 40px;
+  }
+
+  .gallery-item-new:last-child {
+    margin-right: 0; /* Non toccato */
+  }
+
+  .gallery-item-new > * {
+    width: 100%;
+    height: auto;
+    max-height: 100%;
+    object-fit: contain;
+  }
+  
+  
+  
+  #gallery-info-container {
+    margin-top: 20px;
+    padding: 0 10px;
+  }
+
+  #gallery-info-text {
+    font-size: 1.2rem; /* Riduce il titolo */
+    min-height: 1.6em; /* Più compatto */
+  }
+
+  #gallery-info-subtext {
+    font-size: 0.95rem;
+    opacity: 0.85;
+  }
+
+  #gallery-terra-text,
+  #gallery-luna-text,
+  #gallery-tide-text {
+    font-size: 0.85rem;
+    opacity: 0.8;
+  }
+
+  #footer-time-label {
+    font-size: 0.75rem;
+  }
+}
+</style>
+
+<script type="module">
+import { 
+	DDC_dynamicClicked,
+  DDC_dynamicTags,
+  DDC_objectsDidasH1,
+  DDC_getCurrentTimesliceDetails,
+  DDC_objectsDidasP,
+  DDC_objectsLocations,
+  DDC_objectsMoodValues,
+  DDC_globalBackgrounds,
+  DDC_dynamicTagsClicked,
+  DDC_updateTime,
+  DDC_backgroundAudio
+} from 'https://niccolosegato.github.io/unverse-assets/scripts/export.js';
+
+let DDC_galleryMaster = null;
+let galleryItems = [];
+let currentIndex = 0;
+let isScrolling = false;
+let scrollTimeout;
+let galleryInfoTextElement = null;
+let galleryInfoSubtextElement = null;
+let galleryTerraElement = null;
+let galleryLunaElement = null;
+let galleryTideElement = null;
+let DDC_GLOBAL_AUDIO;
+let DDC_OBJECT_AUDIO;
+let isPlaying = false;
+
+/**
+ * Funzione per verificare se l'utente è su un dispositivo mobile.
+ * (Funzione originale dell'utente, mantenuta)
+ * @returns {boolean} - True se è un dispositivo mobile, false altrimenti.
+ */
+function isMobile() {
+    const hasTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+    const hasHover = window.matchMedia('(hover: hover)').matches;
+    const isMobileUA = /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    return hasTouch && !hasHover || isMobileUA;
+}
+
+function isSafari() {
+  	return /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+}
+
+/**
+ * Funzione per renderizzare gli elementi della galleria all'interno del master element.
+ * @param {number} DDC_galleryMood - L'indice del "mood" per determinare quale set di video visualizzare.
+ */
+function DDC_renderGallery(DDC_galleryMood = 1) {
+    // Pulisce il contenuto precedente e resetta l'array degli elementi della galleria
+    DDC_galleryMaster.innerHTML = '';
+    galleryItems = [];
+
+    // Rimuove il messaggio di caricamento se presente
+    const loadingMessage = DDC_galleryMaster.querySelector('.loading-message');
+    if (loadingMessage) {
+        loadingMessage.remove();
+    }
+
+    // Itera sui dati per creare e appendere gli elementi della galleria
+    for (let i = 0; i < DDC_dynamicClicked[DDC_galleryMood].length; i++) {
+        const galleryItem = document.createElement("div");
+        galleryItem.className = "gallery-item-new";
+        galleryItem.id = `gallery-item-${i}`; // Assegna un ID per facile riferimento
+
+        let dynamicTag = DDC_dynamicTagsClicked[DDC_galleryMood][i];
+        let dynamicGenerated;
+
+        // Crea l'elemento immagine o video in base al tag
+        if (dynamicTag === "img") {
+            dynamicGenerated = document.createElement(dynamicTag);
+            dynamicGenerated.src = DDC_dynamicClicked[DDC_galleryMood][i];
+            // Gli stili sono gestiti dal CSS
+        } else if (dynamicTag === "video"){
+            dynamicGenerated = document.createElement("video");
+            let videoContent = document.createElement("source");
+            if(!isSafari()) {
+      				videoContent.src = DDC_dynamicClicked[DDC_galleryMood][i];
+     				}
+      			else {
+	     				videoContent.src = DDC_dynamicClicked[DDC_galleryMood][i].replace(/\.webm$/, ".mp4");
+      			}
+            videoContent.type = "video/mp4";
+            dynamicGenerated.appendChild(videoContent);
+            dynamicGenerated.loop = true; // Riproduzione in loop
+            dynamicGenerated.autoplay = true; // Autoplay (spesso richiede 'muted')
+            dynamicGenerated.muted = true; // Muto per consentire l'autoplay
+            dynamicGenerated.controls = (dynamicTag === "video"); // Mostra controlli solo per tag "video"
+            // Gli stili sono gestiti dal CSS
+        }
+        else if (dynamicTag === "videoaudio") {
+        	  dynamicGenerated = document.createElement("img");
+            dynamicGenerated.src = DDC_dynamicClicked[DDC_galleryMood][i];
+        }
+
+        // Appende l'elemento generato (img/video) all'elemento della galleria (.gallery-item-new)
+        if (dynamicGenerated) {
+            galleryItem.appendChild(dynamicGenerated);
+        }
+        // Appende l'elemento della galleria (.gallery-item-new) al master della galleria
+        DDC_galleryMaster.appendChild(galleryItem);
+        // Aggiunge l'elemento all'array per riferimento futuro
+        galleryItems.push(galleryItem);
+    }
+}
+
+/**
+ * Aggiorna gli stili visivi (scala e opacità) degli elementi della galleria
+ * in base alla loro distanza dal centro della viewport.
+ */
+function updateItemVisuals() {
+    const galleryWidth = DDC_galleryMaster.offsetWidth; // Larghezza visibile del container
+    const galleryCenter = DDC_galleryMaster.scrollLeft + galleryWidth / 2;
+
+    // Definisce la soglia minima di altezza per applicare la scala
+    const minViewportHeightForZoom = 500;
+    const canScale = window.innerHeight > minViewportHeightForZoom;
+    const maxScaleReduction = canScale ? 0.25 : 0; // da 1 a 0.75 normalmente, nessuna scala su schermi piccoli
+
+    galleryItems.forEach(item => {
+        const itemCenter = item.offsetLeft + item.offsetWidth / 2;
+        const distance = Math.abs(itemCenter - galleryCenter);
+        const maxDistanceEffect = galleryWidth * 0.5;
+
+        let scale = 1;
+        let opacity = 1;
+
+        if (distance < maxDistanceEffect) {
+            const normalizedDistance = distance / maxDistanceEffect;
+            scale = 1 - (normalizedDistance * maxScaleReduction); // Scala da 1 a 0.75 o nessuna scala
+            opacity = 1 - (normalizedDistance * 0.5);              // Opacità da 1 a 0.5 sempre
+        } else {
+            scale = 1 - maxScaleReduction; // 0.75 o 1
+            opacity = 0.5;
+        }
+
+        item.style.transform = `scale(${scale})`;
+        item.style.opacity = `${opacity}`;
+    });
+}
+
+/**
+ * Aggiorna il testo informativo sotto la galleria.
+ */
+function updateInfoText() {
+		let DDC_galleryMood = DDC_getCurrentTimesliceDetails().DDC_activeMood;
+    const params = new URLSearchParams(window.location.search);
+    if (params.has('m')) {
+        const mValue = params.get('m');
+        DDC_galleryMood = mValue;
+    }
+    DDC_galleryMood = DDC_galleryMood - 1;
+    if (galleryInfoTextElement && DDC_objectsDidasH1[DDC_galleryMood] && DDC_objectsDidasH1[DDC_galleryMood][currentIndex]) {
+        galleryInfoTextElement.style.opacity = '0'; // Dissolvenza in uscita
+        setTimeout(() => {
+            galleryInfoTextElement.textContent = DDC_objectsDidasH1[DDC_galleryMood][currentIndex];
+            galleryInfoSubtextElement.textContent = DDC_objectsDidasP[DDC_galleryMood][currentIndex] + " - " + DDC_objectsLocations[DDC_galleryMood][currentIndex];
+            galleryTerraElement.textContent = DDC_objectsMoodValues[DDC_galleryMood][currentIndex][0];
+            galleryLunaElement.textContent = DDC_objectsMoodValues[DDC_galleryMood][currentIndex][1];
+            galleryTideElement.textContent = DDC_objectsMoodValues[DDC_galleryMood][currentIndex][2];
+            galleryInfoTextElement.style.opacity = '1';
+            galleryInfoSubtextElement.style.opacity = '1';
+        }, 150); // Piccolo ritardo per l'effetto di dissolvenza
+    } else if (galleryInfoTextElement) {
+        galleryInfoTextElement.textContent = '';
+        galleryInfoSubtextElement.textContext = '';
+    }
+    
+    if(DDC_galleryMood == 0 || DDC_galleryMood == 3) {
+    	// Solitudine e focus
+      galleryTerraElement.style.color = "white";
+	    galleryLunaElement.style.color = "white";
+      galleryTideElement.style.color = "white";
+    	galleryInfoTextElement.style.color = "white";
+      galleryInfoSubtextElement.style.color = "white";
+      document.getElementById("footer-time-label").style.color = "white";
+      document.getElementsByClassName("gallery-terra-img")[0].src = "https://cdn.prod.website-files.com/681b30be07d7850c444db636/6851dcf2131dc4a09e96c126_terra_bianca.svg";
+      document.getElementById("gallery-luna-img").src = "https://cdn.prod.website-files.com/681b30be07d7850c444db636/6851dcf2a1f6816dc0958fd3_luna_bianca.svg";
+      document.getElementById("gallery-tide-img").src = "https://cdn.prod.website-files.com/681b30be07d7850c444db636/6851dcf224d7de0f36518300_marea_bianca.svg";
+    }
+}
+
+/**
+ * Scorre la galleria per centrare l'elemento all'indice specificato.
+ * @param {number} index - L'indice dell'elemento da centrare.
+ */
+function scrollToIndex(index) {
+    // Controlla che l'indice sia valido
+    if (index < 0 || index >= galleryItems.length) {
+        return;
+    }
+
+    currentIndex = index; // Aggiorna l'indice corrente
+    const targetItem = galleryItems[currentIndex]; // L'elemento target
+
+    // Calcola la posizione di scroll necessaria per centrare l'elemento target
+    const galleryMasterCenter = DDC_galleryMaster.offsetWidth / 2;
+    const itemCenterOffset = targetItem.offsetLeft + targetItem.offsetWidth / 2;
+    
+    let targetScrollPosition = itemCenterOffset - galleryMasterCenter;
+
+    // Limita la posizione di scroll per non andare oltre i limiti
+    targetScrollPosition = Math.max(0, targetScrollPosition); // Non scorre oltre l'inizio
+    targetScrollPosition = Math.min(DDC_galleryMaster.scrollWidth - DDC_galleryMaster.offsetWidth, targetScrollPosition); // Non scorre oltre la fine
+
+    DDC_galleryMaster.scrollLeft = targetScrollPosition;
+    
+    // Aggiorna il testo informativo
+    updateInfoText(); 
+}
+
+/**
+ * Gestisce l'evento di scroll della rotellina del mouse.
+ * @param {WheelEvent} event - L'oggetto evento della rotellina.
+ */
+function handleWheel(event) {
+    event.preventDefault(); // Impedisce lo scroll verticale predefinito della pagina
+
+    // Se stiamo già scorrendo, ignora l'evento
+    if (isScrolling) {
+        return;
+    }
+
+    isScrolling = true; // Imposta il flag di scrolling
+    clearTimeout(scrollTimeout); // Pulisce eventuali timeout precedenti
+
+    // Determina la direzione dello scroll (1 = giù/successivo, -1 = su/precedente)
+    const direction = event.deltaY > 0 ? 1 : -1;
+    let nextIndex = currentIndex + direction;
+
+    // Se il nuovo indice è valido, scorre all'elemento successivo/precedente
+    if (nextIndex >= 0 && nextIndex < galleryItems.length) {
+        scrollToIndex(nextIndex);
+    }
+
+    // Imposta un timeout per resettare il flag di scrolling dopo che l'animazione è terminata
+    scrollTimeout = setTimeout(() => {
+        isScrolling = false;
+        // Chiama updateItemVisuals una volta che lo scroll è completato
+        updateItemVisuals(); 
+    }, 1200); 
+}
+
+/**
+ * Funzione chiamata quando il DOM è completamente caricato.
+ * Inizializza la galleria e configura i listener.
+ */
+document.addEventListener("DOMContentLoaded", function() {
+		// Cambio colore di sfondo in base al mood
+    let currentMoodBG = DDC_getCurrentTimesliceDetails().DDC_activeMood;
+    const params = new URLSearchParams(window.location.search);
+    if (params.has('m')) {
+        const mValue = params.get('m');
+        currentMoodBG = mValue;
+    }
+    let bodyElement = document.getElementsByTagName("body")[0];
+    if (DDC_globalBackgrounds[currentMoodBG - 1].includes("gradient")) {
+      bodyElement.style.backgroundImage = DDC_globalBackgrounds[currentMoodBG - 1];
+      bodyElement.style.backgroundSize = "cover";
+      bodyElement.style.backgroundRepeat = "no-repeat";
+      bodyElement.style.backgroundColor = ""; // reset
+    } else {
+      bodyElement.style.background = DDC_globalBackgrounds[currentMoodBG - 1];
+      bodyElement.style.backgroundImage = ""; // reset
+    }
+    //document.getElementsByTagName("body")[0].style.background = DDC_globalBackgrounds[currentMoodBG - 1];
+    DDC_galleryMaster = document.getElementById("gallery-master");
+    galleryInfoTextElement = document.getElementById("gallery-info-text");
+    galleryInfoSubtextElement = document.getElementById("gallery-info-subtext");
+    galleryTerraElement = document.getElementById("gallery-terra-text");
+		galleryLunaElement = document.getElementById("gallery-luna-text");
+		galleryTideElement = document.getElementById("gallery-tide-text");
+
+    if (!DDC_galleryMaster) {
+        console.error("Elemento master della galleria non trovato.");
+        return;
+    }
+    if (!galleryInfoTextElement) {
+        console.error("Elemento per il testo informativo della galleria non trovato.");
+        // Non bloccare l'esecuzione della galleria se il testo informativo manca
+    }
+    
+    /***** BACKGROUND AUDIO *****/
+    DDC_GLOBAL_AUDIO = new Audio(DDC_backgroundAudio[currentMoodBG - 1]);
+    DDC_GLOBAL_AUDIO.loop = true;
+    DDC_GLOBAL_AUDIO.volume = 0; // Inizia da volume 0
+    DDC_GLOBAL_AUDIO.muted = false;
+
+    const btn = document.querySelector('#sound');
+    isPlaying = true;
+    DDC_GLOBAL_AUDIO.play();
+
+    // Fade in di 8 secondi - inizia quando parte l'audio
+    let currentVolume = 0;
+    const targetVolume = 0.50;
+    const fadeTime = 8000; // 8 secondi
+    const steps = 100;
+    const volumeStep = targetVolume / steps;
+    const timeStep = fadeTime / steps;
+
+    const fadeInterval = setInterval(() => {
+      currentVolume += volumeStep;
+      if (currentVolume >= targetVolume) {
+        currentVolume = targetVolume;
+        clearInterval(fadeInterval);
+      }
+      DDC_GLOBAL_AUDIO.volume = currentVolume;
+    }, timeStep);
+    
+    btn.addEventListener('click', function() {
+      if (isPlaying) {
+        DDC_GLOBAL_AUDIO.muted = true;
+        isPlaying = false;
+      } else {
+        DDC_GLOBAL_AUDIO.muted = false;
+        isPlaying = true;
+      }
+    });
+    /***** FINE AUDIO *****/
+
+    // Renderizza la galleria con i contenuti
+    DDC_renderGallery(currentMoodBG - 1);
+
+    // Imposta l'elemento iniziale attivo e lo centra
+    if (galleryItems.length > 0) {
+        scrollToIndex(0); // Centra il primo elemento all'inizio
+    } else {
+        // Se non ci sono elementi, pulisce il messaggio di caricamento e il testo informativo
+        const loadingMessage = DDC_galleryMaster.querySelector('.loading-message');
+        if (loadingMessage) {
+            loadingMessage.textContent = 'Nessun contenuto disponibile.';
+        }
+        if (galleryInfoTextElement) {
+            galleryInfoTextElement.textContent = '';
+        }
+    }
+
+    // Aggiunge il listener per l'evento 'wheel' (scroll rotellina) sull'intera finestra
+    //window.addEventListener('wheel', handleWheel, { passive: false });
+
+    // Aggiunge il listener per l'evento 'scroll' sul master della galleria
+    // Questo listener serve per aggiornare gli stili visivi durante lo scroll
+    //DDC_galleryMaster.addEventListener('scroll', () => {
+        // Usa requestAnimationFrame per aggiornamenti visivi più fluidi durante lo scroll
+        //requestAnimationFrame(updateItemVisuals);
+    //});
+    
+    // Variabili per il controllo dello scroll guidato
+    let scrollAssistTimeout;
+    let isUserScrolling = false;
+    let lastScrollTime = 0;
+    let scrollVelocity = 0;
+    let lastScrollPosition = 0;
+    let isAutoScrolling = false;
+    let scrollDirection = 0;
+    let velocityHistory = [];
+    let lastDetectedIndex = 0;
+
+    DDC_galleryMaster.addEventListener('scroll', () => {
+      // Evita conflitti durante l'auto-scroll
+      if (isAutoScrolling) {
+        return;
+      }
+      
+      const currentTime = Date.now();
+      const currentScrollPosition = DDC_galleryMaster.scrollLeft;
+      
+      // Calcola la velocità di scroll
+      const timeDelta = currentTime - lastScrollTime;
+      const positionDelta = currentScrollPosition - lastScrollPosition;
+      
+      if (timeDelta > 0) {
+        scrollVelocity = Math.abs(positionDelta / timeDelta);
+        scrollDirection = positionDelta > 0 ? 1 : -1;
+        
+        // Mantiene uno storico delle velocità per rilevare la decelerazione
+        velocityHistory.push(scrollVelocity);
+        if (velocityHistory.length > 5) {
+          velocityHistory.shift();
+        }
+      }
+      
+      lastScrollTime = currentTime;
+      lastScrollPosition = currentScrollPosition;
+      
+      // Indica che l'utente sta scrollando
+      isUserScrolling = true;
+      
+      const galleryCenter = DDC_galleryMaster.scrollLeft + DDC_galleryMaster.offsetWidth / 2;
+
+      let closestIndex = 0;
+      let closestDistance = Infinity;
+
+      galleryItems.forEach((item, index) => {
+        const itemCenter = item.offsetLeft + item.offsetWidth / 2;
+        const distance = Math.abs(itemCenter - galleryCenter);
+        if (distance < closestDistance) {
+          closestDistance = distance;
+          closestIndex = index;
+        }
+      });
+
+      if (closestIndex !== currentIndex) {
+        currentIndex = closestIndex;
+        updateInfoText();
+      }
+
+      updateItemVisuals();
+
+      // Rileva la decelerazione per scroll lunghi
+      const isDecelerating = velocityHistory.length >= 3 && 
+                           velocityHistory[velocityHistory.length - 1] < velocityHistory[velocityHistory.length - 2] &&
+                           velocityHistory[velocityHistory.length - 2] < velocityHistory[velocityHistory.length - 3];
+      
+      // Intervento più aggressivo per scroll lunghi
+      const isLongScroll = scrollVelocity > 10.5;
+      const shouldInterceptScroll = isLongScroll && isDecelerating && scrollVelocity < 0.8;
+      
+      if (shouldInterceptScroll) {
+        // Ferma immediatamente lo scroll dell'utente e centra l'elemento
+        isAutoScrolling = true;
+        const target = galleryItems[currentIndex];
+        const scrollTarget = target.offsetLeft - (DDC_galleryMaster.offsetWidth - target.offsetWidth) / 2;
+        
+        DDC_galleryMaster.scrollTo({
+          left: scrollTarget,
+          behavior: 'smooth'
+        });
+        
+        // Resetta le variabili
+        velocityHistory = [];
+        isUserScrolling = false;
+        
+        // Permette nuovamente lo scroll dopo l'animazione
+        setTimeout(() => {
+          isAutoScrolling = false;
+        }, 300);
+        
+        return;
+      }
+
+      // Scroll guidato normale per micro-aggiustamenti
+      clearTimeout(scrollAssistTimeout);
+      scrollAssistTimeout = setTimeout(() => {
+        isUserScrolling = false;
+        
+        // Solo se l'utente non sta più scrollando attivamente
+        if (!isUserScrolling && !isAutoScrolling) {
+          const target = galleryItems[currentIndex];
+          const currentCenter = DDC_galleryMaster.scrollLeft + DDC_galleryMaster.offsetWidth / 2;
+          const targetCenter = target.offsetLeft + target.offsetWidth / 2;
+          const distanceFromCenter = Math.abs(currentCenter - targetCenter);
+          
+          // Soglia di tolleranza per evitare micro-aggiustamenti
+          const tolerance = 1;
+          
+          if (distanceFromCenter > tolerance) {
+            isAutoScrolling = true;
+            const scrollTarget = target.offsetLeft - (DDC_galleryMaster.offsetWidth - target.offsetWidth) / 2;
+
+            DDC_galleryMaster.scrollTo({
+              left: scrollTarget,
+              behavior: 'smooth'
+            });
+            
+            setTimeout(() => {
+              isAutoScrolling = false;
+            }, 300);
+          }
+        }
+      }, scrollVelocity > 0.5 ? 80 : 300);
+    });
+
+    // Aggiunge il listener per l'evento 'resize' della finestra
+    // Per ri-centrare l'elemento corrente e ri-applicare gli stili in caso di ridimensionamento
+    window.addEventListener('resize', () => {
+        if (galleryItems.length > 0) {
+            scrollToIndex(currentIndex); // Ri-centra l'elemento corrente
+            updateItemVisuals(); // Ri-applica gli effetti visivi
+            updateInfoText(); // Aggiorna anche il testo informativo
+        }
+    });
+
+    // Aggiorna gli stili visivi e il testo una volta all'inizio per impostare lo stato iniziale
+    updateItemVisuals();
+    updateInfoText(); // Assicura che il testo sia impostato al caricamento
+    DDC_updateTime();
+    setInterval(DDC_updateTime, 1000);
+});
+
+/***** RITORNO ALLA PAGINA DOPO IL CLICK DELLA FRECCIA INDIETRO *****/
+  window.addEventListener("pageshow", (event) => {
+    if (event.persisted) {
+      DDC_GLOBAL_AUDIO.play();
+      DDC_GLOBAL_AUDIO.muted = false;
+      isPlaying = true;
+    	document.getElementById("sound").classList.remove("stoppedSound");
+      document.getElementById("sound").style.pointerEvents = "auto";
+    }
+  });
+</script>
+
+
+
+
