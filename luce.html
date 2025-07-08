@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animazione Luce Calda Dinamica</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden; /* Nasconde le barre di scorrimento */
+            background: radial-gradient(ellipse 120% 80% at 10% 20%, #ff9db4 0%, #ffb5a3 15%, #ffc999 30%, transparent 65%), radial-gradient(ellipse 100% 70% at 90% 80%, #87ceeb 0%, #a3d5d9 20%, #b8e0d2 35%, transparent 70%), radial-gradient(ellipse 150% 100% at 50% 50%, #f0c4a6 0%, #f5d5b8 25%, #f8e4d0 45%, #faf0e6 65%, #f5f5dc 85%, #ebebeb 100%), linear-gradient(25deg, #ff91a4 0%, #ffb399 12%, #f0c49a 25%, #e8d4b8 37%, #d9e0c7 50%, #c8e3d4 62%, #9fd4d8 75%, #8cc8d8 87%, #87ceeb 100%), radial-gradient(circle at 25% 35%, rgba(255, 145, 164, 0.4) 0%, transparent 40%), radial-gradient(circle at 75% 65%, rgba(135, 206, 235, 0.3) 0%, transparent 35%), radial-gradient(circle at 60% 80%, rgba(240, 196, 166, 0.25) 0%, transparent 45%), linear-gradient(140deg, rgba(255, 145, 164, 0.15) 0%, rgba(255, 179, 153, 0.12) 20%, rgba(240, 196, 166, 0.08) 40%, rgba(217, 224, 199, 0.05) 60%, rgba(159, 212, 216, 0.08) 80%, rgba(135, 206, 235, 0.12) 100%);
+            font-family: sans-serif;
+        }
+
+        .light-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(ellipse 120% 80% at 10% 20%, #ff9db4 0%, #ffb5a3 15%, #ffc999 30%, transparent 65%), radial-gradient(ellipse 100% 70% at 90% 80%, #87ceeb 0%, #a3d5d9 20%, #b8e0d2 35%, transparent 70%), radial-gradient(ellipse 150% 100% at 50% 50%, #f0c4a6 0%, #f5d5b8 25%, #f8e4d0 45%, #faf0e6 65%, #f5f5dc 85%, #ebebeb 100%), linear-gradient(25deg, #ff91a4 0%, #ffb399 12%, #f0c49a 25%, #e8d4b8 37%, #d9e0c7 50%, #c8e3d4 62%, #9fd4d8 75%, #8cc8d8 87%, #87ceeb 100%), radial-gradient(circle at 25% 35%, rgba(255, 145, 164, 0.4) 0%, transparent 40%), radial-gradient(circle at 75% 65%, rgba(135, 206, 235, 0.3) 0%, transparent 35%), radial-gradient(circle at 60% 80%, rgba(240, 196, 166, 0.25) 0%, transparent 45%), linear-gradient(140deg, rgba(255, 145, 164, 0.15) 0%, rgba(255, 179, 153, 0.12) 20%, rgba(240, 196, 166, 0.08) 40%, rgba(217, 224, 199, 0.05) 60%, rgba(159, 212, 216, 0.08) 80%, rgba(135, 206, 235, 0.12) 100%);
+            z-index: 0; /* Assicurati che sia dietro gli altri elementi */
+        }
+
+        .light-container {
+            position: fixed; /* Posizionato rispetto alla viewport */
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            pointer-events: none; /* Permette di cliccare attraverso il contenitore */
+            z-index: 1;
+        }
+
+        .warm-light {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0;
+            filter: blur(20px); /* Aumentata la sfocatura per un effetto più morbido */
+            background: radial-gradient(circle at center,
+                rgba(255, 180, 0, 0.7) 0%,   /* Giallo-arancio brillante */
+                rgba(255, 140, 0, 0.5) 20%,  /* Arancione */
+                rgba(255, 80, 0, 0.3) 40%,   /* Rosso-arancio */
+                rgba(255, 0, 0, 0) 70%       /* Trasparente */
+            );
+            box-shadow: 0 0 80px rgba(255, 150, 0, 0.9); /* Bagliore esterno più pronunciato */
+        }
+
+        /* Dimensioni diverse per i vari elementi luminosi */
+        .warm-light-large {
+            width: 100vmax; /* Copre gran parte della viewport (max tra vw e vh) */
+            height: 100vmax;
+        }
+
+        .warm-light-medium {
+            width: 70vmax;
+            height: 70vmax;
+            background: radial-gradient(circle at center,
+                rgba(255, 200, 0, 0.6) 0%,
+                rgba(255, 160, 0, 0.4) 30%,
+                rgba(255, 0, 0, 0) 60%
+            );
+            filter: blur(15px);
+            box-shadow: 0 0 60px rgba(255, 180, 0, 0.7);
+        }
+
+        .warm-light-small {
+            width: 40vmax;
+            height: 40vmax;
+            background: radial-gradient(circle at center,
+                rgba(255, 220, 0, 0.5) 0%,
+                rgba(255, 190, 0, 0.3) 40%,
+                rgba(255, 0, 0, 0) 70%
+            );
+            filter: blur(10px);
+            box-shadow: 0 0 40px rgba(255, 200, 0, 0.6);
+        }
+
+        .warm-light-tiny {
+            width: 20vmax;
+            height: 20vmax;
+            background: radial-gradient(circle at center,
+                rgba(255, 250, 0, 0.4) 0%,
+                rgba(255, 220, 0, 0.2) 50%,
+                rgba(255, 0, 0, 0) 80%
+            );
+            filter: blur(5px);
+            box-shadow: 0 0 20px rgba(255, 220, 0, 0.5);
+        }
+    </style>
+</head>
+<body>
+    <div class="light-background"></div>
+    <div class="light-container">
+        <div class="warm-light warm-light-large"></div>
+        <div class="warm-light warm-light-medium"></div>
+        <div class="warm-light warm-light-small"></div>
+        <div class="warm-light warm-light-tiny"></div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const lightElements = [
+                { element: document.querySelector('.warm-light-large'), delay: 0 },
+                { element: document.querySelector('.warm-light-medium'), delay: 500 },
+                { element: document.querySelector('.warm-light-small'), delay: 1000 },
+                { element: document.querySelector('.warm-light-tiny'), delay: 1500 }
+            ];
+
+            const maxOffsetX = 30; // Max movimento orizzontale in % della viewport
+            const maxOffsetY = 30; // Max movimento verticale in % della viewport
+
+            lightElements.forEach(({ element, delay }, index) => {
+                // Applica transizioni per animazioni fluide
+                element.style.transition = 'opacity 2.5s ease-in-out, transform 4s ease-in-out, filter 2s ease-in-out';
+
+                function animateLight() {
+                    // Genera posizioni casuali entro un certo intervallo
+                    const offsetX = (Math.random() * 2 - 1) * maxOffsetX; // Da -maxOffsetX a +maxOffsetX
+                    const offsetY = (Math.random() * 2 - 1) * maxOffsetY; // Da -maxOffsetY a +maxOffsetY
+
+                    // Opacità e scala casuali per un effetto pulsante dinamico
+                    const targetOpacity = 0.3 + Math.random() * 0.7; // Da 0.3 a 1.0
+                    const targetScale = 0.8 + Math.random() * 0.4;   // Da 0.8 a 1.2
+
+                    // Applica stili con un piccolo ritardo per rendere l'animazione più graduale
+                    setTimeout(() => {
+                        element.style.opacity = targetOpacity;
+                        element.style.transform = `translate(-50%, -50%) scale(${targetScale}) translateX(${offsetX}%) translateY(${offsetY}%)`;
+                        element.style.filter = `blur(${20 + Math.random() * 20}px)`; // Blur variabile
+                    }, delay + Math.random() * 500); // Ritardo iniziale + ritardo casuale
+
+                    // Imposta il prossimo ciclo di animazione
+                    const duration = 4000 + Math.random() * 2000; // Durata casuale tra 4s e 6s
+                    setTimeout(animateLight, duration);
+                }
+
+                // Avvia l'animazione con un ritardo iniziale per sfalsare gli elementi
+                setTimeout(animateLight, delay);
+            });
+        });
+    </script>
+</body>
+</html>
