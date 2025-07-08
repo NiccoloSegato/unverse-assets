@@ -66,6 +66,19 @@
     border-radius: 12px; /* Angoli arrotondati anche per il contenuto */
 }
 
+@media screen and (max-width: 768px) {
+  .gallery-item-new > * {
+    width: 100% !important;
+    height: 100% !important;
+    max-width: none !important;
+    max-height: none !important;
+    object-fit: contain !important;
+  }
+  .gallery-item-new {
+    overflow: visible !important;
+  }
+}
+
 /* Stili per il contenitore del testo informativo sotto la galleria */
 #gallery-info-container {
     width: 100%;
@@ -91,8 +104,8 @@
 /* 👇 MODIFICHE SOLO PER MOBILE 👇 */
 @media screen and (max-width: 768px) {
   #gallery-master {
-    padding-left: calc(50vw - 30vw);
-    padding-right: calc(50vw - 30vw + 40px); /* Aggiungi il margine mancante dell'ultimo elemento */
+    padding-left: calc(50vw - 40vw);
+    padding-right: calc(50vw - 40vw + 40px); /* Aggiungi il margine mancante dell'ultimo elemento */
     height: auto; /* Lascia adattarsi */
     max-height: 100dvh; /* Vista dinamica su mobile */
   }
@@ -147,7 +160,7 @@
 
 <script type="module">
 import { 
-	DDC_dynamicClicked,
+  DDC_dynamicClicked,
   DDC_dynamicTags,
   DDC_objectsDidasH1,
   DDC_getCurrentTimesliceDetails,
@@ -187,7 +200,7 @@ function isMobile() {
 }
 
 function isSafari() {
-  	return /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+    return /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
 }
 
 /**
@@ -207,6 +220,7 @@ function DDC_renderGallery(DDC_galleryMood = 1) {
 
     // Itera sui dati per creare e appendere gli elementi della galleria
     for (let i = 0; i < DDC_dynamicClicked[DDC_galleryMood].length; i++) {
+        let itemAdded = false;
         const galleryItem = document.createElement("div");
         galleryItem.className = "gallery-item-new";
         galleryItem.id = `gallery-item-${i}`; // Assegna un ID per facile riferimento
@@ -223,11 +237,11 @@ function DDC_renderGallery(DDC_galleryMood = 1) {
             dynamicGenerated = document.createElement("video");
             let videoContent = document.createElement("source");
             if(!isSafari()) {
-      				videoContent.src = DDC_dynamicClicked[DDC_galleryMood][i];
-     				}
-      			else {
-	     				videoContent.src = DDC_dynamicClicked[DDC_galleryMood][i].replace(/\.webm$/, ".mp4");
-      			}
+              videoContent.src = DDC_dynamicClicked[DDC_galleryMood][i];
+            }
+            else {
+              videoContent.src = DDC_dynamicClicked[DDC_galleryMood][i].replace(/\.webm$/, ".mp4");
+            }
             videoContent.type = "video/mp4";
             dynamicGenerated.appendChild(videoContent);
             dynamicGenerated.loop = true; // Riproduzione in loop
@@ -237,18 +251,23 @@ function DDC_renderGallery(DDC_galleryMood = 1) {
             // Gli stili sono gestiti dal CSS
         }
         else if (dynamicTag === "videoaudio") {
-        	  dynamicGenerated = document.createElement("img");
+            dynamicGenerated = document.createElement("img");
             dynamicGenerated.src = DDC_dynamicClicked[DDC_galleryMood][i];
         }
 
         // Appende l'elemento generato (img/video) all'elemento della galleria (.gallery-item-new)
         if (dynamicGenerated) {
             galleryItem.appendChild(dynamicGenerated);
+            itemAdded = true;
         }
-        // Appende l'elemento della galleria (.gallery-item-new) al master della galleria
-        DDC_galleryMaster.appendChild(galleryItem);
-        // Aggiunge l'elemento all'array per riferimento futuro
-        galleryItems.push(galleryItem);
+        
+        if(itemAdded) {
+          // Appende l'elemento della galleria (.gallery-item-new) al master della galleria
+          DDC_galleryMaster.appendChild(galleryItem);
+          // Aggiunge l'elemento all'array per riferimento futuro
+          galleryItems.push(galleryItem);
+        }
+        itemAdded = false;
     }
 }
 
@@ -262,8 +281,8 @@ function updateItemVisuals() {
 
     // Definisce la soglia minima di altezza per applicare la scala
     const minViewportHeightForZoom = 500;
-    const canScale = window.innerHeight > minViewportHeightForZoom;
-    const maxScaleReduction = canScale ? 0.25 : 0; // da 1 a 0.75 normalmente, nessuna scala su schermi piccoli
+    const canScale = window.innerHeight > minViewportHeightForZoom && window.innerWidth > 768;
+    const maxScaleReduction = canScale ? 0.25 : 0; // Nessuna scala su mobile
 
     galleryItems.forEach(item => {
         const itemCenter = item.offsetLeft + item.offsetWidth / 2;
@@ -291,7 +310,7 @@ function updateItemVisuals() {
  * Aggiorna il testo informativo sotto la galleria.
  */
 function updateInfoText() {
-		let DDC_galleryMood = DDC_getCurrentTimesliceDetails().DDC_activeMood;
+    let DDC_galleryMood = DDC_getCurrentTimesliceDetails().DDC_activeMood;
     const params = new URLSearchParams(window.location.search);
     if (params.has('m')) {
         const mValue = params.get('m');
@@ -315,11 +334,11 @@ function updateInfoText() {
     }
     
     if(DDC_galleryMood == 0 || DDC_galleryMood == 3) {
-    	// Solitudine e focus
+      // Solitudine e focus
       galleryTerraElement.style.color = "white";
-	    galleryLunaElement.style.color = "white";
+      galleryLunaElement.style.color = "white";
       galleryTideElement.style.color = "white";
-    	galleryInfoTextElement.style.color = "white";
+      galleryInfoTextElement.style.color = "white";
       galleryInfoSubtextElement.style.color = "white";
       document.getElementById("footer-time-label").style.color = "white";
       document.getElementsByClassName("gallery-terra-img")[0].src = "https://cdn.prod.website-files.com/681b30be07d7850c444db636/6851dcf2131dc4a09e96c126_terra_bianca.svg";
@@ -394,7 +413,7 @@ function handleWheel(event) {
  * Inizializza la galleria e configura i listener.
  */
 document.addEventListener("DOMContentLoaded", function() {
-		// Cambio colore di sfondo in base al mood
+    // Cambio colore di sfondo in base al mood
     let currentMoodBG = DDC_getCurrentTimesliceDetails().DDC_activeMood;
     const params = new URLSearchParams(window.location.search);
     if (params.has('m')) {
@@ -416,8 +435,8 @@ document.addEventListener("DOMContentLoaded", function() {
     galleryInfoTextElement = document.getElementById("gallery-info-text");
     galleryInfoSubtextElement = document.getElementById("gallery-info-subtext");
     galleryTerraElement = document.getElementById("gallery-terra-text");
-		galleryLunaElement = document.getElementById("gallery-luna-text");
-		galleryTideElement = document.getElementById("gallery-tide-text");
+    galleryLunaElement = document.getElementById("gallery-luna-text");
+    galleryTideElement = document.getElementById("gallery-tide-text");
 
     if (!DDC_galleryMaster) {
         console.error("Elemento master della galleria non trovato.");
@@ -642,7 +661,7 @@ document.addEventListener("DOMContentLoaded", function() {
       DDC_GLOBAL_AUDIO.play();
       DDC_GLOBAL_AUDIO.muted = false;
       isPlaying = true;
-    	document.getElementById("sound").classList.remove("stoppedSound");
+      document.getElementById("sound").classList.remove("stoppedSound");
       document.getElementById("sound").style.pointerEvents = "auto";
     }
   });
