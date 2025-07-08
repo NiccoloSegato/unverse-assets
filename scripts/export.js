@@ -69,7 +69,7 @@ export const DDC_dictionary = [
         "È come se <i>l'ambiente esterno</i> e il mio stato d'animo fossero in sintonia.",
         "Quando sono calmo, mi immagino di essere proprio <i>lì nel presente</i>, senza farmi distrarre dai pensieri che vanno avanti e indietro.",
         "È l'altalena  a trasmettermi questa sensazione, perché <i>è semplicemente lì presente</i> ed è fatta per godersi quell'istante e quel piccolo pezzo di mondo con <strong>spensieratezza</strong>.",
-        "Se la felicità è un'energia pazzesca, la calma è meno intensa. Ad esempio, l’acqua che bolle è un casino, finché non abbassi il gas. La calma è un po' così: <i>un grande mare piatto, intatto<i>.",
+        "Se la felicità è un'energia pazzesca, questa sensazione è meno intensa. Ad esempio, l’acqua che bolle è un casino, finché non abbassi il gas. La vedo un po' così: <i>come un grande mare piatto, intatto<i>.",
         "Mi viene in mente <strong>un giardino super ordinato</strong>, tipo quelli zen. Se c'è vita, come dei fiori o degli animali, rimane comunque una presenza silenziosa, che non rompe l'armonia.",
         "Una cosa interessante è che <i>non te ne accorgi mentre la stai vivendo</i>. In quel momento, <strong>sei totalmente immerso in ciò che stai facendo</strong>, che non noti la tranquillità della situazione, anche se, inconsciamente, la percepisci.",
         "Quando sono concentrato a leggere , avverto una profonda <strong>pace</strong>, come se la lettura creasse una barriera contro il frastuono dei miei pensieri.",
@@ -95,8 +95,8 @@ export const DDC_dictionary = [
         "Ciò che hai sfiorato svanirà, ma resta come eco silenziosa. </br>Nulla permane, tutto scorre"
     ],
     [
-        "Mi immagino un focus mode dove sei così preso dalla situazione che non ti accorgi di come ti senti veramente. Non è per forza connesso alla calma, ma è uno stato interessante, perché  anche questo è parte della realtà,",
-        "non è sempre tutto positivo o negativo, no?",
+        "Mi immagino un focus mode dove sei così preso dalla situazione che non ti accorgi di come ti senti veramente. Non è per forza connesso alla calma, ma è uno stato interessante, perché  anche questo è parte della realtà.",
+        "Non è sempre tutto positivo o negativo, no?",
         "Quando sono davanti a un bell’impianto, con un DJ che mette la techno fatta bene e magari sono anche fatto, sento che è come se mi mettesse su una specie di binario.",
         "Può essere davvero tante cose, come una serata o anche quando mi capita di essere mega impegnato, mi sento solo e dico: “aiuto”.",
         "È come se fosse una sorta di concentrazione particolare... ma c’è lo stesso tanta energia, anche se magari non sai dove sia di preciso.",
