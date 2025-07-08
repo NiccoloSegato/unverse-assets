@@ -354,14 +354,14 @@ export const DDC_dynamicAnimations = [
 ];
 export const DDC_dynamicMobileAnimations = [
     [
-        "https://raw.githubusercontent.com/NiccoloSegato/unverse-assets/refs/heads/main/assets/titanium/sfondo",
+        "https://raw.githubusercontent.com/NiccoloSegato/unverse-assets/refs/heads/main/assets/mobile/animazioni/universo/universo",
         "",
         "https://raw.githubusercontent.com/NiccoloSegato/unverse-assets/refs/heads/main/assets/mobile/animazioni/titanium/titanium"
     ],
     [
         "https://raw.githubusercontent.com/NiccoloSegato/unverse-assets/refs/heads/main/assets/mobile/animazioni/nuvole/nuvole",
         "https://raw.githubusercontent.com/NiccoloSegato/unverse-assets/refs/heads/main/assets/mobile/animazioni/petali/petali",
-        "https://raw.githubusercontent.com/NiccoloSegato/unverse-assets/refs/heads/main/assets/fiori/fiori_"
+        "https://raw.githubusercontent.com/NiccoloSegato/unverse-assets/refs/heads/main/assets/mobile/animazioni/fiori/fiori"
     ],
     [
         "https://raw.githubusercontent.com/NiccoloSegato/unverse-assets/refs/heads/main/assets/mobile/animazioni/ribolle/ribolle",
@@ -369,7 +369,7 @@ export const DDC_dynamicMobileAnimations = [
         "https://raw.githubusercontent.com/NiccoloSegato/unverse-assets/refs/heads/main/assets/mobile/animazioni/pappagalli/pappagalli",
     ],
     [
-        "https://raw.githubusercontent.com/NiccoloSegato/unverse-assets/refs/heads/main/assets/tunnel/tunneltrasparente_",
+        "https://raw.githubusercontent.com/NiccoloSegato/unverse-assets/refs/heads/main/assets/mobile/animazioni/tunnel/tunnel",
         "",
         "https://raw.githubusercontent.com/NiccoloSegato/unverse-assets/refs/heads/main/assets/mobile/animazioni/sfera/sfera"
     ]
