@@ -133,7 +133,7 @@ export const DDC_titles = [
         ["FUORI ", "FUOCO"],
         ["ENERGIA ", "DIFFUSA"],
         ["ENERGIA ", "PURA"],
-        ["ECCITAMENTO ", "MECCANICO"]
+        ["UN FLUIRE ", "MECCANICO"]
     ]
 ];
 export const DDC_subtitles = [
