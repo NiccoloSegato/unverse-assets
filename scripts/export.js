@@ -416,7 +416,7 @@ export const DDC_dynamicAudios = [
 export const DDC_objectsDidasH1 = [
     [
         "Troppo Bello per Durare",
-        "Feel It",
+        "Raggae Lovers",
         "Umani che Respirano",
         "Just That",
         "DA ELIMINARE",
@@ -458,7 +458,7 @@ export const DDC_objectsDidasH1 = [
 export const DDC_objectsDidasP = [
     [
         "26.05.2025 - 18:14:38",
-        "21.04.2025 - 16:18:58",
+        "23.04.2025 - 21:41:39",
         "13.04.2025 - 03:30:53",
         "03.05.2025 - 17:17:02",
         "",
@@ -500,7 +500,7 @@ export const DDC_objectsDidasP = [
 export const DDC_objectsLocations = [
     [
         "Montego Bay, Giamaica",
-        "Milano, Italia",
+        "Port Antonio, Giamaica",
         "Milano, Italia",
         "Giamaica",
         "",
@@ -542,7 +542,7 @@ export const DDC_objectsLocations = [
 export const DDC_objectsMoodValues = [
     [
         ["270°", "Ultimo quarto", "Bassa marea"],
-        ["240°", "Gibbosa calante", "Alta marea"],
+        ["325°", "Gibbosa calante", "Bassa marea"],
         ["50°", "Gibbosa crescente", "Alta marea"],
         ["255°", "Luna nuova", "Alta marea"],
         [],
