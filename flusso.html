@@ -25,14 +25,12 @@
     mix-blend-mode: overlay;
   }
 </style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/simplex-noise/2.4.0/simplex-noise.min.js"></script>
 <div class="canvas-container">
   <canvas id="canvas"></canvas>
   <canvas id="noise-canvas"></canvas>
 </div>
 <script>
-document.getElementsByClassName("crt-container")[0].style.display = "none";
-		document.getElementById("canvas-epilessia").style.display = "none";
-    document.getElementById("sphere").style.display = "none";
     // Canvas setup
     const canvas = document.getElementById('canvas');
     const ctx = canvas.getContext('2d');
@@ -190,12 +188,7 @@ document.getElementsByClassName("crt-container")[0].style.display = "none";
 
       // Gradiente per le linee con palette azzurra
       let lineGrad;
-      let currentMoodLin = DDC_getCurrentTimesliceDetails().DDC_activeMood;
-      const params = new URLSearchParams(window.location.search);
-      if (params.has('m')) {
-        const mValue = params.get('m');
-        currentMoodLin = mValue;
-      }
+      let currentMoodLin = 1
       if(currentMoodLin == 1){
         // Calma, sfumature azzurre
         lineGrad = ctx.createLinearGradient(-width_half, -height_half, width_half, height_half);
