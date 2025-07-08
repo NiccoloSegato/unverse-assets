@@ -1,0 +1,1847 @@
+<style>
+#main-app-container {
+    display: flex;
+    flex-direction: column; /* Organizza gli elementi in colonna */
+    align-items: center; /* Centra gli elementi figli orizzontalmente */
+    width: 100%; /* Occupa l'intera larghezza disponibile */
+    height: 100%; /* Occupa l'intera altezza disponibile */
+    padding-top: 100px; /* Alza tutto il contenuto della pagina */
+    box-sizing: border-box; /* Include il padding nel calcolo dell'altezza/larghezza */
+}
+#gallery-master {
+    /* Altezza ridotta per fare spazio al testo informativo */
+    height: 60vh; /* Esempio: 60% dell'altezza della viewport */
+    max-height: 850px; /* Altezza massima opzionale per schermi molto grandi */
+    width: 100%; /* Assicura che occupi l'intera larghezza per l'effetto di scorrimento orizzontale */
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start; /* Gli elementi sono allineati all'inizio */
+    flex-grow: 0;
+    /*overflow-x: hidden; Disabilita lo scroll orizzontale utente */
+    overflow-y: hidden;
+    scroll-behavior: smooth; /* Rende lo scroll animato */
+    -webkit-overflow-scrolling: touch; /* Migliora lo scroll su iOS */
+    scrollbar-width: none; /* Nasconde la scrollbar per Firefox */
+    -ms-overflow-style: none; /* Nasconde la scrollbar per IE/Edge */
+    
+    /* Padding per centrare il primo e l'ultimo elemento della galleria */
+    padding-left: calc(50vw - 20vw); /* 50vw (centro viewport) - 20vw (metà larghezza item 40vw) */
+    padding-right: calc(50vw - 20vw);
+    box-sizing: border-box; /* Assicura che il padding non aggiunga larghezza */
+}
+
+/* Nasconde la scrollbar per Webkit (Chrome, Safari) */
+#gallery-master::-webkit-scrollbar {
+    display: none;
+}
+
+/* Stili per i singoli elementi della galleria */
+.gallery-item-new {
+    height: 100%; /* Altezza piena rispetto al master */
+    width: 40vw; /* Larghezza fissa per un centraggio prevedibile */
+    flex-shrink: 0; /* Impedisce agli elementi di restringersi */
+    display: flex;
+    flex-direction: row; /* Contenuto all'interno del div */
+    justify-content: center; /* Centra orizzontalmente il contenuto (img/video) */
+    align-items: center; /* Centra verticalmente il contenuto (img/video) */
+    margin-right: 80px; /* Spazio tra gli elementi */
+    
+    /* Transizioni per animare scala e opacità */
+    transition: transform 0.5s ease-out, opacity 0.5s ease-out;
+    border-radius: 12px; /* Angoli arrotondati */
+    overflow: hidden; /* Assicura che il contenuto arrotondato non sporga */
+}
+
+/* Rimuove il margine dall'ultimo elemento per un layout pulito */
+.gallery-item-new:last-child {
+    margin-right: 0;
+}
+
+/* Stili per l'immagine o il video all'interno di .gallery-item-new */
+.gallery-item-new > * {
+    max-width: 100%; /* Si adatta alla larghezza del contenitore */
+    height: 100%; /* Si adatta all'altezza del contenitore */
+    object-fit: contain; /* L'immagine/video viene ridimensionato per stare nel contenitore */
+    object-position: center; /* Centra l'immagine/video all'interno del suo spazio */
+    border-radius: 12px; /* Angoli arrotondati anche per il contenuto */
+}
+
+/* Stili per il contenitore del testo informativo sotto la galleria */
+#gallery-info-container {
+    width: 100%;
+    margin-top: 30px; /* Spazio tra galleria e testo */
+    text-align: center;
+    padding: 0 20px; /* Aggiunge un po' di padding orizzontale */
+    box-sizing: border-box;
+}
+
+/* Stili per il testo informativo dinamico */
+#gallery-info-text {
+    font-size: 1.8rem; /* Dimensione del font più grande */
+    color: #333;
+    font-weight: bold;
+    transition: opacity 0.3s ease-in-out; /* Transizione fluida per i cambi di testo */
+    opacity: 0; /* Inizialmente nascosto, apparirà con una transizione */
+    min-height: 2.2em; /* Riserva spazio per prevenire salti di layout (CLS) quando il testo cambia */
+    display: flex; /* Usa flexbox per centrare verticalmente il testo nel caso di una sola riga */
+    justify-content: center; /* Centra orizzontalmente */
+    align-items: center; /* Centra verticalmente */
+}
+
+/* 👇 MODIFICHE SOLO PER MOBILE 👇 */
+@media screen and (max-width: 768px) {
+#gallery-master {
+    padding-left: calc(50vw - 30vw); /* 30vw = metà di 60vw */
+    padding-right: calc(50vw - 30vw + 40px); /* Aggiungi il margine mancante dell'ultimo elemento */
+    height: auto; /* Lascia adattarsi */
+    max-height: 100dvh; /* Vista dinamica su mobile */
+  }
+
+  .gallery-item-new {
+    width: 60vw;
+    height: auto; /* Adattabile */
+    max-height: calc(100dvh - 100px); /* Limita l'altezza per evitare tagli */
+    margin-right: 40px;
+  }
+
+  .gallery-item-new:last-child {
+    margin-right: 0; /* Non toccato */
+  }
+
+  .gallery-item-new > * {
+    width: 100%;
+    height: auto;
+    max-height: 100%;
+    object-fit: contain;
+  }
+  
+  
+  
+  #gallery-info-container {
+    margin-top: 20px;
+    padding: 0 10px;
+  }
+
+  #gallery-info-text {
+    font-size: 1.2rem; /* Riduce il titolo */
+    min-height: 1.6em; /* Più compatto */
+  }
+
+  #gallery-info-subtext {
+    font-size: 0.95rem;
+    opacity: 0.85;
+  }
+
+  #gallery-terra-text,
+  #gallery-luna-text,
+  #gallery-tide-text {
+    font-size: 0.85rem;
+    opacity: 0.8;
+  }
+}
+</style>
+
+<script type="module">
+import { 
+	DDC_dynamicClicked,
+  DDC_dynamicTags,
+  DDC_objectsDidasH1,
+  DDC_getCurrentTimesliceDetails,
+  DDC_objectsDidasP,
+  DDC_objectsLocations,
+  DDC_objectsMoodValues,
+  DDC_globalBackgrounds,
+  DDC_dynamicTagsClicked,
+  DDC_updateTime
+} from 'https://niccolosegato.github.io/unverse-assets/scripts/export.js';
+
+let DDC_galleryMaster = null;
+let galleryItems = [];
+let currentIndex = 0;
+let isScrolling = false;
+let scrollTimeout;
+let galleryInfoTextElement = null;
+let galleryInfoSubtextElement = null;
+let galleryTerraElement = null;
+let galleryLunaElement = null;
+let galleryTideElement = null;
+
+/**
+ * Funzione per verificare se l'utente è su un dispositivo mobile.
+ * (Funzione originale dell'utente, mantenuta)
+ * @returns {boolean} - True se è un dispositivo mobile, false altrimenti.
+ */
+function isMobile() {
+    const hasTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+    const hasHover = window.matchMedia('(hover: hover)').matches;
+    const isMobileUA = /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    return hasTouch && !hasHover || isMobileUA;
+}
+
+/**
+ * Funzione per renderizzare gli elementi della galleria all'interno del master element.
+ * @param {number} DDC_galleryMood - L'indice del "mood" per determinare quale set di video visualizzare.
+ */
+function DDC_renderGallery(DDC_galleryMood = 1) {
+    // Pulisce il contenuto precedente e resetta l'array degli elementi della galleria
+    DDC_galleryMaster.innerHTML = '';
+    galleryItems = [];
+
+    // Rimuove il messaggio di caricamento se presente
+    const loadingMessage = DDC_galleryMaster.querySelector('.loading-message');
+    if (loadingMessage) {
+        loadingMessage.remove();
+    }
+
+    // Itera sui dati per creare e appendere gli elementi della galleria
+    for (let i = 0; i < DDC_dynamicClicked[DDC_galleryMood].length; i++) {
+        const galleryItem = document.createElement("div");
+        galleryItem.className = "gallery-item-new";
+        galleryItem.id = `gallery-item-${i}`; // Assegna un ID per facile riferimento
+
+        let dynamicTag = DDC_dynamicTagsClicked[DDC_galleryMood][i];
+        let dynamicGenerated;
+
+        // Crea l'elemento immagine o video in base al tag
+        if (dynamicTag === "img") {
+            dynamicGenerated = document.createElement(dynamicTag);
+            dynamicGenerated.src = DDC_dynamicClicked[DDC_galleryMood][i];
+            // Gli stili sono gestiti dal CSS
+        } else if (dynamicTag === "video" || dynamicTag === "videoaudio") {
+            dynamicGenerated = document.createElement("video");
+            let videoContent = document.createElement("source");
+            videoContent.src = DDC_dynamicClicked[DDC_galleryMood][i];
+            videoContent.type = "video/mp4";
+            dynamicGenerated.appendChild(videoContent);
+            dynamicGenerated.loop = true; // Riproduzione in loop
+            dynamicGenerated.autoplay = true; // Autoplay (spesso richiede 'muted')
+            dynamicGenerated.muted = true; // Muto per consentire l'autoplay
+            dynamicGenerated.controls = (dynamicTag === "video"); // Mostra controlli solo per tag "video"
+            // Gli stili sono gestiti dal CSS
+        }
+
+        // Appende l'elemento generato (img/video) all'elemento della galleria (.gallery-item-new)
+        if (dynamicGenerated) {
+            galleryItem.appendChild(dynamicGenerated);
+        }
+        // Appende l'elemento della galleria (.gallery-item-new) al master della galleria
+        DDC_galleryMaster.appendChild(galleryItem);
+        // Aggiunge l'elemento all'array per riferimento futuro
+        galleryItems.push(galleryItem);
+    }
+}
+
+/**
+ * Aggiorna gli stili visivi (scala e opacità) degli elementi della galleria
+ * in base alla loro distanza dal centro della viewport.
+ */
+function updateItemVisuals() {
+    const galleryWidth = DDC_galleryMaster.offsetWidth;
+    const galleryCenter = DDC_galleryMaster.scrollLeft + galleryWidth / 2;
+
+    // Definisce la soglia minima di altezza per applicare la scala
+    const minViewportHeightForZoom = 500;
+    const canScale = window.innerHeight > minViewportHeightForZoom;
+    const maxScaleReduction = canScale ? 0.25 : 0;
+
+    galleryItems.forEach(item => {
+        const itemCenter = item.offsetLeft + item.offsetWidth / 2;
+        const distance = Math.abs(itemCenter - galleryCenter);
+        const maxDistanceEffect = galleryWidth * 0.5;
+
+        let scale = 1;
+        let opacity = 1;
+
+        if (distance < maxDistanceEffect) {
+            const normalizedDistance = distance / maxDistanceEffect;
+            scale = 1 - (normalizedDistance * maxScaleReduction);
+            opacity = 1 - (normalizedDistance * 0.5);
+        } else {
+            scale = 1 - maxScaleReduction;
+            opacity = 0.5;
+        }
+
+        // Applica le trasformazioni usando transform3d per hardware acceleration
+        item.style.transform = `scale3d(${scale}, ${scale}, 1)`;
+        item.style.opacity = `${opacity}`;
+    });
+}
+
+/**
+ * Aggiorna il testo informativo sotto la galleria.
+ */
+function updateInfoText() {
+		let DDC_galleryMood = DDC_getCurrentTimesliceDetails().DDC_activeMood;
+    const params = new URLSearchParams(window.location.search);
+    if (params.has('m')) {
+        const mValue = params.get('m');
+        DDC_galleryMood = mValue;
+    }
+    DDC_galleryMood = DDC_galleryMood - 1;
+    if (galleryInfoTextElement && DDC_objectsDidasH1[DDC_galleryMood] && DDC_objectsDidasH1[DDC_galleryMood][currentIndex]) {
+        galleryInfoTextElement.style.opacity = '0'; // Dissolvenza in uscita
+        setTimeout(() => {
+            galleryInfoTextElement.textContent = DDC_objectsDidasH1[DDC_galleryMood][currentIndex];
+            galleryInfoSubtextElement.textContent = DDC_objectsDidasP[DDC_galleryMood][currentIndex] + " - " + DDC_objectsLocations[DDC_galleryMood][currentIndex];
+            galleryTerraElement.textContent = DDC_objectsMoodValues[DDC_galleryMood][currentIndex][0];
+            galleryLunaElement.textContent = DDC_objectsMoodValues[DDC_galleryMood][currentIndex][1];
+            galleryTideElement.textContent = DDC_objectsMoodValues[DDC_galleryMood][currentIndex][2];
+            galleryInfoTextElement.style.opacity = '1';
+            galleryInfoSubtextElement.style.opacity = '1';
+        }, 150); // Piccolo ritardo per l'effetto di dissolvenza
+    } else if (galleryInfoTextElement) {
+        galleryInfoTextElement.textContent = '';
+        galleryInfoSubtextElement.textContext = '';
+    }
+    
+    if(DDC_galleryMood == 0 || DDC_galleryMood == 3) {
+    	// Solitudine e focus
+      galleryTerraElement.style.color = "white";
+	    galleryLunaElement.style.color = "white";
+      galleryTideElement.style.color = "white";
+    	galleryInfoTextElement.style.color = "white";
+      galleryInfoSubtextElement.style.color = "white";
+      document.getElementById("footer-time-label").style.color = "white";
+      document.getElementsByClassName("gallery-terra-img")[0].src = "https://cdn.prod.website-files.com/681b30be07d7850c444db636/6851dcf2131dc4a09e96c126_terra_bianca.svg";
+      document.getElementById("gallery-luna-img").src = "https://cdn.prod.website-files.com/681b30be07d7850c444db636/6851dcf2a1f6816dc0958fd3_luna_bianca.svg";
+      document.getElementById("gallery-tide-img").src = "https://cdn.prod.website-files.com/681b30be07d7850c444db636/6851dcf224d7de0f36518300_marea_bianca.svg";
+    }
+}
+
+/**
+ * Scorre la galleria per centrare l'elemento all'indice specificato.
+ * @param {number} index - L'indice dell'elemento da centrare.
+ */
+function scrollToIndex(index) {
+    if (index < 0 || index >= galleryItems.length) {
+        return;
+    }
+
+    currentIndex = index;
+    const targetItem = galleryItems[currentIndex];
+    const galleryMasterCenter = DDC_galleryMaster.offsetWidth / 2;
+    const itemCenterOffset = targetItem.offsetLeft + targetItem.offsetWidth / 2;
+    
+    let targetScrollPosition = itemCenterOffset - galleryMasterCenter;
+
+    // Calcolo della compensazione per il padding mobile
+    let paddingCorrection = 0;
+    if (isMobile()) {
+        const isFirst = index === 0;
+        const isLast = index === galleryItems.length - 1;
+        const viewportWidth = window.innerWidth;
+
+        if (isFirst) {
+            paddingCorrection = - (0.5 * viewportWidth - 0.3 * viewportWidth);
+        } else if (isLast) {
+            paddingCorrection = 40;
+        }
+    }
+
+    targetScrollPosition += paddingCorrection;
+    targetScrollPosition = Math.max(0, targetScrollPosition);
+    targetScrollPosition = Math.min(
+        DDC_galleryMaster.scrollWidth - DDC_galleryMaster.offsetWidth,
+        targetScrollPosition
+    );
+
+    // Su mobile, usa sempre uno scroll più fluido
+    if (isMobile()) {
+        DDC_galleryMaster.scrollTo({
+            left: targetScrollPosition,
+            behavior: 'smooth'
+        });
+    } else {
+        DDC_galleryMaster.scrollLeft = targetScrollPosition;
+    }
+    
+    updateInfoText();
+    
+    // Forza aggiornamento degli effetti visivi su mobile
+    if (isMobile()) {
+        requestAnimationFrame(() => {
+            updateItemVisuals();
+        });
+    }
+}
+/**
+ * Gestisce l'evento di scroll della rotellina del mouse.
+ * @param {WheelEvent} event - L'oggetto evento della rotellina.
+ */
+function handleWheel(event) {
+    event.preventDefault(); // Impedisce lo scroll verticale predefinito della pagina
+
+    // Se stiamo già scorrendo, ignora l'evento
+    if (isScrolling) {
+        return;
+    }
+
+    isScrolling = true; // Imposta il flag di scrolling
+    clearTimeout(scrollTimeout); // Pulisce eventuali timeout precedenti
+
+    // Determina la direzione dello scroll (1 = giù/successivo, -1 = su/precedente)
+    const direction = event.deltaY > 0 ? 1 : -1;
+    let nextIndex = currentIndex + direction;
+
+    // Se il nuovo indice è valido, scorre all'elemento successivo/precedente
+    if (nextIndex >= 0 && nextIndex < galleryItems.length) {
+        scrollToIndex(nextIndex);
+    }
+
+    // Imposta un timeout per resettare il flag di scrolling dopo che l'animazione è terminata
+    scrollTimeout = setTimeout(() => {
+        isScrolling = false;
+        // Chiama updateItemVisuals una volta che lo scroll è completato
+        updateItemVisuals(); 
+    }, 1200); 
+}
+
+/**
+ * Funzione chiamata quando il DOM è completamente caricato.
+ * Inizializza la galleria e configura i listener.
+ */
+document.addEventListener("DOMContentLoaded", function() {
+		// Cambio colore di sfondo in base al mood
+    let currentMoodBG = DDC_getCurrentTimesliceDetails().DDC_activeMood;
+    const params = new URLSearchParams(window.location.search);
+    if (params.has('m')) {
+        const mValue = params.get('m');
+        currentMoodBG = mValue;
+    }
+    let bodyElement = document.getElementsByTagName("body")[0];
+    if (DDC_globalBackgrounds[currentMoodBG - 1].includes("gradient")) {
+      bodyElement.style.backgroundImage = DDC_globalBackgrounds[currentMoodBG - 1];
+      bodyElement.style.backgroundSize = "cover";
+      bodyElement.style.backgroundRepeat = "no-repeat";
+      bodyElement.style.backgroundColor = ""; // reset
+    } else {
+      bodyElement.style.background = DDC_globalBackgrounds[currentMoodBG - 1];
+      bodyElement.style.backgroundImage = ""; // reset
+    }
+    //document.getElementsByTagName("body")[0].style.background = DDC_globalBackgrounds[currentMoodBG - 1];
+    DDC_galleryMaster = document.getElementById("gallery-master");
+    galleryInfoTextElement = document.getElementById("gallery-info-text");
+    galleryInfoSubtextElement = document.getElementById("gallery-info-subtext");
+    galleryTerraElement = document.getElementById("gallery-terra-text");
+		galleryLunaElement = document.getElementById("gallery-luna-text");
+		galleryTideElement = document.getElementById("gallery-tide-text");
+
+    if (!DDC_galleryMaster) {
+        console.error("Elemento master della galleria non trovato.");
+        return;
+    }
+    if (!galleryInfoTextElement) {
+        console.error("Elemento per il testo informativo della galleria non trovato.");
+        // Non bloccare l'esecuzione della galleria se il testo informativo manca
+    }
+
+    // Renderizza la galleria con i contenuti
+    DDC_renderGallery(currentMoodBG - 1);
+
+    // Imposta l'elemento iniziale attivo e lo centra
+    if (galleryItems.length > 0) {
+        scrollToIndex(0); // Centra il primo elemento all'inizio
+    } else {
+        // Se non ci sono elementi, pulisce il messaggio di caricamento e il testo informativo
+        const loadingMessage = DDC_galleryMaster.querySelector('.loading-message');
+        if (loadingMessage) {
+            loadingMessage.textContent = 'Nessun contenuto disponibile.';
+        }
+        if (galleryInfoTextElement) {
+            galleryInfoTextElement.textContent = '';
+        }
+    }
+
+    // Aggiunge il listener per l'evento 'wheel' (scroll rotellina) sull'intera finestra
+    //window.addEventListener('wheel', handleWheel, { passive: false });
+
+    // Aggiunge il listener per l'evento 'scroll' sul master della galleria
+    // Questo listener serve per aggiornare gli stili visivi durante lo scroll
+    //DDC_galleryMaster.addEventListener('scroll', () => {
+        // Usa requestAnimationFrame per aggiornamenti visivi più fluidi durante lo scroll
+        //requestAnimationFrame(updateItemVisuals);
+    //});
+    
+    // Variabili per il controllo dello scroll guidato
+    let scrollAssistTimeout;
+    let isUserScrolling = false;
+    let lastScrollTime = 0;
+    let scrollVelocity = 0;
+    let lastScrollPosition = 0;
+    let isAutoScrolling = false;
+    let scrollDirection = 0;
+    let velocityHistory = [];
+    let lastDetectedIndex = 0;
+
+    // Variabili per il controllo touch mobile
+    let touchStartX = 0;
+    let touchStartY = 0;
+    let touchEndX = 0;
+    let touchEndY = 0;
+    let isTouchScrolling = false;
+    let touchScrollTimeout;
+    let initialScrollLeft = 0;
+
+    DDC_galleryMaster.addEventListener('scroll', () => {
+      // Evita conflitti durante l'auto-scroll
+      if (isAutoScrolling) {
+        return;
+      }
+      
+      const currentTime = Date.now();
+      const currentScrollPosition = DDC_galleryMaster.scrollLeft;
+      
+      // Calcola la velocità di scroll
+      const timeDelta = currentTime - lastScrollTime;
+      const positionDelta = currentScrollPosition - lastScrollPosition;
+      
+      if (timeDelta > 0) {
+        scrollVelocity = Math.abs(positionDelta / timeDelta);
+        scrollDirection = positionDelta > 0 ? 1 : -1;
+        
+        // Mantiene uno storico delle velocità per rilevare la decelerazione
+        velocityHistory.push(scrollVelocity);
+        if (velocityHistory.length > 5) {
+          velocityHistory.shift();
+        }
+      }
+      
+      lastScrollTime = currentTime;
+      lastScrollPosition = currentScrollPosition;
+      
+      // Indica che l'utente sta scrollando
+      isUserScrolling = true;
+      
+      const galleryCenter = DDC_galleryMaster.scrollLeft + DDC_galleryMaster.offsetWidth / 2;
+
+      let closestIndex = 0;
+      let closestDistance = Infinity;
+
+      galleryItems.forEach((item, index) => {
+        const itemCenter = item.offsetLeft + item.offsetWidth / 2;
+        const distance = Math.abs(itemCenter - galleryCenter);
+        if (distance < closestDistance) {
+          closestDistance = distance;
+          closestIndex = index;
+        }
+      });
+
+      if (closestIndex !== currentIndex) {
+        currentIndex = closestIndex;
+        updateInfoText();
+      }
+
+      updateItemVisuals();
+
+      // Rileva la decelerazione per scroll lunghi
+      const isDecelerating = velocityHistory.length >= 3 && 
+                           velocityHistory[velocityHistory.length - 1] < velocityHistory[velocityHistory.length - 2] &&
+                           velocityHistory[velocityHistory.length - 2] < velocityHistory[velocityHistory.length - 3];
+      
+      // Intervento più aggressivo per scroll lunghi
+      const isLongScroll = scrollVelocity > 10.5;
+      const shouldInterceptScroll = isLongScroll && isDecelerating && scrollVelocity < 0.8;
+      
+      if (shouldInterceptScroll) {
+        // Ferma immediatamente lo scroll dell'utente e centra l'elemento
+        isAutoScrolling = true;
+        const target = galleryItems[currentIndex];
+        const scrollTarget = target.offsetLeft - (DDC_galleryMaster.offsetWidth - target.offsetWidth) / 2;
+        
+        DDC_galleryMaster.scrollTo({
+          left: scrollTarget,
+          behavior: 'smooth'
+        });
+        
+        // Resetta le variabili
+        velocityHistory = [];
+        isUserScrolling = false;
+        
+        // Permette nuovamente lo scroll dopo l'animazione
+        setTimeout(() => {
+          isAutoScrolling = false;
+        }, 300);
+        
+        return;
+      }
+
+      // Scroll guidato normale per micro-aggiustamenti
+      clearTimeout(scrollAssistTimeout);
+      scrollAssistTimeout = setTimeout(() => {
+        isUserScrolling = false;
+        
+        // Solo se l'utente non sta più scrollando attivamente
+        if (!isUserScrolling && !isAutoScrolling) {
+          const target = galleryItems[currentIndex];
+          const currentCenter = DDC_galleryMaster.scrollLeft + DDC_galleryMaster.offsetWidth / 2;
+          const targetCenter = target.offsetLeft + target.offsetWidth / 2;
+          const distanceFromCenter = Math.abs(currentCenter - targetCenter);
+          
+          // Soglia di tolleranza per evitare micro-aggiustamenti
+          const tolerance = 1;
+          
+          if (distanceFromCenter > tolerance) {
+  isAutoScrolling = true;
+  const scrollTarget = target.offsetLeft - (DDC_galleryMaster.offsetWidth - target.offsetWidth) / 2;
+
+  DDC_galleryMaster.scrollTo({
+    left: scrollTarget,
+    behavior: 'smooth'
+  });
+
+  setTimeout(() => {
+    isAutoScrolling = false;
+
+    // 🔁 Forza aggiornamento dopo auto-scroll
+    requestAnimationFrame(() => {
+      updateItemVisuals();
+      updateInfoText();
+    });
+  }, 300);
+}
+        }
+      }, scrollVelocity > 0.5 ? 80 : 300);
+    });
+
+
+
+// Gestione touch per mobile (scroll rigido)
+// Gestione touch per mobile (scroll rigido) - VERSIONE OTTIMIZZATA
+    if (isMobile()) {
+      // Disabilita il comportamento di scroll predefinito su mobile
+      DDC_galleryMaster.style.overflowX = 'hidden';
+      
+      // Variabili per una gestione più fluida
+      let touchStartTime = 0;
+      let lastTouchX = 0;
+      let touchVelocity = 0;
+      let animationFrame = null;
+      let isAnimating = false;
+      
+      DDC_galleryMaster.addEventListener('touchstart', (e) => {
+        if (isAutoScrolling) return;
+        
+        touchStartX = e.touches[0].clientX;
+        touchStartY = e.touches[0].clientY;
+        lastTouchX = touchStartX;
+        touchStartTime = Date.now();
+        initialScrollLeft = DDC_galleryMaster.scrollLeft;
+        isTouchScrolling = true;
+        touchVelocity = 0;
+        
+        // Cancella animazioni in corso
+        if (animationFrame) {
+          cancelAnimationFrame(animationFrame);
+          animationFrame = null;
+        }
+        
+        // Ferma qualsiasi scroll in corso
+        clearTimeout(touchScrollTimeout);
+        
+        // Impedisce il bounce scroll di iOS
+        e.preventDefault();
+      }, { passive: false });
+      
+      DDC_galleryMaster.addEventListener('touchmove', (e) => {
+        if (!isTouchScrolling || isAutoScrolling) return;
+        
+        e.preventDefault(); // Previene il scroll nativo
+        
+        const currentTouchX = e.touches[0].clientX;
+        const currentTouchY = e.touches[0].clientY;
+        
+        // Calcola la distanza dello swipe
+        const deltaX = touchStartX - currentTouchX;
+        const deltaY = touchStartY - currentTouchY;
+        
+        // Verifica che sia un movimento orizzontale
+        if (Math.abs(deltaX) > Math.abs(deltaY)) {
+          // Calcola velocità più accurata
+          const currentTime = Date.now();
+          const timeDelta = currentTime - touchStartTime;
+          const movementDelta = currentTouchX - lastTouchX;
+          
+          if (timeDelta > 0) {
+            touchVelocity = movementDelta / timeDelta;
+          }
+          
+          // Applica uno scroll più fluido con easing
+          const scrollAmount = deltaX * 1.2; // Aumenta leggermente la sensibilità
+          const targetScrollLeft = initialScrollLeft + scrollAmount;
+          
+          // Limita lo scroll per evitare overflow
+          const maxScroll = DDC_galleryMaster.scrollWidth - DDC_galleryMaster.offsetWidth;
+          const clampedScroll = Math.max(0, Math.min(maxScroll, targetScrollLeft));
+          
+          // Usa requestAnimationFrame per scroll più fluido
+          if (!isAnimating) {
+            isAnimating = true;
+            animationFrame = requestAnimationFrame(() => {
+              DDC_galleryMaster.scrollLeft = clampedScroll;
+              updateItemVisuals();
+              isAnimating = false;
+            });
+          }
+          
+          lastTouchX = currentTouchX;
+        }
+      }, { passive: false });
+      
+      DDC_galleryMaster.addEventListener('touchend', (e) => {
+        if (!isTouchScrolling || isAutoScrolling) return;
+        
+        const deltaX = touchStartX - touchEndX;
+        const deltaY = touchStartY - touchEndY;
+        const touchDuration = Date.now() - touchStartTime;
+        
+        // Verifica che sia un movimento orizzontale significativo
+        if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > 1) {
+          let targetIndex = currentIndex;
+          
+          // Considera anche la velocità per determinare l'intenzione
+          const isQuickSwipe = touchDuration < 1 && Math.abs(touchVelocity) > 200;
+          const isLongSwipe = Math.abs(deltaX) > 5;
+          
+          if (deltaX > 0) {
+            // Swipe verso sinistra (prossimo elemento)
+            if (isQuickSwipe || isLongSwipe) {
+              targetIndex = Math.min(currentIndex + 1, galleryItems.length - 1);
+            }
+          } else {
+            // Swipe verso destra (elemento precedente)
+            if (isQuickSwipe || isLongSwipe) {
+              targetIndex = Math.max(currentIndex - 1, 0);
+            }
+          }
+          
+          // Limita il movimento a massimo 1 elemento per volta per maggiore controllo
+          const maxJump = 1;
+          if (Math.abs(targetIndex - currentIndex) > maxJump) {
+            targetIndex = currentIndex + (targetIndex > currentIndex ? maxJump : -maxJump);
+            targetIndex = Math.max(0, Math.min(galleryItems.length - 1, targetIndex));
+          }
+          
+          // Esegui lo scroll verso l'elemento target con animazione più fluida
+          isAutoScrolling = true;
+          
+          // Usa una transizione CSS temporanea per maggiore fluidità
+          DDC_galleryMaster.style.scrollBehavior = 'smooth';
+          
+          scrollToIndex(targetIndex);
+          
+        touchScrollTimeout = setTimeout(() => {
+        isAutoScrolling = false;
+        DDC_galleryMaster.style.scrollBehavior = 'auto';
+        requestAnimationFrame(() => updateItemVisuals());
+        }, 600); // più tempo = scroll più “morbido”
+        } else {
+          // Swipe non significativo, torna alla posizione originale con animazione fluida
+          DDC_galleryMaster.style.scrollBehavior = 'smooth';
+          scrollToIndex(currentIndex);
+          
+          // Forza aggiornamento degli effetti visivi
+          setTimeout(() => {
+            DDC_galleryMaster.style.scrollBehavior = 'auto';
+            requestAnimationFrame(() => {
+              updateItemVisuals();
+            });
+          }, 200);
+        }
+        
+        // Reset variabili
+        isTouchScrolling = false;
+        touchStartX = 0;
+        touchStartY = 0;
+        touchEndX = 0;
+        touchEndY = 0;
+        touchVelocity = 0;
+        isAnimating = false;
+        
+        if (animationFrame) {
+          cancelAnimationFrame(animationFrame);
+          animationFrame = null;
+        }
+      }, { passive: false });
+      
+      // Previene il comportamento di scroll elastico di iOS
+      DDC_galleryMaster.addEventListener('touchforcechange', (e) => {
+        e.preventDefault();
+      }, { passive: false });
+      
+    } else {
+      // Desktop: riabilita scroll normale
+      DDC_galleryMaster.style.overflowX = 'auto';
+    }
+
+
+    // Aggiunge il listener per l'evento 'resize' della finestra
+    // Per ri-centrare l'elemento corrente e ri-applicare gli stili in caso di ridimensionamento
+    window.addEventListener('resize', () => {
+        if (galleryItems.length > 0) {
+            scrollToIndex(currentIndex); // Ri-centra l'elemento corrente
+            updateItemVisuals(); // Ri-applica gli effetti visivi
+            updateInfoText(); // Aggiorna anche il testo informativo
+        }
+    });
+
+    // Aggiorna gli stili visivi e il testo una volta all'inizio per impostare lo stato iniziale
+    updateItemVisuals();
+    updateInfoText(); // Assicura che il testo sia impostato al caricamento
+    DDC_updateTime();
+    setInterval(DDC_updateTime, 1000);
+});
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<style>
+  @media (max-width: 767px) {
+    .content-box-4 {
+      position: -webkit-sticky;
+    }
+  }
+.dynaclass-img {
+	cursor: pointer;
+  position: relative;
+  z-index: 3;
+  max-width: 100%;
+  max-height: 80vh;
+  overflow: crop;
+  displaY: inline-block;
+  transition: transform 0.1s ease;
+  transform-style: preserve-3d;
+}
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.ripples/0.5.3/jquery.ripples.min.js"></script>
+<script  type="module">
+	import { 
+  	DDC_dynamicClicked,
+    DDC_introBackgrounds,
+    DDC_globalTextColors,
+    DDC_dictionaryLength,
+    DDC_dictionary,
+    DDC_dynamicTags,
+    DDC_objectsDidasH1,
+    DDC_objectsDidasP,
+    DDC_objectsLocations,
+    DDC_objectsMoodValues,
+    DDC_dynamicAudios,
+    DDC_globalBackgrounds,
+    DDC_dynamicAnimations,
+    DDC_getCurrentTimesliceDetails,
+    DDC_getLiteralMoonValue,
+    DDC_getLiteralTideValue,
+    DDC_getLiteralEarthValue,
+    DDC_updateTime,
+    DDC_dynamicContents,
+    DDC_dynamicTagsClicked,
+    DDC_backgroundAudio,
+    DDC_titles,
+    DDC_subtitles
+  } from 'https://niccolosegato.github.io/unverse-assets/scripts/export.js';
+  
+  let DDC_GLOBAL_AUDIO;
+  let DDC_OBJECT_AUDIO;
+  let isPlaying = false;
+
+	// Controlla se il browser è Safari
+	function isSafari() {
+  	return /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+	}
+  /**
+   * Funzione per visualizzare il mood
+   */
+  function DDC_run() {
+      let DDC_moodValue = DDC_getCurrentTimesliceDetails().DDC_activeMood;
+      const params = new URLSearchParams(window.location.search);
+      if (params.has('m')) {
+        const mValue = params.get('m');
+        DDC_moodValue = mValue;
+      }
+      
+      // Imposto il colore di sfondo dell'intro
+      document.getElementsByTagName('body')[0].style.background = DDC_introBackgrounds[DDC_moodValue - 1];
+      // Imposto il colore di sfondo del sito
+      document.getElementById('DDC_backgroundIntro').style.background = DDC_globalBackgrounds[DDC_moodValue - 1];
+      if(DDC_moodValue == 1 || DDC_moodValue == 4) {
+          document.getElementsByTagName('body')[0].style.color = "white !important";
+      	  const DDC_toIterate = document.getElementsByClassName('intro-color');
+          for(let DDC_i = 0; DDC_i < DDC_toIterate.length; DDC_i++) {
+              DDC_toIterate[DDC_i].style.color = 'white';
+          }
+          const DDC_toIterateDivs = document.getElementsByClassName('vertical-intro-color');
+          for(let DDC_i = 0; DDC_i < DDC_toIterateDivs.length; DDC_i++) {
+              DDC_toIterateDivs[DDC_i].style.backgroundColor = 'white';
+          }
+      }
+      
+      // Imposto i contenuti e i colori dei testi
+      for(let DDC_i = 0; DDC_i < DDC_dictionaryLength; DDC_i++){
+      	const DDC_currentElement = document.getElementById('DDC_textcontent_' + DDC_i);
+        DDC_currentElement.innerHTML = DDC_dictionary[DDC_moodValue - 1][DDC_i];
+        DDC_currentElement.style.color = DDC_globalTextColors[DDC_moodValue - 1];
+  		}
+  }
+  
+  function createDynaElement(elementContainer, targetMood = 1, targetObject) {
+  	// Svuoto il contenitore
+    elementContainer.innerHTML = "";
+  	const dynamicTag = DDC_dynamicTags[targetMood][targetObject];
+    let dynamicGenerated;
+    if(dynamicTag == "img") {
+	    dynamicGenerated = document.createElement(dynamicTag);
+    	dynamicGenerated.src = DDC_dynamicContents[targetMood][targetObject];
+      dynamicGenerated.style.width = "100%";
+      dynamicGenerated.style.height = "100%";
+      dynamicGenerated.style.objectFit = "contain";
+     	dynamicGenerated.classList.add("dynaclass-img");
+      dynamicGenerated.style.pointerEvents = "auto";
+      dynamicGenerated.addEventListener("click", function(){ showBlurOverlay(targetMood, targetObject) });//console.log("TEST") });
+      dynamicGenerated.addEventListener('mousemove', (e) => {
+        const rect = dynamicGenerated.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+
+        const rotateX = (y - centerY) / centerY * -15;
+        const rotateY = (x - centerX) / centerX * 15;
+            
+        dynamicGenerated.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
+      });
+      dynamicGenerated.addEventListener('mouseleave', () => {
+        dynamicGenerated.style.transform = 'rotateX(0deg) rotateY(0deg) scale(1)';
+      });
+  	  elementContainer.appendChild(dynamicGenerated);
+     }
+     else if(dynamicTag == "video") {
+	    dynamicGenerated = document.createElement(dynamicTag);
+     	let videoContent = document.createElement("source");
+      if(!isSafari()) {
+      	videoContent.src = DDC_dynamicContents[targetMood][targetObject];
+     	}
+      else {
+	      videoContent.src = DDC_dynamicContents[targetMood][targetObject];
+        videoContent.src = videoContent.src.replace(/\.webm$/, ".mp4");
+      }
+      videoContent.type = "video/mp4";
+      dynamicGenerated.style.width = "fit-content";
+      dynamicGenerated.style.maxWidth = "100%";
+      dynamicGenerated.style.height = "100%";
+      dynamicGenerated.loop = true;
+      dynamicGenerated.autoplay = true;
+      dynamicGenerated.controls = true;
+      dynamicGenerated.muted = true;
+      dynamicGenerated.style.objectFit = "contain";
+      dynamicGenerated.appendChild(videoContent);
+     	dynamicGenerated.classList.add("dynaclass-img");
+      dynamicGenerated.style.pointerEvents = "auto";
+      dynamicGenerated.addEventListener("click", function(){ showBlurOverlay(targetMood, targetObject) });//console.log("TEST") });
+  	  elementContainer.appendChild(dynamicGenerated);
+     }
+     else if(dynamicTag == "videoaudio") {
+	    dynamicGenerated = document.createElement("video");
+     	let videoContent = document.createElement("source");
+      if(!isSafari()) {
+      	videoContent.src = DDC_dynamicContents[targetMood][targetObject];
+     	}
+      else {
+	      videoContent.src = DDC_dynamicContents[targetMood][targetObject].replace(/\.webm$/, ".mp4");
+      }
+      videoContent.type = "video/mp4";
+      dynamicGenerated.style.width = "fit-content";
+      dynamicGenerated.style.maxWidth = "100%";
+      dynamicGenerated.style.height = "100%";
+      dynamicGenerated.loop = true;
+      dynamicGenerated.autoplay = true;
+      dynamicGenerated.controls = false;
+      dynamicGenerated.muted = true;
+      dynamicGenerated.style.objectFit = "contain";
+      dynamicGenerated.appendChild(videoContent);
+      // Create the object audio
+      DDC_GLOBAL_AUDIO.muted = true;
+      isPlaying = false;
+      DDC_OBJECT_AUDIO = new Audio(DDC_dynamicAudios[targetMood][targetObject]);
+      DDC_OBJECT_AUDIO.loop = true;
+      DDC_OBJECT_AUDIO.volume = 1;
+      DDC_OBJECT_AUDIO.muted = false;
+      DDC_OBJECT_AUDIO.play();
+    	document.getElementById("sound").classList.add("stoppedSound");
+      document.getElementById("sound").style.pointerEvents = "none";
+     	dynamicGenerated.classList.add("dynaclass-img");
+      dynamicGenerated.style.pointerEvents = "auto";
+      dynamicGenerated.addEventListener("click", function(){ showBlurOverlay(targetMood, targetObject) });//console.log("TEST") });
+  	  elementContainer.appendChild(dynamicGenerated);
+     }
+     else if(dynamicTag == "none") {
+     	// Non faccio nulla
+     }
+  }
+  
+  /**
+   * Function to set the content when an object is clicked
+   */
+  function showBlurOverlay(targetMood = 1, targetObject) {
+  	// Imposto la corretta dimensione del contenitore
+    document.getElementById("dinamic-element").style.height = "calc(100% - 200px)";
+  	// Svuoto prima il contenitore
+    const cont = document.getElementById('dinamic-element');
+    cont.innerHTML = "";
+  	const dynamicTag = DDC_dynamicTagsClicked[targetMood][targetObject];
+  	let dynamicGenerated;
+    if(dynamicTag == "img") {
+	    dynamicGenerated = document.createElement(dynamicTag);
+    	dynamicGenerated.src = DDC_dynamicClicked[targetMood][targetObject];
+      dynamicGenerated.style.width = "100%";
+      dynamicGenerated.style.height = "100%";
+      dynamicGenerated.style.objectFit = "contain";
+     }
+     else if(dynamicTag == "video") {
+	    dynamicGenerated = document.createElement(dynamicTag);
+     	let videoContent = document.createElement("source");
+      if(!isSafari()) {
+      	videoContent.src = DDC_dynamicContents[targetMood][targetObject];
+     	}
+      else {
+	      videoContent.src = DDC_dynamicContents[targetMood][targetObject].replace(/\.webm$/, ".mp4");
+      }
+      videoContent.type = "video/mp4";
+      dynamicGenerated.style.width = "fit-content";
+      dynamicGenerated.style.maxWidth = "100%";
+      dynamicGenerated.style.height = "100%";
+      dynamicGenerated.loop = true;
+      dynamicGenerated.autoplay = true;
+      dynamicGenerated.controls = true;
+      dynamicGenerated.muted = true;
+      dynamicGenerated.style.objectFit = "contain";
+      dynamicGenerated.appendChild(videoContent);
+     }
+     else if(dynamicTag == "videoaudio") {
+	    dynamicGenerated = document.createElement("img");
+    	dynamicGenerated.src = DDC_dynamicClicked[targetMood][targetObject];
+      dynamicGenerated.style.width = "100%";
+      dynamicGenerated.style.height = "100%";
+      dynamicGenerated.style.objectFit = "contain";
+      // Create the object audio
+      DDC_GLOBAL_AUDIO.muted = true;
+      isPlaying = false;
+      DDC_OBJECT_AUDIO = new Audio(DDC_dynamicAudios[targetMood][targetObject]);
+      DDC_OBJECT_AUDIO.loop = true;
+      DDC_OBJECT_AUDIO.volume = 1;
+      DDC_OBJECT_AUDIO.muted = false;
+      DDC_OBJECT_AUDIO.play();
+    	document.getElementById("sound").classList.add("stoppedSound");
+      document.getElementById("sound").style.pointerEvents = "none";
+     }
+     dynamicGenerated.addEventListener('mousemove', (e) => {
+        const rect = dynamicGenerated.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+
+        const rotateX = (y - centerY) / centerY * -15;
+        const rotateY = (x - centerX) / centerX * 15;
+            
+        dynamicGenerated.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
+      });
+      dynamicGenerated.addEventListener('mouseleave', () => {
+        dynamicGenerated.style.transform = 'rotateX(0deg) rotateY(0deg) scale(1)';
+      });
+  	cont.appendChild(dynamicGenerated);
+    document.getElementById("dinamic-content-heading").innerHTML = DDC_objectsDidasH1[targetMood][targetObject];
+    document.getElementById("dinamic-content-heading").style.color = DDC_globalTextColors[targetMood];
+    document.getElementById("dinamic-content-p").innerHTML = DDC_objectsDidasP[targetMood][targetObject];
+    document.getElementById("dinamic-content-p").style.color = DDC_globalTextColors[targetMood];
+    document.getElementById("dinamic-content-l").innerHTML = DDC_objectsLocations[targetMood][targetObject];
+    document.getElementById("dinamic-content-l").style.color = DDC_globalTextColors[targetMood];
+    document.getElementById("click-earth").innerHTML = DDC_objectsMoodValues[targetMood][targetObject][0];
+    document.getElementById("click-earth").style.color = DDC_globalTextColors[targetMood];
+    document.getElementById("click-moon").innerHTML = DDC_objectsMoodValues[targetMood][targetObject][1];
+    document.getElementById("click-moon").style.color = DDC_globalTextColors[targetMood];
+    document.getElementById("click-tide").innerHTML = DDC_objectsMoodValues[targetMood][targetObject][2];
+    document.getElementById("click-tide").style.color = DDC_globalTextColors[targetMood];
+    if(DDC_globalTextColors[targetMood] == "#FFFFFF") {
+    	document.getElementById("terra-blur-icon").src = "https://cdn.prod.website-files.com/681b30be07d7850c444db636/6851dcf2131dc4a09e96c126_terra_bianca.svg";
+      document.getElementById("luna-blur-icon").src = "https://cdn.prod.website-files.com/681b30be07d7850c444db636/6851dcf2a1f6816dc0958fd3_luna_bianca.svg";
+    	document.getElementById("marea-blur-icon").src = "https://cdn.prod.website-files.com/681b30be07d7850c444db636/6851dcf224d7de0f36518300_marea_bianca.svg";
+    }
+  }
+  
+  /**
+   * Function to hide the blur
+   */
+  function hideBlurOverlay() {
+  	if(DDC_OBJECT_AUDIO) {
+    	// Rimuovo il vecchio audio
+    	DDC_OBJECT_AUDIO.pause();
+      DDC_OBJECT_AUDIO.currentTime = 0;
+      DDC_OBJECT_AUDIO.src = '';
+      DDC_OBJECT_AUDIO.srcObject = null;
+      DDC_OBJECT_AUDIO.load();
+      DDC_OBJECT_AUDIO = null;
+      DDC_GLOBAL_AUDIO.muted = false;
+      isPlaying = true;
+    	document.getElementById("sound").classList.remove("stoppedSound");
+      document.getElementById("sound").style.pointerEvents = "auto";
+    }
+  }
+
+  /**
+   * Esegue lo script
+   */
+   $(document).ready(function() {
+  	DDC_run();
+    DDC_updateTime();
+    setInterval(DDC_updateTime, 1000);
+    
+    // Disabilito l'interazione con il main content
+    document.getElementById("main-content-scroller").style.display = "none";
+    
+    // Nascondo inizialmente il paragrafo intro
+    document.querySelector('.main-intro-paragraph').style.display = "none";
+    
+    let localInstanceCurrentMood = DDC_getCurrentTimesliceDetails().DDC_activeMood;
+    const params = new URLSearchParams(window.location.search);
+      if (params.has('m')) {
+        const mValue = params.get('m');
+        localInstanceCurrentMood = mValue;
+      }
+     
+     if(localInstanceCurrentMood == 1) {
+	     // Malinconia
+       document.getElementById("main-content-crazy").style.display = "none";
+       document.getElementById("main-content").style.display = "none";
+       document.getElementById("main-content-nitida").style.display = "none";
+     }
+   	 else if(localInstanceCurrentMood == 2) {
+     	// Calma
+       $("#main-content").ripples({
+         resolution: 336,
+         perturbance: 0.05
+       });
+      document.getElementById("main-content-crazy").style.display = "none";
+      document.getElementById("main-content-nitida").style.display = "none";
+      document.getElementById("main-content-hotsmoke").style.display = "none";
+     }
+     else if(localInstanceCurrentMood == 3) {
+     	// Felicita
+      document.getElementById("main-content-crazy").style.display = "none";
+      document.getElementById("main-content").style.display = "none";
+      document.getElementById("main-content-hotsmoke").style.display = "none";
+     }
+     else if(localInstanceCurrentMood == 4) {
+     	// Focus
+      document.getElementById("main-content").style.display = "none";
+      document.getElementById("main-content-hotsmoke").style.display = "none";
+      document.getElementById("main-content-nitida").style.display = "none";
+     }
+     
+     /***** CONTENT CLICK *****/
+     let blurredDiv = document.getElementById("blurred-bg-area");
+     blurredDiv.addEventListener("click", function(){ hideBlurOverlay(); });
+     /***** END CONTENT CLICK *****/
+     
+     /***** TITLES *****/
+     // Enable title animation
+     document.querySelector('.heading-gsap-1').classList.add('active');
+     // Cambio titoli in base al mood
+     document.getElementById("heading-gsap-1").innerText = DDC_titles[localInstanceCurrentMood - 1][0][0];
+     document.getElementById("heading-gsap-2").innerText = DDC_titles[localInstanceCurrentMood - 1][0][1];
+     document.getElementById("heading-gsap-3").innerText = DDC_titles[localInstanceCurrentMood - 1][1][0];
+     document.getElementById("heading-gsap-4").innerText = DDC_titles[localInstanceCurrentMood - 1][1][1];
+     document.getElementById("heading-gsap-5").innerText = DDC_titles[localInstanceCurrentMood - 1][2][0];
+     document.getElementById("heading-gsap-6").innerText = DDC_titles[localInstanceCurrentMood - 1][2][1];
+     document.getElementById("heading-gsap-7").innerText = DDC_titles[localInstanceCurrentMood - 1][3][0];
+     document.getElementById("heading-gsap-8").innerText = DDC_titles[localInstanceCurrentMood - 1][3][1];
+     // Change color to subtitles
+     const subs = document.getElementsByClassName("effect-black-glass-sub");
+     for(let i = 0; i < subs.length; i++) {
+     	subs[i].style.color = DDC_globalTextColors[localInstanceCurrentMood - 1];
+     }
+     document.getElementById("heading-sub-gsap-1").innerText = DDC_subtitles[localInstanceCurrentMood - 1][0];
+     document.getElementById("heading-sub-gsap-2").innerText = DDC_subtitles[localInstanceCurrentMood - 1][1];
+     document.getElementById("heading-sub-gsap-3").innerText = DDC_subtitles[localInstanceCurrentMood - 1][2];
+     document.getElementById("heading-sub-gsap-4").innerText = DDC_subtitles[localInstanceCurrentMood - 1][3];
+     /***** END TITLES *****/
+     
+     // Ritorno all'inizio dello scroll
+     setTimeout(function() {
+        $('html, body').scrollTop(0);
+     }, 300);
+     
+     /***** BACKGROUND AUDIO *****/
+     DDC_GLOBAL_AUDIO = new Audio(DDC_backgroundAudio[localInstanceCurrentMood - 1]);
+     DDC_GLOBAL_AUDIO.loop = true;
+     DDC_GLOBAL_AUDIO.volume = 0; // Inizia da volume 0
+     DDC_GLOBAL_AUDIO.muted = false;
+
+     const btn = document.querySelector('#sound');
+     isPlaying = true;
+
+     // Variabile per tracciare se l'audio è già stato cambiato
+     let audioChanged = false;
+
+     // Aggiungi il listener per il cambio audio se siamo nel mood 1
+     if (localInstanceCurrentMood == 1) {
+       window.addEventListener('scroll', function() {
+         // Calcola la percentuale di scroll
+         const scrollPercentage = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+         
+         // Se arriviamo al 60% e non abbiamo ancora cambiato l'audio
+         if (scrollPercentage >= 60 && !audioChanged) {
+           audioChanged = true;
+           
+           // Salva il volume corrente
+           const currentVolume = DDC_GLOBAL_AUDIO.volume;
+           
+           // Fade out dell'audio corrente
+           const fadeOutInterval = setInterval(() => {
+             if (DDC_GLOBAL_AUDIO.volume > 0.05) {
+               DDC_GLOBAL_AUDIO.volume -= 0.05;
+             } else {
+               DDC_GLOBAL_AUDIO.volume = 0;
+               clearInterval(fadeOutInterval);
+               
+               // Cambia la sorgente audio
+               DDC_GLOBAL_AUDIO.src = DDC_backgroundAudio[4];
+               DDC_GLOBAL_AUDIO.load();
+               
+               // Riavvia l'audio e fade in
+               DDC_GLOBAL_AUDIO.play().then(() => {
+                 const fadeInInterval = setInterval(() => {
+                   if (DDC_GLOBAL_AUDIO.volume < currentVolume - 0.05) {
+                     DDC_GLOBAL_AUDIO.volume += 0.05;
+                   } else {
+                     DDC_GLOBAL_AUDIO.volume = currentVolume;
+                     clearInterval(fadeInInterval);
+                   }
+                 }, 50);
+               });
+             }
+           }, 50);
+         }
+       });
+     }
+
+     document.getElementById("starter-button").addEventListener("click", function() {
+      		// Mostro immediatamente il paragrafo intro e inizializzo la sua animazione
+          document.querySelector('.main-intro-paragraph').style.display = "block";
+          initializeIntroGSAP();
+          
+          // Riattivo l'interazione di main content
+          setTimeout(function() {
+          	document.getElementById("main-content-scroller").style.display = "block";
+            // Inizializzo il resto di GSAP dopo che il contenuto è visibile
+            setTimeout(() => {
+                initializeMainGSAP();
+            }, 50);
+          }, 8000);
+          DDC_GLOBAL_AUDIO.play();
+
+          // Fade in di 8 secondi - inizia quando parte l'audio
+          let currentVolume = 0;
+          const targetVolume = 0.50;
+          const fadeTime = 8000; // 8 secondi
+          const steps = 100;
+          const volumeStep = targetVolume / steps;
+          const timeStep = fadeTime / steps;
+
+          const fadeInterval = setInterval(() => {
+              currentVolume += volumeStep;
+              if (currentVolume >= targetVolume) {
+                  currentVolume = targetVolume;
+                  clearInterval(fadeInterval);
+              }
+              DDC_GLOBAL_AUDIO.volume = currentVolume;
+          }, timeStep);
+
+      });
+    
+     btn.addEventListener('click', function() {
+         if (isPlaying) {
+             DDC_GLOBAL_AUDIO.muted = true;
+             isPlaying = false;
+         } else {
+             DDC_GLOBAL_AUDIO.muted = false;
+             isPlaying = true;
+         }
+     });
+     /***** FINE AUDIO *****/
+     
+     
+     /***** POPOLAZIONE CONTENUTI *****/
+     // Secondo elemento
+     createDynaElement(document.getElementById("dyna-con-1"), localInstanceCurrentMood - 1, 0); 
+     createDynaElement(document.getElementById("dyna-con-2"), localInstanceCurrentMood - 1, 1); 
+     createDynaElement(document.getElementById("dyna-con-3"), localInstanceCurrentMood - 1, 2); 
+     createDynaElement(document.getElementById("dyna-con-4"), localInstanceCurrentMood - 1, 3); 
+     createDynaElement(document.getElementById("dyna-con-5"), localInstanceCurrentMood - 1, 4);
+     createDynaElement(document.getElementById("dyna-con-6"), localInstanceCurrentMood - 1, 5);
+     createDynaElement(document.getElementById("dyna-con-7"), localInstanceCurrentMood - 1, 6);
+     createDynaElement(document.getElementById("dyna-con-8"), localInstanceCurrentMood - 1, 7); 
+     /***** FINE POPOLAZIONE CONTENUTI ******/
+  }); // Chiusura document.ready
+
+		/**
+   * Funzione per inizializzare GSAP per il paragrafo intro immediatamente dopo il click
+   */
+  function initializeIntroGSAP() {
+    // Registra i plugin GSAP
+    gsap.registerPlugin(SplitText, ScrollTrigger);
+
+    const targetDiv8 = document.querySelector('.main-intro-paragraph');
+
+    if (targetDiv8) { 
+      document.fonts.ready.then(() => {
+        let div8 = SplitText.create(targetDiv8, { type: "words,chars, lines" });
+       
+        div8.chars.forEach(char => {
+            char.parentNode.style.overflow = "hidden";
+            char.parentNode.style.display = "inline-block";
+        });
+
+        // Animazione per il paragrafo intro
+        gsap.from(div8.lines, {
+            duration: 2,
+            y: -100,
+            autoAlpha: 0,      
+            ease: "expo.out",
+            stagger: 0.1,
+            delay: 5.3
+        });
+      });
+    } else {
+        console.warn("Impossibile trovare .main-intro-paragraph per l'animazione intro.");
+    }
+  }
+
+  /**
+   * Funzione per inizializzare il resto di GSAP dopo gli 8 secondi
+   */
+  function initializeMainGSAP() {
+    const targetHeadingTitle1 = document.querySelector('.heading-gsap-1'); 
+    const targetHeadingTitle2 = document.querySelector('.heading-gsap-2'); 
+    const targetHeadingSub1 = document.querySelector('.heading-sub-gsap-1');
+    const targetHeadingBlur = document.querySelector('.tituloblur');
+    const targetHeadingSingleLine = document.querySelector('.discrete-class');
+    const targetHeadingSubSingleLine = document.querySelector('.singolalinea-sub');
+    const targetHeadingSparse = document.querySelector('.letteresparse-gsap');
+    const targetHeadingSparse2 = document.querySelector('.letteresparse-gsap-2');
+    const targetText1 = document.querySelector('.content-text-1');
+    const targetText2 = document.querySelector('.content-text-2');
+    const targetText3 = document.querySelector('.content-text-3');
+    const targetText4 = document.querySelector('.content-text-4');
+    const targetText5 = document.querySelector('.content-text-5');
+    const targetText6 = document.querySelector('.content-text-6');
+    const targetText7 = document.querySelector('.content-text-7');
+    const targetText8 = document.querySelector('.content-text-8');
+    const targetText9 = document.querySelector('.content-text-9');
+    const targetText10 = document.querySelector('.content-text-10');
+    const targetText11 = document.querySelector('.content-text-11');
+    const targetText12 = document.querySelector('.content-text-12');
+    const superHeading = document.querySelector('#heading-left');
+    const socialPar = document.querySelector('#DDC_textcontent_12');
+
+    if (targetHeadingTitle1 && targetHeadingTitle2) { 
+      document.fonts.ready.then(() => {
+        let headingTitle1 = SplitText.create(targetHeadingTitle1, { type: "words,chars" });
+        let headingTitle2 = SplitText.create(targetHeadingTitle2, { type: "words,chars" });
+        let headingSub1 = SplitText.create(targetHeadingSub1, { type: "words,chars" });
+        let headingBlur = SplitText.create(targetHeadingBlur, { type: "words, chars" });
+        let headingSingolaLinea = SplitText.create(targetHeadingSingleLine, { type: "words, chars, lines" });
+        let headingSingolaLineaSub = SplitText.create(targetHeadingSubSingleLine, { type: "words, chars, lines" });
+        let headingSparse = SplitText.create(targetHeadingSparse, { type: "words, chars" });
+        let headingSparse2 = SplitText.create(targetHeadingSparse2, { type: "words, chars" });
+        let text1 = SplitText.create(targetText1, { type: "lines, words, chars" });
+        let text2 = SplitText.create(targetText2, {type: "lines, words, chars" });
+        let text3 = SplitText.create(targetText3, {type: "lines, words, chars" });
+        let text4 = SplitText.create(targetText4, {type: "lines, words, chars" });
+        let text5 = SplitText.create(targetText5, {type: "lines, words, chars" });
+        let text6 = SplitText.create(targetText6, {type: "lines, words, chars" });
+        let text7 = SplitText.create(targetText7, {type: "lines, words, chars" });
+        let text8 = SplitText.create(targetText8, {type: "lines, words, chars" });
+        let text9 = SplitText.create(targetText9, {type: "lines, words, chars" });
+        let text10 = SplitText.create(targetText10, {type: "lines, words, chars" });
+        let text11 = SplitText.create(targetText11, {type: "lines, words, chars" });
+        let text12 = SplitText.create(targetText12, {type: "lines, words, chars" });
+        let socialTextGsap = SplitText.create(socialPar, {type: "lines, words, chars" });
+
+        headingTitle1.chars.forEach(char => {
+            char.parentNode.style.overflow = "hidden";
+            char.parentNode.style.display = "inline-block";
+        });
+        headingTitle2.chars.forEach(char => {
+            char.parentNode.style.overflow = "hidden";
+            char.parentNode.style.display = "inline-block";
+        });
+
+        // Animazioni per i titoli principali
+        gsap.from(headingTitle1.chars, {
+            delay: 1,
+            duration: 2,
+            y: -100,
+            autoAlpha: 0,      
+            ease: "expo.out",
+            stagger: 0.1,
+            delay: 2.3
+        });
+        gsap.from(headingTitle2.chars, {
+            delay: 1,
+            duration: 2,
+            y: 100,
+            autoAlpha: 0,      
+            ease: "expo.out",
+            stagger: 0.1,
+            delay: 2.3
+        });
+        gsap.from(headingSub1.words, {
+            delay: 2,
+            duration: 2,
+            x: 30,
+            autoAlpha: 0,      
+            ease: "expo.out",
+            stagger: 0.1
+        });
+        gsap.from(headingBlur.words, {
+          filter: "blur(30px)",
+          ease: "none",
+          scrollTrigger: {
+            trigger: ".tituloblur",
+            start: "top center",
+            end: "bottom top",
+            scrub: true,
+            markers: false
+          }
+        });
+        gsap.from(headingSparse.chars, {
+          x: 30,
+          delay: 4,
+          duration: 4,
+          autoAlpha: 0,
+          ease: "expo.out",
+          stagger: 0.5,
+          scrollTrigger: {
+            trigger: ".letteresparse-gsap",
+            start: "top 700px",
+            end: "bottom 200px",
+            scrub: true,
+            markers: false
+          }
+        });
+        gsap.from(headingSparse2.chars, {
+          x: 30,
+          delay: 4,
+          duration: 4,
+          autoAlpha: 0,
+          ease: "expo.out",
+          stagger: 0.5,
+          scrollTrigger: {
+            trigger: ".letteresparse-gsap-2",
+            start: "top 700px",
+            end: "bottom 200px",
+            scrub: true,
+            markers: false
+          }
+        });
+        gsap.from(headingSingolaLinea.words, {
+            delay: 1,
+            duration: 2,
+            y: 30,
+            autoAlpha: 0,
+            ease: "expo.out",
+            stagger: 0.5,
+            scrollTrigger: {
+                trigger: ".discrete-class", 
+                start: "top 60%",
+                end: "bottom 40%",
+                scrub: true,
+                markers: false,
+            }
+        });
+        gsap.set(text1.words, { autoAlpha: 0 });
+        gsap.to(text1.words, {
+            autoAlpha: 1,
+            ease: "none",
+            stagger: 0.1,
+            scrollTrigger: {
+                trigger: ".content-text-1", 
+                start: "top 90%",
+                end: "bottom center",
+                scrub: true,
+                markers: false,
+            }
+        });
+        gsap.to(text1.lines, {
+            autoAlpha: 0,
+            ease: "none",
+            stagger: 0.1,
+            scrollTrigger: {
+                trigger: ".content-text-1",
+                start: "top 10%",
+                end: "top -5%",
+                scrub: true,
+                markers: false,
+            }
+        });
+        gsap.set(text2.words, { autoAlpha: 0 });
+        gsap.to(text2.words, {
+            autoAlpha: 1,
+            ease: "none",
+            stagger: 0.1,
+            scrollTrigger: {
+                trigger: ".content-text-2", 
+                start: "top 85%",
+                end: "bottom 70%",
+                scrub: true,
+                markers: false,
+            }
+        });
+        gsap.to(text2.lines, {
+            autoAlpha: 0,
+            ease: "none",
+            stagger: 0.1,
+            scrollTrigger: {
+                trigger: ".content-text-2",
+                start: "top 10%",
+                end: "top -5%",
+                scrub: true,
+                markers: false,
+            }
+        });
+        gsap.set(text3.words, { autoAlpha: 0 });
+        gsap.to(text3.words, {
+            autoAlpha: 1,
+            ease: "none",
+            stagger: 0.1,
+            scrollTrigger: {
+                trigger: ".content-text-3", 
+                start: "top 85%",
+                end: "bottom 70%",
+                scrub: true,
+                markers: false,
+            }
+        });
+        gsap.to(text3.lines, {
+            autoAlpha: 0,
+            ease: "none",
+            stagger: 0.1,
+            scrollTrigger: {
+                trigger: ".content-text-3",
+                start: "top 10%",
+                end: "top -5%",
+                scrub: true,
+                markers: false,
+            }
+        });
+        gsap.set(text4.words, { autoAlpha: 0 });
+        gsap.to(text4.words, {
+            autoAlpha: 1,
+            ease: "none",
+            stagger: 0.1,
+            scrollTrigger: {
+                trigger: ".content-text-4", 
+                start: "top 85%", 
+                end: "bottom 70%",
+                scrub: true,
+                markers: false
+            }
+        });
+        gsap.to(text4.lines, {
+            autoAlpha: 0,
+            ease: "none",
+            stagger: 0.1,
+            scrollTrigger: {
+                trigger: ".content-text-4",
+                start: "top 10%",
+                end: "top -5%",
+                scrub: true,
+                markers: false,
+            }
+        });
+        gsap.set(text5.words, { autoAlpha: 0 });
+        gsap.to(text5.words, {
+            autoAlpha: 1,
+            ease: "none",
+            stagger: 0.01,
+            scrollTrigger: {
+                trigger: ".content-text-5", 
+                start: "top 90%", 
+                end: "bottom 60%",
+                scrub: true,
+                markers: false
+            }
+        });
+        gsap.to(text5.lines, {
+            autoAlpha: 0,
+            ease: "none",
+            stagger: 0.1,
+            scrollTrigger: {
+                trigger: ".content-text-5",
+                start: "top 10%",
+                end: "top -5%",
+                scrub: true,
+                markers: false,
+            }
+        });
+        gsap.from(headingSingolaLineaSub.words, {
+            delay: 2,
+            duration: 2,
+            x: 30,
+            autoAlpha: 0,      
+            ease: "expo.out",
+            stagger: 0.1,
+            scrollTrigger: {
+                trigger: ".singolalinea-sub", 
+                start: "top 60%",
+                end: "bottom 40%",
+                scrub: true,
+                markers: false,
+            }
+        });
+        
+        gsap.set(text6.words, { autoAlpha: 0 });
+        gsap.to(text6.words, {
+            autoAlpha: 1,
+            ease: "none",
+            stagger: 0.1,
+            scrollTrigger: {
+                trigger: ".content-text-6", 
+                start: "top 90%", 
+                end: "bottom 60%",
+                scrub: true,
+                markers: false
+            }
+        });
+        gsap.to(text6.lines, {
+            autoAlpha: 0,
+            ease: "none",
+            stagger: 0.1,
+            scrollTrigger: {
+                trigger: ".content-text-6",
+                start: "top 10%",
+                end: "top -5%",
+                scrub: true,
+                markers: false,
+            }
+        });
+       	gsap.set(text7.words, { autoAlpha: 0 });
+        gsap.to(text7.words, {
+            autoAlpha: 1,
+            ease: "none",
+            stagger: 0.1,
+            scrollTrigger: {
+                trigger: ".content-text-7", 
+                start: "top 90%", 
+                end: "bottom 70%",
+                scrub: true,
+                markers: false
+            }
+        });
+        gsap.to(text7.lines, {
+            autoAlpha: 0,
+            ease: "none",
+            stagger: 0.1,
+            scrollTrigger: {
+                trigger: ".content-text-7",
+                start: "top 10%",
+                end: "top -5%",
+                scrub: true,
+                markers: false,
+            }
+        });
+        gsap.set(text8.words, { autoAlpha: 0 });
+        gsap.to(text8.words, {
+            autoAlpha: 1,
+            ease: "none",
+            stagger: 0.1,
+            scrollTrigger: {
+                trigger: ".content-text-8", 
+                start: "top 90%", 
+                end: "bottom 70%",
+                scrub: true,
+                markers: false
+            }
+        });
+        gsap.to(text8.lines, {
+            autoAlpha: 0,
+            ease: "none",
+            stagger: 0.1,
+            scrollTrigger: {
+                trigger: ".content-text-8",
+                start: "top 10%",
+                end: "top -5%",
+                scrub: true,
+                markers: false,
+            }
+        });
+        gsap.set(text9.words, { autoAlpha: 0 });
+        gsap.to(text9.words, {
+            autoAlpha: 1,
+            ease: "none",
+            stagger: 0.1,
+            scrollTrigger: {
+                trigger: ".content-text-9", 
+                start: "top 90%", 
+                end: "bottom 70%",
+                scrub: true,
+                markers: false
+            }
+        });
+        
+        gsap.set(text10.words, { autoAlpha: 0 });
+        gsap.to(text10.words, {
+            autoAlpha: 1,
+            ease: "none",
+            stagger: 0.1,
+            scrollTrigger: {
+                trigger: ".content-text-10", 
+                start: "top 90%", 
+                end: "bottom 70%",
+                scrub: true,
+                markers: false
+            }
+        });
+        gsap.to(text10.lines, {
+            autoAlpha: 0,
+            ease: "none",
+            stagger: 0.1,
+            scrollTrigger: {
+                trigger: ".content-text-10",
+                start: "top 10%",
+                end: "top -5%",
+                scrub: true,
+                markers: false,
+            }
+        });
+        gsap.set(text11.words, { autoAlpha: 0 });
+        gsap.to(text11.words, {
+            autoAlpha: 1,
+            ease: "none",
+            stagger: 0.1,
+            scrollTrigger: {
+                trigger: ".content-text-11", 
+                start: "top 90%", 
+                end: "bottom 70%",
+                scrub: true,
+                markers: false
+            }
+        });
+        gsap.to(text11.lines, {
+            autoAlpha: 0,
+            ease: "none",
+            stagger: 0.1,
+            scrollTrigger: {
+                trigger: ".content-text-11",
+                start: "top 10%",
+                end: "top -5%",
+                scrub: true,
+                markers: false,
+            }
+        });
+        gsap.set(text12.words, { autoAlpha: 0 });
+        gsap.to(text12.words, {
+            autoAlpha: 1,
+            ease: "none",
+            stagger: 0.1,
+            scrollTrigger: {
+                trigger: ".content-text-12", 
+                start: "top 90%", 
+                end: "bottom 70%",
+                scrub: true,
+                markers: false
+            }
+        });
+        gsap.to(text12.lines, {
+            autoAlpha: 0,
+            ease: "none",
+            stagger: 0.1,
+            scrollTrigger: {
+                trigger: ".content-text-12",
+                start: "top 10%",
+                end: "top -5%",
+                scrub: true,
+                markers: false,
+            }
+        });
+        gsap.set(socialTextGsap.words, { autoAlpha: 0 });
+        gsap.to(socialTextGsap.words, {
+            autoAlpha: 1,
+            ease: "none",
+            stagger: 0.1,
+            scrollTrigger: {
+                trigger: socialPar,
+                start: "top 70%", 
+                end: "bottom 50%",
+                scrub: true,
+                markers: false
+            }
+        });
+      });
+    } else {
+        console.warn("Impossibile avviare l'animazione GSAP principale.");
+    }
+  }
+  
+  /***** RITORNO ALLA PAGINA DOPO IL CLICK DELLA FRECCIA INDIETRO *****/
+  window.addEventListener("pageshow", (event) => {
+    if (event.persisted) {
+      DDC_GLOBAL_AUDIO.play();
+      DDC_GLOBAL_AUDIO.muted = false;
+      isPlaying = true;
+      document.getElementById("sound").classList.remove("stoppedSound");
+      document.getElementById("sound").style.pointerEvents = "auto";
+    }
+  });
+  
+  const lenis = new Lenis({
+    wheelMultiplier: 0.6,
+    lerp: 0.08,
+    smoothTouch: false
+  });
+  function raf(t){ 
+    lenis.raf(t);
+    //console.clear()
+    //console.log('Scroll Y:', lenis.scroll)
+    requestAnimationFrame(raf);
+  }
+  requestAnimationFrame(raf);
+
+  // Rispetta chi ha "Riduci animazioni"
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) lenis.destroy();
+</script>
