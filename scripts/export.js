@@ -89,10 +89,10 @@ export const DDC_dictionary = [
         "È poi il coinvolgimento di altre persone: dall’essere con gli amici supportandosi e aiutandosi, piuttosto che all’essere con la tua famiglia e percepire l'armonia tra le generazioni.",
         "Mi ricordo di quando ero sul tetto di questa casa nella giungla Giamaicana e, mentre guardavo il tramonto, tutt’intorno c'erano questi uccellini in una totale estasi. Erano circondati da tutta quella natura, quei fiori e la temperatura era perfetta.",
         "C’è sempre questo elemento vitale che va a visitare la natura, no? È sempre una questione di convivialità.",
-        "Ciò che hai sfiorato svanirà, ma resta come eco silenziosa. </br>Nulla permane, tutto scorre",
+        "A livello naturale, sono tanti uccellini che cantano e volano, dei fiori magari, e una vegetazione rigogliosa e riccamente popolata da altri esseri viventi.",
         "È un qualcosa che associo tanto alle persone, insomma. Può essere, non so, un villaggio felice o una situazione sociale che funziona, di convivialità.",
         "In quella sensazione, penso sia difficile avere dei problemi con quelli a cui voglio bene. Percepisco del calore, un’immagine di un piccolo villaggio o di una casa con delle luci accese all’interno... mi piace l’idea che questi posti siano popolati dalla vita.",
-        "A livello naturale, sono tanti uccellini che cantano e volano, dei fiori magari, e una vegetazione rigogliosa e riccamente popolata da altri esseri viventi."
+        "Ciò che hai sfiorato svanirà, ma resta come eco silenziosa. </br>Nulla permane, tutto scorre"
     ],
     [
         "Mi immagino un focus mode dove sei così preso dalla situazione che non ti accorgi di come ti senti veramente. Non è per forza connesso alla calma, ma è uno stato interessante, perché  anche questo è parte della realtà.",
