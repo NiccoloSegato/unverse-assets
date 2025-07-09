@@ -11,13 +11,14 @@
       height: 100vh;
       overflow: hidden;
       background:
-        radial-gradient(circle at 20% 80%, #FFB6C1 0%, transparent 60%),
-        radial-gradient(circle at 80% 20%, #87CEEB 0%, transparent 55%),
-        radial-gradient(circle at 40% 40%, #FFC0CB 0%, transparent 50%),
-        radial-gradient(circle at 60% 70%, #B0E0E6 0%, transparent 65%),
-        radial-gradient(circle at 10% 10%, #FFE4E1 0%, transparent 45%),
-        radial-gradient(circle at 70% 40%, #87CEEB 0%, transparent 55%),
+        radial-gradient(circle at 80% 80%, #FFB6C1 0%, transparent 60%),
+        radial-gradient(circle at 20% 20%, #87CEEB 0%, transparent 55%),
+        radial-gradient(circle at 40% 60%, #FFC0CB 0%, transparent 50%),
+        radial-gradient(circle at 70% 40%, #B0E0E6 0%, transparent 65%),
+        radial-gradient(circle at 10% 90%, #FFE4E1 0%, transparent 45%),
+        radial-gradient(circle at 40% 30%, #87CEEB 0%, transparent 55%),
         radial-gradient(ellipse at 50% 50%, #B0E0E6 0%, #FFC0CB 100%);
+
       position: relative;
     }
 
@@ -146,7 +147,7 @@
       particle.style.height = `${size}px`;
 
       const animationDuration = Math.random() * 30 + 20;
-      const animationDelay = Math.random() * animationDuration;
+      const animationDelay = Math.random() * 1.5 + 0.2; // all particles appear between 0.2s and 1.7s
       particle.style.animationDuration = `${animationDuration}s`;
       particle.style.animationDelay = `${animationDelay}s`;
 

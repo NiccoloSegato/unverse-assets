@@ -2,13 +2,13 @@ export const DDC_moods = ['Malinconia', 'Calma', 'Felicità', 'Focus'];
 export const DDC_globalBackgrounds = [
     '#00072D',
     '#A8C8D8',
-    "radial-gradient(ellipse 120% 80% at 10% 20%, #ff9db4 0%, #ffb5a3 15%, #ffc999 30%, transparent 65%), radial-gradient(ellipse 100% 70% at 90% 80%, #87ceeb 0%, #a3d5d9 20%, #b8e0d2 35%, transparent 70%), radial-gradient(ellipse 150% 100% at 50% 50%, #f0c4a6 0%, #f5d5b8 25%, #f8e4d0 45%, #faf0e6 65%, #f5f5dc 85%, #ebebeb 100%), linear-gradient(25deg, #ff91a4 0%, #ffb399 12%, #f0c49a 25%, #e8d4b8 37%, #d9e0c7 50%, #c8e3d4 62%, #9fd4d8 75%, #8cc8d8 87%, #87ceeb 100%), radial-gradient(circle at 25% 35%, rgba(255, 145, 164, 0.4) 0%, transparent 40%), radial-gradient(circle at 75% 65%, rgba(135, 206, 235, 0.3) 0%, transparent 35%), radial-gradient(circle at 60% 80%, rgba(240, 196, 166, 0.25) 0%, transparent 45%), linear-gradient(140deg, rgba(255, 145, 164, 0.15) 0%, rgba(255, 179, 153, 0.12) 20%, rgba(240, 196, 166, 0.08) 40%, rgba(217, 224, 199, 0.05) 60%, rgba(159, 212, 216, 0.08) 80%, rgba(135, 206, 235, 0.12) 100%)",
+    "radial-gradient(circle at 80% 80%, #FFB6C1 0%, transparent 60%), radial-gradient(circle at 20% 20%, #87CEEB 0%, transparent 55%), radial-gradient(circle at 40% 60%, #FFC0CB 0%, transparent 50%), radial-gradient(circle at 70% 40%, #B0E0E6 0%, transparent 65%), radial-gradient(circle at 10% 90%, #FFE4E1 0%, transparent 45%), radial-gradient(circle at 40% 30%, #87CEEB 0%, transparent 55%), radial-gradient(ellipse at 50% 50%, #B0E0E6 0%, #FFC0CB 100%)",
     '#000000'
 ];
 export const DDC_introBackgrounds = [
     '#00072D',
     '#FFFFFF',
-    "radial-gradient(ellipse 120% 80% at 10% 20%, #ff9db4 0%, #ffb5a3 15%, #ffc999 30%, transparent 65%), radial-gradient(ellipse 100% 70% at 90% 80%, #87ceeb 0%, #a3d5d9 20%, #b8e0d2 35%, transparent 70%), radial-gradient(ellipse 150% 100% at 50% 50%, #f0c4a6 0%, #f5d5b8 25%, #f8e4d0 45%, #faf0e6 65%, #f5f5dc 85%, #ebebeb 100%), linear-gradient(25deg, #ff91a4 0%, #ffb399 12%, #f0c49a 25%, #e8d4b8 37%, #d9e0c7 50%, #c8e3d4 62%, #9fd4d8 75%, #8cc8d8 87%, #87ceeb 100%), radial-gradient(circle at 25% 35%, rgba(255, 145, 164, 0.4) 0%, transparent 40%), radial-gradient(circle at 75% 65%, rgba(135, 206, 235, 0.3) 0%, transparent 35%), radial-gradient(circle at 60% 80%, rgba(240, 196, 166, 0.25) 0%, transparent 45%), linear-gradient(140deg, rgba(255, 145, 164, 0.15) 0%, rgba(255, 179, 153, 0.12) 20%, rgba(240, 196, 166, 0.08) 40%, rgba(217, 224, 199, 0.05) 60%, rgba(159, 212, 216, 0.08) 80%, rgba(135, 206, 235, 0.12) 100%)",
+    "radial-gradient(circle at 80% 80%, #FFB6C1 0%, transparent 60%), radial-gradient(circle at 20% 20%, #87CEEB 0%, transparent 55%), radial-gradient(circle at 40% 60%, #FFC0CB 0%, transparent 50%), radial-gradient(circle at 70% 40%, #B0E0E6 0%, transparent 65%), radial-gradient(circle at 10% 90%, #FFE4E1 0%, transparent 45%), radial-gradient(circle at 40% 30%, #87CEEB 0%, transparent 55%), radial-gradient(ellipse at 50% 50%, #B0E0E6 0%, #FFC0CB 100%)",
     '#000000'
 ];
 export const DDC_globalTextColors = [
